@@ -1,0 +1,2 @@
+utc	job	status	trigger	run_id	summary
+2026-11-25T04:32:14Z	feed	success	workflow_dispatch	45546542838	Built feed files in: /home/runner/work/melaleuca-orders/melaleuca-orders/feedwork/feed | Inventory rows: 174 | FBA rows: 172 | fees known: 174 | note: incomplete fee (no FBA fee) for P9-9LY1-OBH4 - not used (x2) | errors=1 first: note: demand history not available (download failed: HTTP Error 404: Not Found) - dem_* columns are empty, the workbook uses the old sales s
