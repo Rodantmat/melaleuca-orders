@@ -30,11 +30,11 @@
   },
   "4": {
    "tab": "Marcos F",
-   "mode": "tracking",
+   "mode": "idle",
    "armed": "2026-11-25T03:42:14Z",
    "next_scrape": "",
    "tries": 0,
-   "note": "tracking numbers found 2026-11-25T03:49:05Z",
+   "note": "all delivered 2026-11-25T19:08:45Z",
    "last_error": ""
   },
   "5": {
@@ -155,5 +155,5 @@
    "last_error": ""
   }
  },
- "updated": "2026-11-25T17:08:21Z"
+ "updated": "2026-11-25T19:08:45Z"
 }
