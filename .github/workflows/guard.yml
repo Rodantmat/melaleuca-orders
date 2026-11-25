@@ -1,0 +1,27 @@
+name: Leak guard
+on:
+  push:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 * * * *"
+permissions:
+  contents: read
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      matrix:
+        branch: [main, status-site, status-state]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          path: main
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ matrix.branch }}
+          path: target
+      - name: Scan for anything that looks like a credential (values are never printed)
+        run: python3 main/tools/leakcheck.py target

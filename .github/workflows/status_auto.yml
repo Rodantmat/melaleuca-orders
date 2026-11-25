@@ -61,7 +61,42 @@ jobs:
       - name: Read the order history of one account (text only, through the proxy)
         env:
           PROXY_URL: ${{ secrets.PROXY_URL }}
-          CRED_ENV: ${{ secrets.CREDENTIALS_ENV }}
+          MELA_USER_1: ${{ secrets.MELA_USER_1 }}
+          MELA_PASS_1: ${{ secrets.MELA_PASS_1 }}
+          MELA_USER_2: ${{ secrets.MELA_USER_2 }}
+          MELA_PASS_2: ${{ secrets.MELA_PASS_2 }}
+          MELA_USER_3: ${{ secrets.MELA_USER_3 }}
+          MELA_PASS_3: ${{ secrets.MELA_PASS_3 }}
+          MELA_USER_4: ${{ secrets.MELA_USER_4 }}
+          MELA_PASS_4: ${{ secrets.MELA_PASS_4 }}
+          MELA_USER_5: ${{ secrets.MELA_USER_5 }}
+          MELA_PASS_5: ${{ secrets.MELA_PASS_5 }}
+          MELA_USER_6: ${{ secrets.MELA_USER_6 }}
+          MELA_PASS_6: ${{ secrets.MELA_PASS_6 }}
+          MELA_USER_7: ${{ secrets.MELA_USER_7 }}
+          MELA_PASS_7: ${{ secrets.MELA_PASS_7 }}
+          MELA_USER_8: ${{ secrets.MELA_USER_8 }}
+          MELA_PASS_8: ${{ secrets.MELA_PASS_8 }}
+          MELA_USER_9: ${{ secrets.MELA_USER_9 }}
+          MELA_PASS_9: ${{ secrets.MELA_PASS_9 }}
+          MELA_USER_10: ${{ secrets.MELA_USER_10 }}
+          MELA_PASS_10: ${{ secrets.MELA_PASS_10 }}
+          MELA_USER_11: ${{ secrets.MELA_USER_11 }}
+          MELA_PASS_11: ${{ secrets.MELA_PASS_11 }}
+          MELA_USER_12: ${{ secrets.MELA_USER_12 }}
+          MELA_PASS_12: ${{ secrets.MELA_PASS_12 }}
+          MELA_USER_13: ${{ secrets.MELA_USER_13 }}
+          MELA_PASS_13: ${{ secrets.MELA_PASS_13 }}
+          MELA_USER_14: ${{ secrets.MELA_USER_14 }}
+          MELA_PASS_14: ${{ secrets.MELA_PASS_14 }}
+          MELA_USER_15: ${{ secrets.MELA_USER_15 }}
+          MELA_PASS_15: ${{ secrets.MELA_PASS_15 }}
+          MELA_USER_16: ${{ secrets.MELA_USER_16 }}
+          MELA_PASS_16: ${{ secrets.MELA_PASS_16 }}
+          MELA_USER_17: ${{ secrets.MELA_USER_17 }}
+          MELA_PASS_17: ${{ secrets.MELA_PASS_17 }}
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           AMZ_CLIENT: ${{ secrets.AMZ_CLIENT }}
           AMZ_SECRET: ${{ secrets.AMZ_SECRET }}
           AMZ_REFRESH: ${{ secrets.AMZ_REFRESH }}
@@ -71,7 +106,7 @@ jobs:
           PYTHONIOENCODING: "ascii:replace"
         run: |
           cd local
-          printf '%s\n' "$CRED_ENV" > credentials.env
+          env | grep -E '^(MELA_(USER|PASS)_[0-9]+|GMAIL_USER|GMAIL_APP_PASSWORD|SHIPPO_LIVE_TOKEN)=' > credentials.env || true
           if [ -n "$AMZ_SECRET" ] && [ -n "$AMZ_REFRESH" ]; then
             grep -v -i -E '^[[:space:]]*(CLIENT_ID|CLIENT_SECRET|REFRESH_TOKEN)[[:space:]]*=' credentials.env > credentials.env.tmp; mv credentials.env.tmp credentials.env
             printf 'CLIENT_ID=%s\nCLIENT_SECRET=%s\nREFRESH_TOKEN=%s\n' "$AMZ_CLIENT" "$AMZ_SECRET" "$AMZ_REFRESH" >> credentials.env
@@ -127,7 +162,7 @@ jobs:
           for d in site state; do
             ( cd $d
               git config user.name "status-bot"; git config user.email "status-bot@users.noreply.github.com"
-              find . -name 'credentials.*' -not -path './.git/*' -delete; git add -A
+              find . -name 'credentials.*' -not -path './.git/*' -delete; python3 "$GITHUB_WORKSPACE/tools/leakcheck.py" . || exit 1; git add -A
               if ! git diff --cached --quiet; then
                 git commit -qm "status $(date -u +%F_%H%M)"
                 b=$(git rev-parse --abbrev-ref HEAD)
