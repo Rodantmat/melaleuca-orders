@@ -57,11 +57,11 @@
   },
   "7": {
    "tab": "Antonio M",
-   "mode": "tracking",
+   "mode": "idle",
    "armed": "2026-11-25T03:42:14Z",
    "next_scrape": "",
    "tries": 0,
-   "note": "tracking numbers found 2026-11-25T03:49:05Z",
+   "note": "all delivered 2026-11-25T03:58:01Z",
    "last_error": ""
   },
   "8": {
@@ -111,11 +111,11 @@
   },
   "13": {
    "tab": "Jessica M",
-   "mode": "tracking",
+   "mode": "idle",
    "armed": "2026-11-25T03:42:14Z",
    "next_scrape": "",
    "tries": 0,
-   "note": "tracking numbers found 2026-11-25T03:49:05Z",
+   "note": "all delivered 2026-11-25T03:58:01Z",
    "last_error": ""
   },
   "14": {
@@ -155,5 +155,5 @@
    "last_error": ""
   }
  },
- "updated": "2026-11-25T03:49:05Z"
+ "updated": "2026-11-25T03:58:01Z"
 }
