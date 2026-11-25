@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Toronto - tracking</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#1c2430;--mute:#667085;--line:#e3e7ee;--accent:#1f6feb;--ok:#0f7b3f;--okbg:#e0f5e8;--tr:#0b57c4;--trbg:#e3eefc;--pre:#8a5a00;--prebg:#fdf1d6;--bad:#b42318;--badbg:#fde4e1;--none:#475467;--nonebg:#eceff3}
+@media (prefers-color-scheme:dark){:root{--bg:#10151c;--card:#171e28;--ink:#e6eaf0;--mute:#97a3b6;--line:#2a3442;--accent:#5b9dff;--ok:#5fd68c;--okbg:#12301f;--tr:#7db3ff;--trbg:#14284a;--pre:#f2c35c;--prebg:#3a2d0c;--bad:#ff8a7f;--badbg:#411a16;--none:#b2bccb;--nonebg:#232c39}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+.wrap{max-width:1180px;margin:0 auto;padding:16px}
+h1{font-size:20px;margin:0 0 2px}
+.sub{color:var(--mute);font-size:13px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0}
+button{font:inherit;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:9px 14px;border-radius:8px;cursor:pointer}
+button.primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+button:disabled{opacity:.55;cursor:default}
+select{font:inherit;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink)}
+input[type=search]{font:inherit;padding:9px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);flex:1;min-width:160px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 12px}
+.chip{border:1px solid var(--line);border-radius:999px;padding:4px 11px;font-size:13px;background:var(--card);cursor:pointer;user-select:none}
+.chip.on{outline:2px solid var(--accent)}
+.msg{padding:10px 12px;border-radius:8px;background:var(--prebg);color:var(--pre);margin:8px 0;font-size:14px}
+.msg.bad{background:var(--badbg);color:var(--bad)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(440px,1fr));gap:12px;align-items:start}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.ch{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;padding:11px 14px;background:var(--bg);border-bottom:1px solid var(--line)}
+.ch b{font-size:16px} .ch .loc{color:var(--mute);font-size:13px}
+.ch .nx{font-size:12.5px;color:var(--mute);text-align:right;white-space:nowrap}
+.oh{padding:6px 14px 0;font-size:12px;color:var(--mute);text-transform:uppercase;letter-spacing:.04em}
+.pk{display:grid;grid-template-columns:1fr auto;gap:2px 12px;padding:9px 14px;border-bottom:1px solid var(--line)}
+.pk:last-child{border-bottom:0}
+.pk .eta{grid-column:1 / -1;font-size:13.5px}
+.pk .st{text-align:right}
+a{color:var(--accent);text-decoration:none;word-break:break-all} a:hover{text-decoration:underline}
+.pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:12.5px;font-weight:600;white-space:nowrap}
+.s-DELIVERED{background:var(--okbg);color:var(--ok)} .s-TRANSIT{background:var(--trbg);color:var(--tr)} .s-PRE_TRANSIT{background:var(--prebg);color:var(--pre)}
+.s-FAILURE,.s-RETURNED{background:var(--badbg);color:var(--bad)} .s-NONE,.s-UNKNOWN{background:var(--nonebg);color:var(--none)}
+.car{font-size:12px;color:var(--mute)} .det{font-size:12.5px;color:var(--mute)}
+.num{font-variant-numeric:tabular-nums}
+dialog{border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);max-width:440px;width:92%}
+dialog input{width:100%;font:inherit;padding:9px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);margin:10px 0}
+@media (max-width:520px){.cards{grid-template-columns:1fr}.wrap{padding:10px}}
+</style>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-title" content="Melaleuca Track">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="application-name" content="Melaleuca Track">
+<meta name="theme-color" content="#1a0f0d">
+</head>
+<body>
+<div class="wrap">
+  <h1 id="ttl">Toronto - tracking</h1>
+  <div class="sub" id="sub">Loading...</div>
+  <div class="bar" id="bar"></div>
+  <div id="notes"></div>
+  <div class="chips" id="chips"></div>
+  <div class="cards" id="cards"></div>
+</div>
+
+<script>
+const VIEW="toronto";
+let DATA=null, FILTER="", SORT="name", CHIP="";
+const $=id=>document.getElementById(id);
+const MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"], DOW=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+function parse(s){const m=/^(\d{4})-(\d\d)-(\d\d)(?:[T ](\d\d):(\d\d))?/.exec(s||"");return m?{y:+m[1],mo:+m[2]-1,d:+m[3],h:m[4]!==undefined?+m[4]:null,mi:m[5]!==undefined?+m[5]:null}:null}
+function fmt(s,withDow){const p=parse(s);if(!p)return"";const dt=new Date(Date.UTC(p.y,p.mo,p.d));let t=(withDow?DOW[dt.getUTCDay()]+" ":"")+MON[p.mo]+" "+p.d;
+  if(p.h!==null&&!(p.h===0&&p.mi===0)){const ap=p.h>=12?"PM":"AM",h=p.h%12||12;t+=", "+h+":"+String(p.mi).padStart(2,"0")+" "+ap}return t}
+const TZ={main:"America/Los_Angeles",toronto:"America/Toronto",vancouver:"America/Vancouver"};
+function fmtTZ(iso,reg,dow){ // carrier times are UTC: shown in the time zone of the delivery address; a midnight result means "date only"
+  if(!iso||!/T\d\d:\d\d/.test(iso))return fmt(iso,dow);
+  try{const d=new Date(iso);if(isNaN(d))return fmt(iso,dow);
+    const f=new Intl.DateTimeFormat("en-US",{timeZone:TZ[VIEW],weekday:"short",month:"short",day:"numeric",hour:"numeric",minute:"2-digit",hour12:true,hourCycle:"h12"}).formatToParts(d);
+    const g=t=>(f.find(p=>p.type===t)||{}).value||"";const hh=new Intl.DateTimeFormat("en-US",{timeZone:TZ[VIEW],hour:"2-digit",minute:"2-digit",hour12:false}).format(d);
+    const date=(dow?g("weekday")+" ":"")+g("month")+" "+g("day");
+    return (hh==="24:00"||hh==="00:00")?date:date+", "+g("hour")+":"+g("minute")+" "+g("dayPeriod");
+  }catch(e){return fmt(iso,dow)}}
+const TZNAME={main:"Pacific time",toronto:"Toronto time",vancouver:"Vancouver time"};
+function ago(iso){if(!iso)return"never";const s=(Date.now()-Date.parse(iso))/1000;if(s<90)return"just now";if(s<3600)return Math.round(s/60)+" min ago";if(s<86400)return Math.round(s/3600)+" h ago";return Math.round(s/86400)+" d ago"}
+function esc(x){return String(x==null?"":x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+const LBL={DELIVERED:"Delivered",TRANSIT:"In transit",PRE_TRANSIT:"Label created",FAILURE:"Problem",RETURNED:"Returned",NONE:"Not shipped",UNKNOWN:"No info"};
+function skey(r){return r.status||"UNKNOWN"}
+function etaText(r){if(r.status==="DELIVERED")return r.delivered_at?"Delivered "+fmtTZ(r.delivered_at,r.region,true):"Delivered";if(r.eta)return "ETA "+fmtTZ(r.eta,r.region,true);return r.status==="NONE"?"":"ETA not available yet"}
+function etaMs(r){if(!r.eta||r.status==="DELIVERED")return Infinity;const t=Date.parse(/T\d\d:\d\d/.test(r.eta)?r.eta:r.eta+"T12:00:00Z");return isNaN(t)?Infinity:t}
+function render(){
+  if(!DATA)return;
+  const rows=DATA.rows.slice();
+  $("ttl").textContent=VIEW==="main"?"Melaleuca orders - tracking":(VIEW==="toronto"?"Toronto - tracking":"Vancouver - tracking");
+  const mn=DATA.month?new Date(Date.UTC(+DATA.month.slice(0,4),+DATA.month.slice(5,7)-1,1)).toLocaleString("en-US",{month:"long",year:"numeric",timeZone:"UTC"}):"";
+  const people=new Set(rows.map(r=>r.account)).size;
+  $("sub").innerHTML=esc(mn)+" orders &middot; "+people+" people &middot; "+rows.length+" packages &middot; delivery status checked "+ago(DATA.generated_status)+(VIEW==="main"?" &middot; orders read "+ago(DATA.generated_full):"")+" &middot; times in "+TZNAME[VIEW];
+  const cnt={};rows.forEach(r=>cnt[skey(r)]=(cnt[skey(r)]||0)+1);
+  $("chips").innerHTML=`<span class="chip ${CHIP===""?"on":""}" data-c="">All ${rows.length}</span>`+["DELIVERED","TRANSIT","PRE_TRANSIT","FAILURE","RETURNED","UNKNOWN","NONE"].filter(k=>cnt[k]).map(k=>`<span class="chip ${CHIP===k?"on":""}" data-c="${k}">${LBL[k]} ${cnt[k]}</span>`).join("");
+  document.querySelectorAll(".chip").forEach(c=>c.onclick=()=>{CHIP=c.dataset.c;render()});
+  let notes="";
+  if(DATA.failed_accounts&&DATA.failed_accounts.length)notes+=`<div class="msg bad">Could not read the account(s): ${esc(DATA.failed_accounts.join(", "))}. Their last known rows are shown. It will be retried automatically.</div>`;
+  $("notes").innerHTML=notes+($("notes").dataset.run?`<div class="msg">${$("notes").dataset.run}</div>`:"");
+  const q=FILTER.toLowerCase(), groups={};
+  rows.forEach(r=>{(groups[r.account]=groups[r.account]||[]).push(r)});
+  let cards=Object.values(groups).map(all=>{
+    const head=(all[0].name+" "+all[0].city+" "+all[0].state+" "+all[0].account).toLowerCase();
+    const personHit=q&&head.includes(q);
+    const list=all.filter(r=>(!CHIP||skey(r)===CHIP)&&(!q||personHit||[r.tracking,r.order_no,r.carrier_name,r.status_text,r.detail].join(" ").toLowerCase().includes(q)));
+    return {all,list};
+  }).filter(g=>g.list.length);
+  const best=g=>Math.min(...g.all.map(etaMs));
+  const RG=c=>({"US":0,"Vancouver":1,"Toronto":2})[c.all[0].region]??3;
+  cards.sort((a,b)=>SORT==="eta"?(best(a)-best(b))||(a.all[0].name>b.all[0].name?1:-1):(RG(a)-RG(b))||(a.all[0].name.toLowerCase()>b.all[0].name.toLowerCase()?1:-1));
+  $("cards").innerHTML=cards.map(g=>{
+    const f=g.all[0], tot=g.all.filter(r=>r.tracking).length, dl=g.all.filter(r=>r.status==="DELIVERED").length, nxt=best(g);
+    let sum="";
+    if(tot&&dl===tot)sum=`<span class="pill s-DELIVERED">All delivered</span>`;
+    else if(tot)sum=`<span class="pill s-${dl?"TRANSIT":"UNKNOWN"}">${dl} of ${tot} delivered</span>`+(isFinite(nxt)?`<div class="nx">next ETA ${esc(fmtTZ(new Date(nxt).toISOString(),f.region,true))}</div>`:"");
+    const orders=[...new Set(g.list.map(r=>r.order_no))];
+    const body=orders.map(o=>{const rs=g.list.filter(r=>r.order_no===o);
+      return (orders.length>1?`<div class="oh">Order ${esc(fmt(rs[0].order_date,false))}</div>`:"")+rs.map(r=>`<div class="pk">
+        <div>${r.tracking?`<a href="${esc(r.link)}" target="_blank" rel="noopener" class="num">${esc(r.tracking)}</a> <span class="car">${esc(r.carrier_name)}</span>`:`<span class="det">no tracking number yet</span>`}</div>
+        <div class="st"><span class="pill s-${skey(r)}">${esc(r.status_text||LBL[skey(r)])}</span></div>
+        ${r.detail&&r.status!=="NONE"?`<div class="det" style="grid-column:1 / -1">${esc(r.detail)}${r.location?" &middot; "+esc(r.location):""}</div>`:""}
+        ${etaText(r)?`<div class="eta num">${esc(etaText(r))}</div>`:""}</div>`).join("")}).join("");
+    const od=[...new Set(g.all.map(r=>r.order_date))].sort().map(d=>fmt(d,false)).join(", ");
+    return `<section class="card"><div class="ch"><div><b>${esc(f.name)}</b><div class="loc">${esc(f.city)}${f.state?", "+esc(f.state):""} &middot; ordered ${esc(od)}</div></div><div style="text-align:right">${sum}</div></div>${body}</section>`}).join("")||`<div class="msg">Nothing matches.</div>`;
+}
+async function load(){
+  try{const r=await fetch("data.json?t="+Date.now(),{cache:"no-store"});DATA=await r.json();render();return DATA}
+  catch(e){$("sub").textContent="Could not load the data ("+e+")"}
+}
+// search box + (main page only) the two refresh buttons
+const bar=$("bar");
+bar.innerHTML=`<input type="search" id="q" placeholder="Search name, city, tracking number..."><select id="srt"><option value="name">Sort: San Diego, Vancouver, Toronto</option><option value="eta">Sort: soonest delivery</option></select>`+`<button id="breload">Reload</button>`;
+$("q").oninput=e=>{FILTER=e.target.value;render()};$("srt").onchange=e=>{SORT=e.target.value;render()};
+$("breload").onclick=load;
+load();setInterval(load,300000);
+</script>
+</body>
+</html>
