@@ -1,0 +1,159 @@
+{
+ "batch_month": "2026-11",
+ "accounts": {
+  "1": {
+   "tab": "David H",
+   "mode": "tracking",
+   "armed": "2026-11-25T03:42:14Z",
+   "next_scrape": "",
+   "tries": 0,
+   "note": "tracking numbers found 2026-11-25T03:49:05Z",
+   "last_error": ""
+  },
+  "2": {
+   "tab": "Liliana O",
+   "mode": "tracking",
+   "armed": "2026-11-25T03:42:14Z",
+   "next_scrape": "",
+   "tries": 0,
+   "note": "tracking numbers found 2026-11-25T03:49:05Z",
+   "last_error": ""
+  },
+  "3": {
+   "tab": "Liliana C",
+   "mode": "tracking",
+   "armed": "2026-11-25T03:42:14Z",
+   "next_scrape": "",
+   "tries": 0,
+   "note": "tracking numbers found 2026-11-25T03:49:05Z",
+   "last_error": ""
+  },
+  "4": {
+   "tab": "Marcos F",
+   "mode": "tracking",
+   "armed": "2026-11-25T03:42:14Z",
+   "next_scrape": "",
+   "tries": 0,
+   "note": "tracking numbers found 2026-11-25T03:49:05Z",
+   "last_error": ""
+  },
+  "5": {
+   "tab": "Alexandra S",
+   "mode": "tracking",
+   "armed": "2026-11-25T03:42:14Z",
+   "next_scrape": "",
+   "tries": 0,
+   "note": "tracking numbers found 2026-11-25T03:49:05Z",
+   "last_error": ""
+  },
+  "6": {
+   "tab": "Rudy A",
+   "mode": "idle",
+   "armed": "2026-11-25T03:42:14Z",
+   "next_scrape": "",
+   "tries": 0,
+   "note": "all delivered 2026-11-25T03:49:05Z",
+   "last_error": ""
+  },
+  "7": {
+   "tab": "Antonio M",
+   "mode": "tracking",
+   "armed": "2026-11-25T03:42:14Z",
+   "next_scrape": "",
+   "tries": 0,
+   "note": "tracking numbers found 2026-11-25T03:49:05Z",
+   "last_error": ""
+  },
+  "8": {
+   "tab": "William Y",
+   "mode": "idle",
+   "armed": "2026-11-25T03:42:14Z",
+   "next_scrape": "",
+   "tries": 0,
+   "note": "all delivered 2026-11-25T03:49:05Z",
+   "last_error": ""
+  },
+  "9": {
+   "tab": "Adriana M",
+   "mode": "idle",
+   "armed": "2026-11-25T03:42:14Z",
+   "next_scrape": "",
+   "tries": 0,
+   "note": "all delivered 2026-11-25T03:49:05Z",
+   "last_error": ""
+  },
+  "10": {
+   "tab": "Liz C",
+   "mode": "idle",
+   "armed": "2026-11-25T03:42:14Z",
+   "next_scrape": "",
+   "tries": 0,
+   "note": "all delivered 2026-11-25T03:49:05Z",
+   "last_error": ""
+  },
+  "11": {
+   "tab": "Karina G",
+   "mode": "idle",
+   "armed": "2026-11-25T03:42:14Z",
+   "next_scrape": "",
+   "tries": 0,
+   "note": "all delivered 2026-11-25T03:49:05Z",
+   "last_error": ""
+  },
+  "12": {
+   "tab": "Jonathan A",
+   "mode": "tracking",
+   "armed": "2026-11-25T03:42:14Z",
+   "next_scrape": "",
+   "tries": 0,
+   "note": "tracking numbers found 2026-11-25T03:49:05Z",
+   "last_error": ""
+  },
+  "13": {
+   "tab": "Jessica M",
+   "mode": "tracking",
+   "armed": "2026-11-25T03:42:14Z",
+   "next_scrape": "",
+   "tries": 0,
+   "note": "tracking numbers found 2026-11-25T03:49:05Z",
+   "last_error": ""
+  },
+  "14": {
+   "tab": "Juan R",
+   "mode": "idle",
+   "armed": "2026-11-25T03:42:14Z",
+   "next_scrape": "",
+   "tries": 0,
+   "note": "all delivered 2026-11-25T03:49:05Z",
+   "last_error": ""
+  },
+  "15": {
+   "tab": "Abel P",
+   "mode": "idle",
+   "armed": "2026-11-25T03:42:14Z",
+   "next_scrape": "",
+   "tries": 0,
+   "note": "all delivered 2026-11-25T03:49:05Z",
+   "last_error": ""
+  },
+  "16": {
+   "tab": "Dyorgenes O",
+   "mode": "idle",
+   "armed": "2026-11-25T03:42:14Z",
+   "next_scrape": "",
+   "tries": 0,
+   "note": "all delivered 2026-11-25T03:49:05Z",
+   "last_error": ""
+  },
+  "17": {
+   "tab": "Alfonso L",
+   "mode": "tracking",
+   "armed": "2026-11-25T03:42:14Z",
+   "next_scrape": "",
+   "tries": 0,
+   "note": "tracking numbers found 2026-11-25T03:49:05Z",
+   "last_error": ""
+  }
+ },
+ "updated": "2026-11-25T03:49:05Z"
+}
