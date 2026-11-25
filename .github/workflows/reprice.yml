@@ -1,0 +1,88 @@
+name: Reprice
+on:
+  workflow_dispatch:
+    inputs:
+      mode: { description: "empty = normal (live); shadow = change nothing", default: "" }
+  schedule:
+    - cron: "17 7,13,19 * * *"
+permissions:
+  contents: write
+  actions: read
+concurrency: { group: reprice-state, cancel-in-progress: false }
+jobs:
+  gate:   # GitHub's own cron often fires hours late; when the heartbeat already started this slot, the late run must not repeat it
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs: { go: "${{ steps.g.outputs.go }}" }
+    steps:
+      - id: g
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: |
+          go=1
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            cut=$(( $(date +%s) - 19800 ))
+            n=$(gh api "repos/${{ github.repository }}/actions/workflows/reprice.yml/runs?per_page=10" -q "[.workflow_runs[]|select(.id != ${{ github.run_id }} and (.created_at|fromdateiso8601) > $cut and (.conclusion == null or .conclusion == \"success\"))]|length" 2>/dev/null || echo 0)
+            if [ "${n:-0}" != "0" ]; then go=0; echo "skip: this slot already ran ($n run(s) in the last 5.5h)"; fi
+          fi
+          echo "go=$go" >> "$GITHUB_OUTPUT"
+  reprice:
+    needs: gate
+    if: needs.gate.outputs.go == '1'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: main }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: Safety gate - tests and stress simulation must pass
+        run: |
+          cd reprice
+          python tests/test_engine.py
+          python tests/test_run_helpers.py
+          python tests/test_owner_rules.py
+          python tests/test_run_pipeline.py
+          python sim.py 25 200 11 | tail -3
+          python sim.py 25 200 12 | tail -3
+      - name: Fetch saved state
+        run: git fetch origin reprice-state:reprice-state 2>/dev/null && git checkout reprice-state -- reprice/state 2>/dev/null || true
+      - name: Run
+        env:
+          CRED_ENV: ${{ secrets.CREDENTIALS_ENV }}
+          AMZ_CLIENT: ${{ secrets.AMZ_CLIENT }}
+          AMZ_SECRET: ${{ secrets.AMZ_SECRET }}
+          AMZ_REFRESH: ${{ secrets.AMZ_REFRESH }}
+          REPRICE_LIVE: ${{ vars.REPRICE_LIVE }}
+        run: |
+          set -o pipefail
+          cd reprice
+          printf '%s\n' "$CRED_ENV" > credentials.env
+          if [ -n "$AMZ_SECRET" ] && [ -n "$AMZ_REFRESH" ]; then
+            grep -v -i -E '^[[:space:]]*(CLIENT_ID|CLIENT_SECRET|REFRESH_TOKEN)[[:space:]]*=' credentials.env > credentials.env.tmp; mv credentials.env.tmp credentials.env
+            printf 'CLIENT_ID=%s\nCLIENT_SECRET=%s\nREFRESH_TOKEN=%s\n' "$AMZ_CLIENT" "$AMZ_SECRET" "$AMZ_REFRESH" >> credentials.env
+          elif [ -n "$AMZ_SECRET" ]; then printf 'CLIENT_ID=%s\nCLIENT_SECRET=%s\n' "$AMZ_CLIENT" "$AMZ_SECRET" >> credentials.env; fi
+          MODE="${{ github.event.inputs.mode }}"
+          if [ -z "$MODE" ]; then MODE=live; fi   # scheduled runs are live; kill switch = reprice/config.json live_enabled=false or a KILL file; nothing manual needed
+          if [ "$MODE" = "live" ]; then export REPRICE_LIVE=1; fi
+          # fresh order history first (days-since-last-sale, sold-price floor/ceiling depend on it); current month only, 2 months on the 1st-2nd
+          python history.py $([ "$(date +%d)" -le 2 ] && echo 2 || echo 1) 2>&1 | tee history.log || true
+          python run.py "$MODE" 2>&1 | tee run.log
+          python analysis.py 2>&1 | tee -a run.log
+          python market.py 2>&1 | tee -a run.log || true
+          python bb_intel.py 2>&1 | tee -a run.log || true
+          python reports.py 2>&1 | tee -a run.log || true
+          rm -f credentials.env
+      - name: Journal this run (permanent run history on branch ops-log)
+        if: always()
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: python reprice/opslog.py reprice "${{ job.status }}" reprice/run.log '^mode=' 'decided ' 'units to sell' 'bb intel:' 'reports:' || true
+      - name: Save state
+        if: always()
+        run: |
+          git config user.name "reprice-bot"; git config user.email "reprice-bot@users.noreply.github.com"
+          rm -rf /tmp/st && mkdir /tmp/st && mkdir -p /tmp/st/state && cp -a reprice/state/. /tmp/st/state/ && cp reprice/run.log /tmp/st/ 2>/dev/null || true
+          find . -name credentials.env -not -path "./.git/*" -delete  # SCRUB secrets before anything is committed
+          git checkout --orphan reprice-state-new
+          git rm -rf . >/dev/null 2>&1 || true
+          mkdir -p reprice && mkdir -p reprice/state && cp -a /tmp/st/state/. reprice/state/ && cp /tmp/st/run.log reprice/ 2>/dev/null || true
+          find . -name 'credentials.*' -not -path './.git/*' -delete; git add reprice && git commit -qm "reprice state" && git push -f origin reprice-state-new:reprice-state

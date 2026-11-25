@@ -1,0 +1,476 @@
+"""Repricing orchestrator.  usage: python run.py [snapshot|shadow|live]
+ snapshot : read everything, write state/snapshot.json, decide nothing
+ shadow   : decide for every product, write state/decisions.jsonl, change NOTHING          (default)
+ live     : like shadow, but applies decisions ONLY if ALL of these hold:
+            env REPRICE_LIVE=1  AND  config.json live_enabled=true  AND  sku in allowlist  AND  no kill file  AND  per-run/day caps not exceeded
+            every write = re-read price -> VALIDATION_PREVIEW -> PATCH -> re-read -> rollback if the price is not what we sent."""
+import copy, datetime as dt, json, math, os, sys, time
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
+import spapi, engine, amazon_pricing as AP
+
+STATE = os.path.join(HERE, "state"); os.makedirs(STATE, exist_ok=True)
+MK = "ATVPDKIKX0DER"
+now = dt.datetime.utcnow()
+
+
+def log(*a):
+    print(*a); sys.stdout.flush()
+
+
+def jload(p, d):
+    try:
+        return json.load(open(p))
+    except Exception:
+        return d
+
+
+def f(x):
+    try:
+        v = float(str(x).replace("$", "").replace(",", ""))
+        return v if math.isfinite(v) else None
+    except Exception:
+        return None
+
+
+def read_tsv(p):
+    L = open(p, encoding="utf-8", errors="replace").read().splitlines()
+    if not L:
+        return []
+    h = L[0].split("\t")
+    return [dict(zip(h, l.split("\t"))) for l in L[1:]]
+
+
+def history_stats():
+    """per ASIN(sku): sold price percentiles and unit counts from the stored order lines"""
+    by = {}
+    for fn in sorted(os.listdir(STATE)) if os.path.isdir(STATE) else []:
+        if not fn.startswith("orders_"):
+            continue
+        for r in read_tsv(os.path.join(STATE, fn)):
+            if (r.get("order-status") or "").lower().startswith("cancel"):
+                continue
+            q, p = f(r.get("quantity")), f(r.get("item-price"))
+            d = (r.get("purchase-date") or "")[:10]
+            if not q or not p or q <= 0:
+                continue
+            by.setdefault(r.get("sku"), []).append((d, q, p / q))
+    return by
+
+
+def load_ledger():
+    """daily FBA ledger (state/ledger_YYYY-MM.tsv) -> {sku: {date: sellable ending balance}}"""
+    out = {}
+    for fn in sorted(os.listdir(STATE)) if os.path.isdir(STATE) else []:
+        if not fn.startswith("ledger_"):
+            continue
+        try:
+            for r in read_tsv(os.path.join(STATE, fn)):
+                if (r.get("Disposition") or "") != "SELLABLE":
+                    continue
+                try:
+                    d = dt.datetime.strptime(r["Date"], "%m/%d/%Y").date()
+                    out.setdefault(r["MSKU"], {})[d] = float(r["Ending Warehouse Balance"])
+                except Exception:
+                    continue
+        except Exception:
+            continue
+    return out
+
+
+def load_web(max_hours=36):
+    """latest logged-out amazon.com Buy Box read per ASIN (state/webbb.jsonl, written by bb_web.py) -> {asin: record}; older than max_hours -> ignored"""
+    out = {}
+    try:
+        for l in open(os.path.join(STATE, "webbb.jsonl")):
+            try:
+                r = json.loads(l)
+                age = (now - dt.datetime.strptime(r["t"], "%Y-%m-%d %H:%M")).total_seconds() / 3600.0
+                if age <= max_hours and not r.get("err") and r.get("seller_id") and r.get("bb_price"):
+                    out[r["asin"]] = r
+            except Exception:
+                continue
+    except Exception:
+        pass
+    return out
+
+
+def rival_count(lv, w_, seller):
+    """sellers other than us with a New offer, from BOTH views (Amazon offers list and the logged-out page); None when either view is missing -> never 'alone' on thin evidence"""
+    if not seller or not lv or not lv.get("n_offers") or not w_ or w_.get("aod") is None:
+        return None
+    sp = sum(1 for x in (lv.get("ladder") or []) if x and x[0] != seller)
+    wb = sum(1 for o in w_["aod"] if o.get("seller_id") and o["seller_id"] != seller)
+    return max(sp, wb)
+
+
+def stock_profile(days, today, dss=None, min_known=7):
+    """days = {date: ending balance} -> (in_stock_days_30, in_stock_days_7, out_of_stock_days_inside_the_last_dss_days)
+    Days the ledger does not cover are treated as 'in stock' (never invent an outage); fewer than min_known known days -> None (engine default)."""
+    def window(k):
+        ds = [today - dt.timedelta(days=i) for i in range(1, k + 1)]
+        known = [x for x in ds if x in days]
+        return ds, known
+    ds30, k30 = window(30)
+    ds7, k7 = window(7)
+    i30 = (round(sum(1 for x in k30 if days[x] > 0) / len(k30) * 30) if len(k30) >= min_known else None)
+    i7 = (round(sum(1 for x in k7 if days[x] > 0) / len(k7) * 7) if len(k7) >= 4 else None)
+    oos = 0
+    if dss is not None and dss > 0:
+        for i in range(1, int(dss) + 1):
+            x = today - dt.timedelta(days=i)
+            if x in days and days[x] <= 0:
+                oos += 1
+    return i30, i7, oos
+
+
+def fetch_foep(c, skus, pause=31):
+    """Amazon's own 'price that would win the Featured Offer' per sku (batches of 40).  Returns {sku: price}; any failure -> missing (engine ignores it)."""
+    out = {}
+    skus = sorted(skus)
+    for i in range(0, len(skus), 40):
+        body = {"requests": [{"uri": "/products/pricing/2022-05-01/offer/featuredOfferExpectedPrice", "method": "GET", "marketplaceId": MK, "sku": k} for k in skus[i:i + 40]]}
+        try:
+            r = spapi.call(c, "POST", "/batches/products/pricing/2022-05-01/offer/featuredOfferExpectedPrice", body=body, quiet=True)
+        except Exception as e:
+            log("  foep batch failed (%s) - skipped" % str(e)[:80]); continue
+        for x in r.get("responses", []):
+            try:
+                b = x.get("body") or {}
+                sku = b.get("sku") or (x.get("request") or {}).get("sku")
+                res = (b.get("featuredOfferExpectedPriceResults") or [{}])[0]
+                if res.get("resultStatus") == "VALID_FOEP":
+                    out[sku] = float(res["featuredOfferExpectedPrice"]["listingPrice"]["amount"])
+            except Exception:
+                continue
+        if i + 40 < len(skus):
+            time.sleep(pause)
+    return out
+
+
+def infer_seller(c, costs, plan):
+    """own seller id = the FBA offer whose price equals our price on most of our ASINs (cached in state/seller.txt)"""
+    p = os.path.join(STATE, "seller.txt")
+    if os.path.exists(p) and open(p).read().strip():
+        return open(p).read().strip()
+    votes, rows = {}, [(r["asin"], f((plan.get(k) or {}).get("your-price"))) for k, r in costs.items()]
+    rows = [x for x in rows if x[1]][:40]
+    for i in range(0, len(rows), 20):
+        chunk = rows[i:i + 20]
+        body = {"requests": [{"asin": a, "marketplaceId": MK, "includedData": ["lowestPricedOffers"],
+                              "lowestPricedOffersInputs": [{"itemCondition": "New", "offerType": "Consumer"}],
+                              "method": "GET", "uri": "/products/pricing/2022-05-01/items/competitiveSummary"} for a, _ in chunk]}
+        r = spapi.call(c, "POST", "/batches/products/pricing/2022-05-01/items/competitiveSummary", body=body)
+        mine = dict(chunk)
+        for x in r.get("responses", []):
+            b = x.get("body") or {}
+            for lo in b.get("lowestPricedOffers") or []:
+                offs = [o for o in lo.get("offers") or [] if o.get("fulfillmentType") == "AFN"]
+                if len(offs) == 1 and abs(offs[0]["listingPrice"]["amount"] - mine.get(b.get("asin"), -1)) < 0.005:
+                    votes[offs[0]["sellerId"]] = votes.get(offs[0]["sellerId"], 0) + 1
+        if i + 20 < len(rows):
+            time.sleep(31)
+    if votes:
+        best = max(votes, key=votes.get)
+        open(p, "w").write(best)
+        return best
+    return ""
+
+
+def flags_ok(d):
+    """automatic raises only when the engine raised no warning about the product"""
+    return not (d.get("flags") or [])
+
+
+def is_allowed(d, sku, conf, raised_run, dropped_run):
+    """(allowed, protective). allowed = this change may be written live.
+    - allowlist: anything
+    - up: auto_raise (any product) while under its per-run cap and the engine raised no warning
+    - down: auto_drop (any product) only for real droughts / severe cases, under its per-run cap
+    - revert (undo of our own failed raise) and to_floor (price below the minimum-profit floor): always, they only protect the profit"""
+    act = d.get("action")
+    ar, ad = conf.get("auto_raise") or {}, conf.get("auto_drop") or {}
+    if sku in (conf.get("allowlist") or []):
+        return True, act in ("revert", "to_floor")
+    if act in ("revert", "to_floor") and (conf.get("auto_protect", True) is True):
+        return True, True
+    if act == "up":
+        return bool(ar.get("enabled") is True and raised_run < ar.get("max_per_run", 4) and flags_ok(d)), False
+    if act == "down":
+        return bool(ad.get("enabled") is True and dropped_run < ad.get("max_per_run", 3) and (d.get("severe") or d.get("no_box") or d.get("rival_flood") or (
+            (d.get("dss") or 0) >= ad.get("min_days_no_sale", 30) and (d.get("dos") or 0) >= ad.get("min_days_cover", 90)))), False
+    return False, False
+
+
+def norm_change(x):
+    """state record -> engine format {ts(datetime), old, new, dir, base_v}; also reads the first version (from/to/action)"""
+    y = dict(x)
+    if "old" not in y and "from" in y: y["old"] = y.pop("from")
+    if "new" not in y and "to" in y: y["new"] = y.pop("to")
+    if "dir" not in y:
+        a = y.pop("action", "")
+        y["dir"] = "up" if (y.get("new") or 0) > (y.get("old") or 0) else "down"
+    y["ts"] = dt.datetime.fromisoformat(x["ts"])
+    return y
+
+
+def listing(c, seller, sku):
+    return spapi.call(c, "GET", "/listings/2021-08-01/items/%s/%s" % (seller, sku),
+                      params={"marketplaceIds": MK, "includedData": "summaries,attributes,issues"}, quiet=True)
+
+
+def listing_age_days(item, now):
+    """Days since Amazon created the listing (None when unknown)."""
+    try:
+        cd = ((item.get("summaries") or [{}])[0]).get("createdDate")
+        t = dt.datetime.fromisoformat(str(cd).replace("Z", "+00:00")).replace(tzinfo=None)
+        return max(0, (now.replace(tzinfo=None) - t).days)
+    except Exception:
+        return None
+
+
+def current_price(item):
+    try:
+        po = item["attributes"]["purchasable_offer"]
+        return float(po[0]["our_price"][0]["schedule"][0]["value_with_tax"]), po
+    except Exception:
+        return None, None
+
+
+def set_price(c, seller, sku, new, po_old, ptype):
+    po = copy.deepcopy(po_old)
+    po[0]["our_price"][0]["schedule"][0]["value_with_tax"] = new
+    body = {"productType": ptype, "patches": [{"op": "replace", "path": "/attributes/purchasable_offer", "value": po}]}
+    path = "/listings/2021-08-01/items/%s/%s" % (seller, sku)
+    v = spapi.call(c, "PATCH", path, params={"marketplaceIds": MK, "mode": "VALIDATION_PREVIEW"}, body=body)
+    if v.get("status") not in ("VALID", "ACCEPTED") or v.get("issues"):
+        if any(i.get("severity") == "ERROR" for i in v.get("issues", [])) or v.get("status") != "VALID":
+            return False, "validation: %s" % json.dumps(v)[:300]
+    r = spapi.call(c, "PATCH", path, params={"marketplaceIds": MK}, body=body)
+    return r.get("status") in ("ACCEPTED", "VALID"), json.dumps(r)[:300]
+
+
+def main():
+    mode = (sys.argv[1] if len(sys.argv) > 1 else "shadow").lower()
+    conf = jload(os.path.join(HERE, "config.json"), {})
+    cfg = dict(engine.DEFAULTS); cfg.update(conf.get("cfg") or {})
+    c = spapi.load_creds(HERE)
+    seller = c.get("SELLER_ID") or c.get("seller_id") or ""
+    costs = {r["sku"]: r for r in read_tsv(os.path.join(HERE, "costs.tsv"))}
+    killed = os.path.exists(os.path.join(STATE, "KILL")) or os.path.exists(os.path.join(HERE, "KILL"))
+    live_ok = (mode == "live" and os.environ.get("REPRICE_LIVE") == "1" and conf.get("live_enabled") is True and not killed)
+    log("mode=%s live_writes_allowed=%s killed=%s skus=%d" % (mode, live_ok, killed, len(costs)))
+
+    hist = history_stats()
+    ledger = load_ledger()
+    web = load_web()
+    sk = jload(os.path.join(STATE, "skustate.json"), {})
+    # live Buy Box data
+    asins = sorted({r["asin"] for r in costs.values()})
+    api = lambda cr, m, p, body=None: spapi.call(cr, m, p, body=body)
+    live = AP.fetch(api, c, asins, log)
+
+    txt = spapi.report(c, "GET_FBA_INVENTORY_PLANNING_DATA")[1]
+    plan = {}
+    L = txt.splitlines()
+    if L:
+        h = L[0].split("\t")
+        for l in L[1:]:
+            r = dict(zip(h, l.split("\t"))); plan[r.get("sku")] = r
+    foep = fetch_foep(c, [k for k in costs if k in plan])
+    log("Amazon target prices (FOEP) read for %d products" % len(foep))
+    if plan:
+        open(os.path.join(STATE, "planning_latest.tsv"), "w", encoding="utf-8").write(txt)
+    if not plan:
+        log("no planning data -> stop (nothing decided)"); return 2
+    if not seller:
+        seller = infer_seller(c, costs, plan)
+        log("seller id %s" % ("found" if seller else "NOT found - live price reads/writes disabled"))
+    if not seller:
+        live_ok = False
+
+    out, changed_run, snaps, raised_run, dropped_run = [], 0, [], 0, 0
+    queue = []
+    pressure = {}
+    try:
+        for l in open(os.path.join(STATE, 'market.tsv')).read().splitlines()[1:]:
+            c_ = l.split('\t'); pressure[c_[0]] = c_[8]
+    except Exception:
+        pass
+    listing_alerts = []
+    rival_flood = {}
+    rival_hint = {}                           # OWNER 2026-11-04 "wait for a cheap rival's units to sell": Buy Box owner with few units left (bb_stock.tsv, written by reports.py after the last scan)
+    try:
+        for l in open(os.path.join(STATE, 'bb_stock.tsv')).read().splitlines()[1:]:
+            c_ = l.split('\t')
+            if len(c_) > 15 and c_[14] == "WAIT":
+                rival_hint[c_[1]] = {"left": c_[7], "eta": c_[10], "why": c_[15], "next_price": c_[16] if len(c_) > 16 else ""}
+            elif len(c_) > 15 and c_[14] == "DROP-CANDIDATE":
+                rival_flood[c_[1]] = {"price": (c_[17] if len(c_) > 17 and c_[17] else c_[4]), "gap": c_[6], "why": c_[15]}
+    except Exception:
+        pass
+    day_key = now.strftime("%Y-%m-%d")
+    sk.setdefault("_day", {}); changed_today = sk["_day"].get(day_key, 0)
+    for sku, row in sorted(costs.items()):
+        asin = row["asin"]
+        cost = max(f(row["cost"]) or 0, f(row.get("orig_ws")) or 0) or None      # worst case: never price below what a unit could really have cost
+        p = plan.get(sku)
+        ov = (conf.get("overrides") or {}).get(sku, {})
+        if not p or ov.get("pause"):
+            continue
+        s = sk.setdefault(sku, {"changes": [], "last_change": None, "frozen_until": None, "last_applied": None})
+        fees_total, inv_price = f(row.get("inv_fees")), f(row.get("inv_price"))
+        fba = max(0.0, (fees_total - 0.15 * inv_price)) if fees_total and inv_price else None
+        if fba is None:
+            continue
+        try:
+            item = listing(c, seller, sku) if seller else {}
+        except spapi.SpError as e:
+            if e.code == 404:
+                continue                      # no such listing (closed / renamed sku): never touch
+            raise
+        price, po = current_price(item)
+        try:
+            lstat = list(((item.get("summaries") or [{}])[0]).get("status") or [])
+        except Exception:
+            lstat = []
+        lissue = "; ".join(str(x.get("message") or x.get("code") or "")[:90] for x in (item.get("issues") or [])[:2]) if isinstance(item, dict) else ""
+        if price is None:
+            price = f(p.get("your-price"))
+        lv = live.get(asin) or {}
+        h = hist.get(sku, [])
+        cut = lambda k: sum(q for d, q, _ in h if d >= (now - dt.timedelta(days=k)).strftime("%Y-%m-%d"))
+        sold = sorted(pp for _, q, pp in h for _ in range(int(min(q, 5))))
+        hh = None
+        if len(sold) >= 6:
+            hh = {"n": len(sold), "p_low": sold[int(.07 * (len(sold) - 1))], "p_mid": sold[len(sold) // 2], "p_high": sold[int(.95 * (len(sold) - 1))]}
+        snap = {"sku": sku, "price": price, "cost": cost, "fba_fee": fba,
+                "on_hand": f(p.get("available")) or 0, "inbound": f(p.get("inbound-quantity")) or 0,
+                "units_7": f(p.get("units-shipped-t7")) or 0, "units_30": f(p.get("units-shipped-t30")) or 0, "units_90": f(p.get("units-shipped-t90")) or 0,
+                "days_since_sale": None, "aged_units": sum(f(p.get("inv-age-" + k)) or 0 for k in ("181-to-270-days", "271-to-365-days", "366-to-455-days", "456-plus-days")),
+                "bb": lv.get("bb"), "we_hold_bb": (lv.get("bb") is None) or (price is not None and price <= lv["bb"] * 1.005),
+                "low_fba": lv.get("low_afn"), "low_new": lv.get("low_new"), "foep": foep.get(sku), "hist": hh, "n_rivals": rival_count(lv, web.get(asin), seller),
+                "last_change": s["last_change"] and norm_change(s["last_change"]),
+                "changes": [norm_change(x) for x in s["changes"]],
+                "frozen_until": s["frozen_until"] and dt.datetime.fromisoformat(s["frozen_until"]),
+                "manual_seen": bool(s["last_applied"] and price and abs(price - s["last_applied"]) > 0.005)}
+        if h:
+            snap["days_since_sale"] = (now.date() - dt.date.fromisoformat(max(d for d, _, _ in h))).days
+        led = ledger.get(sku)
+        if led:                                    # sales speed per day IN STOCK, and a drought clock that does not run while the product is out of stock
+            i30, i7, oos_d = stock_profile(led, now.date(), snap["days_since_sale"])
+            if i30: snap["in_stock_days_30"] = max(i30, 7)       # fewer than 7 days in stock: too little to judge a speed
+            if i7: snap["in_stock_days_7"] = i7
+            if snap["days_since_sale"] is not None and oos_d:
+                snap["days_since_sale"] = max(0, snap["days_since_sale"] - oos_d)
+        rh = rival_hint.get(sku)                    # a rival Buy Box owner about to sell out: price drops wait (at most RIVAL_WAIT_MAX_DAYS in a row, so a rival who keeps restocking cannot hold us forever)
+        if rh:
+            since = s.setdefault("rw_since", now.isoformat())
+            if (now - dt.datetime.fromisoformat(since)).total_seconds() <= engine.DEFAULTS["RIVAL_WAIT_MAX_DAYS"] * 86400:
+                snap["rival_wait"] = dict(rh, seen_h=(now - dt.datetime.fromisoformat(since)).total_seconds() / 3600.0)
+        else:
+            s.pop("rw_since", None)
+        if rival_flood.get(sku):
+            snap["rival_flood"] = rival_flood[sku]
+        snap["no_box"] = bool(lv and lv.get("n_offers") and lv.get("bb") is None and "BUYABLE" in lstat and snap["on_hand"] > 0)
+        if snap["on_hand"] > 0 and lstat and "BUYABLE" not in lstat:     # stock that cannot be bought: listing not buyable (suppressed / inactive) - the owner has to look in Seller Central
+            listing_alerts.append([sku, asin, snap["on_hand"], ",".join(lstat), lissue])
+        w_ = web.get(asin)                         # what a shopper really sees on amazon.com: if another seller owns a LOWER Buy Box, never raise towards it
+        if w_ and seller and w_["seller_id"] != seller and price and w_["bb_price"] < price - 0.005:
+            snap["we_hold_bb"] = False
+        # overrides: min/max price
+        try:
+            d = engine.decide(snap, cfg, now)
+        except Exception as e:
+            d = {"action": "hold", "reason": "engine error %r - held" % e}
+        if d["action"] == "up" and pressure.get(asin) == "HIGH":
+            d = {"action": "hold", "reason": "raise skipped: many FBA rivals and the cheapest one keeps cutting (market pressure HIGH)", "flags": ["pressure_high"]}
+        age = listing_age_days(item, now)          # OWNER 2026-11-17: a new product gets time to find its buyers - no price drop in its first 60 days
+        if d["action"] == "down" and age is not None and age < conf.get("new_listing_no_drop_days", 60):
+            d = {"action": "hold", "reason": "new listing (%d days old): no price drop in the first %d days" % (age, conf.get("new_listing_no_drop_days", 60)), "flags": ["new_listing"]}
+        np_ = d.get("price")
+        if np_ is not None:
+            if ov.get("min"): np_ = max(np_, float(ov["min"]))
+            if ov.get("max"): np_ = min(np_, float(ov["max"]))
+            d["price"] = round(np_, 2)
+        rec = {"ts": now.isoformat(), "sku": sku, "asin": asin, "price": price, "bb": lv.get("bb"), "action": d["action"], "new": d.get("price"), "reason": d.get("reason"), "flags": d.get("flags"), "applied": False, "impact": d.get("impact"),
+               "web_seller": (web.get(asin) or {}).get("seller_id"), "web_price": (web.get(asin) or {}).get("bb_price"),
+               "bb_seller": ((lv.get("winners") or [{}])[0]).get("seller"), "bb_type": ((lv.get("winners") or [{}])[0]).get("type"),
+               "we_win": (bool(seller) and ((lv.get("winners") or [{}])[0]).get("seller") == seller) if lv.get("winners") else None}
+        if d.get("freeze_days"):
+            s["frozen_until"] = (now + dt.timedelta(days=d["freeze_days"])).isoformat()
+        if s["last_applied"] is None or snap["manual_seen"]:
+            s["last_applied"] = price
+        if d["action"] in ("down", "up", "to_floor", "revert") and d.get("price") and price and abs(d["price"] - price) >= 0.005:
+            # OWNER 2026-11-04: when the caps bind, the changes that matter most for the money go first (not product-code order); applied after the loop
+            queue.append({"impact": float(d.get("impact") or 0.0), "protective": d["action"] in ("revert", "to_floor"), "sku": sku, "d": d, "price": price, "po": po, "item": item, "s": s, "rec": rec})
+        out.append(rec)
+        snaps.append([now.strftime("%Y-%m-%d %H:%M"), sku, asin, price, lv.get("bb"), lv.get("low_afn"), lv.get("low_new"), lv.get("n_offers"), foep.get(sku), snap["units_7"], snap["on_hand"]])
+    # ---- apply: protective moves first, then by money impact (largest first); caps and every write check stay exactly as before
+    queue.sort(key=lambda q: (not q["protective"], -q["impact"], q["sku"]))
+    for it in queue:
+        sku, d, price, po, item, s, rec = it["sku"], it["d"], it["price"], it["po"], it["item"], it["s"], it["rec"]
+        is_up, is_down = d["action"] == "up", d["action"] == "down"
+        allowed, protective = is_allowed(d, sku, conf, raised_run, dropped_run)
+        # protective moves (undo a failed raise, lift a price that is below the minimum-profit floor) are never held back by the run/day caps
+        can = live_ok and allowed and po and (protective or (changed_run < conf.get("max_changes_per_run", 8) and changed_today < conf.get("max_changes_per_day", 20)))
+        if can:
+            ptype = (item.get("summaries") or [{}])[0].get("productType", "PRODUCT")
+            try:
+                cur2, _ = current_price(listing(c, seller, sku))
+            except spapi.SpError:
+                cur2 = None
+            if cur2 is not None and abs(cur2 - price) < 0.005:
+                ok, msg = set_price(c, seller, sku, d["price"], po, ptype)
+                time.sleep(8)
+                chk, _ = current_price(listing(c, seller, sku))
+                if ok and chk is not None and abs(chk - d["price"]) < 0.005:
+                    rec["applied"] = True; changed_run += 1; changed_today += 1
+                    if is_up: raised_run += 1
+                    if is_down: dropped_run += 1
+                    s["last_applied"] = d["price"]
+                    ev = {"ts": now.isoformat(), "old": price, "new": d["price"], "dir": "up" if d["price"] > price else "down", "base_v": d.get("base_v")}
+                    s["changes"] = (s["changes"] + [ev])[-30:]; s["last_change"] = ev
+                else:
+                    ok2, m2 = set_price(c, seller, sku, price, po, ptype)   # roll back
+                    rec["reason"] += " | WRITE NOT CONFIRMED, rolled back (%s)" % ("ok" if ok2 else m2)
+            else:
+                rec["reason"] += " | price changed meanwhile - skipped"
+        else:
+            rec["reason"] += " | SHADOW (not applied)" if not (live_ok and allowed) else " | waiting: run/day cap reached (lower money impact)"
+    sk["_day"] = {day_key: changed_today}
+    with open(os.path.join(STATE, "listing_alert.tsv"), "w") as fh:
+        fh.write("sku\tasin\tunits_in_stock\tlisting_status\tissue\n")
+        for r in listing_alerts: fh.write("\t".join(str(x) for x in r) + "\n")
+    json.dump(sk, open(os.path.join(STATE, "skustate.json"), "w"), indent=1, default=str)
+    with open(os.path.join(STATE, "decisions.jsonl"), "a") as fh:
+        for r in out:
+            fh.write(json.dumps(r) + "\n")
+    with open(os.path.join(STATE, "offers.jsonl"), "a") as fh:     # who sells what at which price, every run: the raw material for market.py
+        for a, lv_ in live.items():
+            if lv_.get("ladder"):
+                fh.write(json.dumps({"t": now.strftime("%Y-%m-%d %H:%M"), "asin": a, "bb": lv_.get("bb"), "ladder": lv_["ladder"][:15]}) + "\n")
+    try:                                   # who REALLY owns the Buy Box (seller id, FBA/FBM, price, traffic weights) - the raw material for learning from the competition
+        with open(os.path.join(STATE, "bbwin.jsonl"), "a") as fh:
+            for a, lv_ in live.items():
+                if lv_.get("winners"):
+                    fh.write(json.dumps({"t": now.strftime("%Y-%m-%d %H:%M"), "asin": a, "me": seller, "win": lv_["winners"][:3], "low_afn": lv_.get("low_afn"), "n": lv_.get("n_offers")}) + "\n")
+    except Exception as e:
+        log("bbwin not saved: %r" % e)
+    sp = os.path.join(STATE, "snapshots.tsv")
+    new = not os.path.exists(sp)
+    with open(sp, "a") as fh:
+        if new: fh.write("time\tsku\tasin\town_price\tbuybox\tlow_fba\tlow_new\tn_offers\tfoep\tunits_7d\ton_hand\n")
+        for r in snaps: fh.write("\t".join("" if v is None else str(v) for v in r) + "\n")
+    acts = {}
+    for r in out:
+        acts[r["action"]] = acts.get(r["action"], 0) + 1
+    log("decided %d products: %s ; applied this run: %d" % (len(out), acts, changed_run))
+    for r in out:
+        if r["action"] != "hold":
+            log("  %s %s %s -> %s  %s" % (r["sku"], r["action"], r["price"], r["new"], r["reason"][:110]))
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main() or 0)

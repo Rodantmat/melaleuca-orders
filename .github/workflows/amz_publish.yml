@@ -1,0 +1,36 @@
+name: Amazon PUBLISH shirt listings (owner approved)
+on:
+  workflow_dispatch:
+    inputs:
+      skus: { description: "comma list of child SKUs (blank = all)", default: "" }
+      only: { description: "one listing id for a pilot (blank = all shirt types)", default: "" }
+      feed: { description: "feed URL override", default: "" }
+      preview: { description: "1 = check-only (VALIDATION_PREVIEW)", default: "" }
+permissions: { contents: read }
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: main }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - env:
+          CRED_ENV: ${{ secrets.CREDENTIALS_ENV }}
+          AMZ_CLIENT: ${{ secrets.AMZ_CLIENT }}
+          AMZ_SECRET: ${{ secrets.AMZ_SECRET }}
+          AMZ_REFRESH: ${{ secrets.AMZ_REFRESH }}
+          AMZ_ONLY: ${{ inputs.only }}
+          AMZ_SKUS: ${{ inputs.skus }}
+          AMZ_FEED_URL: ${{ inputs.feed }}
+          AMZ_PREVIEW: ${{ inputs.preview }}
+        run: |
+          cd reprice
+          printf '%s\n' "$CRED_ENV" > credentials.env
+          if [ -n "$AMZ_SECRET" ] && [ -n "$AMZ_REFRESH" ]; then
+            grep -v -i -E '^[[:space:]]*(CLIENT_ID|CLIENT_SECRET|REFRESH_TOKEN)[[:space:]]*=' credentials.env > credentials.env.tmp; mv credentials.env.tmp credentials.env
+            printf 'CLIENT_ID=%s\nCLIENT_SECRET=%s\nREFRESH_TOKEN=%s\n' "$AMZ_CLIENT" "$AMZ_SECRET" "$AMZ_REFRESH" >> credentials.env
+          elif [ -n "$AMZ_SECRET" ]; then printf 'CLIENT_ID=%s\nCLIENT_SECRET=%s\n' "$AMZ_CLIENT" "$AMZ_SECRET" >> credentials.env; fi
+          [ -z "$AMZ_FEED_URL" ] && unset AMZ_FEED_URL; python amz_publish.py 2>&1 | tee publish.log
+          rm -f credentials.env

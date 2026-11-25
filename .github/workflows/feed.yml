@@ -1,0 +1,53 @@
+name: Amazon feed (daily)
+on:
+  workflow_dispatch: {}
+  schedule:
+    - cron: "41 11 * * *"
+permissions:
+  contents: write
+concurrency: { group: feed, cancel-in-progress: false }
+jobs:
+  feed:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: main }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: Fetch order and stock history (for the true-demand columns)
+        run: |
+          git fetch origin reprice-state:reprice-state 2>/dev/null && git checkout reprice-state -- reprice/state 2>/dev/null || true
+          mkdir -p feedwork/state
+          cp reprice/state/orders_*.tsv reprice/state/ledger_*.tsv feedwork/state/ 2>/dev/null || true
+          ls feedwork/state | wc -l
+      - name: Build the feed
+        env: { CRED_ENV: "${{ secrets.CREDENTIALS_ENV }}", AMZ_CLIENT: "${{ secrets.AMZ_CLIENT }}", AMZ_SECRET: "${{ secrets.AMZ_SECRET }}", AMZ_REFRESH: "${{ secrets.AMZ_REFRESH }}" }
+        run: |
+          set -o pipefail
+          cd feedwork
+          trap 'rm -f credentials.txt' EXIT
+          printf '%s\n' "$CRED_ENV" > credentials.txt
+          if [ -n "$AMZ_SECRET" ] && [ -n "$AMZ_REFRESH" ]; then
+            grep -v -i -E '^[[:space:]]*(CLIENT_ID|CLIENT_SECRET|REFRESH_TOKEN)[[:space:]]*=' credentials.txt > credentials.txt.tmp; mv credentials.txt.tmp credentials.txt
+            printf 'CLIENT_ID=%s\nCLIENT_SECRET=%s\nREFRESH_TOKEN=%s\n' "$AMZ_CLIENT" "$AMZ_SECRET" "$AMZ_REFRESH" >> credentials.txt
+          elif [ -n "$AMZ_SECRET" ]; then printf 'CLIENT_ID=%s\nCLIENT_SECRET=%s\n' "$AMZ_CLIENT" "$AMZ_SECRET" >> credentials.txt; fi
+          python amazon_feed.py refresh 2>&1 | tee feed_run.log
+          rm -f credentials.txt
+      - name: Journal this run (permanent run history on branch ops-log)
+        if: always()
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: python reprice/opslog.py feed "${{ job.status }}" feedwork/feed_run.log 'Built feed files' 'Inventory rows' 'incomplete fee' || true
+      - name: Publish to branch feed-latest
+        if: always()
+        run: |
+          git config user.name "feed-bot"; git config user.email "feed-bot@users.noreply.github.com"
+          rm -rf /tmp/fo && mkdir -p /tmp/fo/feed
+          cp feedwork/feed/*.tsv feedwork/feed/feed_status.json feedwork/feed/fees_good.json /tmp/fo/feed/ 2>/dev/null || true
+          cp feedwork/feed_run.log /tmp/fo/ 2>/dev/null || true
+          # compact order + stock-day history for the PC (it downloads this file, ~150 KB, to compute the same true-demand columns)
+          python feedwork/demand.py export feedwork/state /tmp/fo/demand_hist.json || true
+          git checkout --orphan feed-new
+          git rm -rf . >/dev/null 2>&1 || true
+          cp -a /tmp/fo/. . 
+          find . -name 'credentials.*' -not -path './.git/*' -delete; git add -A && git commit -qm "feed $(date -u +%F_%H%M)" && git push -f origin feed-new:feed-latest

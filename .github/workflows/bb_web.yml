@@ -1,0 +1,67 @@
+name: Buy Box web scan (logged out)
+on:
+  workflow_dispatch:
+    inputs:
+      max: { description: "max ASINs (0 = all)", default: "0" }
+      rivals: { description: "read cheaper rivals' stock: auto (12:30 UTC scan only) / 1 / 0", default: "auto" }
+  schedule:
+    - cron: "37 9 * * *"   # the heartbeat starts the scans (06:30 / 12:30 / 18:30 UTC); this daily one is only a fallback
+permissions:
+  contents: write
+  actions: read
+concurrency: { group: reprice-state, cancel-in-progress: false }
+jobs:
+  gate:   # GitHub's own cron often fires hours late; when the heartbeat already started this slot, the late run must not repeat it
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs: { go: "${{ steps.g.outputs.go }}" }
+    steps:
+      - id: g
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: |
+          go=1
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            cut=$(( $(date +%s) - 19800 ))
+            n=$(gh api "repos/${{ github.repository }}/actions/workflows/bb_web.yml/runs?per_page=10" -q "[.workflow_runs[]|select(.id != ${{ github.run_id }} and (.created_at|fromdateiso8601) > $cut and (.conclusion == null or .conclusion == \"success\"))]|length" 2>/dev/null || echo 0)
+            if [ "${n:-0}" != "0" ]; then go=0; echo "skip: this slot already ran ($n run(s) in the last 5.5h)"; fi
+          fi
+          echo "go=$go" >> "$GITHUB_OUTPUT"
+  scan:
+    needs: gate
+    if: needs.gate.outputs.go == '1'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: main }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install playwright && playwright install --with-deps chromium && sudo apt-get install -y xvfb
+      - name: Fetch saved state
+        run: git fetch origin reprice-state:reprice-state 2>/dev/null && git checkout reprice-state -- reprice/state reprice/run.log 2>/dev/null || git checkout reprice-state -- reprice/state 2>/dev/null || true
+      - name: Scan the public pages
+        env: { PROXY_URL: "${{ secrets.PROXY_URL }}", RIVAL_READ: "${{ github.event.inputs.rivals || 'auto' }}" }
+        run: |
+          cd reprice
+          mkdir -p /tmp/lg; xvfb-run -a python bb_web.py ${{ github.event.inputs.max || '0' }} 2>&1 | tee run_bbweb.log /tmp/lg/bbweb.log
+      - name: Journal this run (permanent run history on branch ops-log)
+        if: always()
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: python reprice/opslog.py bb_web "${{ job.status }}" reprice/run_bbweb.log 'MB so far' 'web Buy Box:' 'rival stock reads' 'proxy traffic' || true
+      - name: Save state
+        if: always()
+        run: |
+          git config user.name "reprice-bot"; git config user.email "reprice-bot@users.noreply.github.com"
+          rm -rf /tmp/st && mkdir /tmp/st && mkdir -p /tmp/st/state && cp -a reprice/state/. /tmp/st/state/ && cp reprice/run_bbweb.log reprice/run.log /tmp/st/ 2>/dev/null || true
+          git checkout --orphan reprice-state-new
+          git rm -rf . >/dev/null 2>&1 || true
+          mkdir -p reprice/state && cp -a /tmp/st/state/. reprice/state/ && cp /tmp/st/run_bbweb.log /tmp/st/run.log reprice/ 2>/dev/null || true
+          git add reprice && git commit -qm "reprice state (web bb)" && git push -f origin reprice-state-new:reprice-state
+      - name: Publish log
+        if: always()
+        run: |
+          git config user.name "reprice-bot"; git config user.email "reprice-bot@users.noreply.github.com"
+          git checkout --orphan bbweb-log-new 2>/dev/null || true
+          git rm -rf . >/dev/null 2>&1 || true
+          cp /tmp/lg/bbweb.log . 2>/dev/null || echo "no log" > bbweb.log
+          git add bbweb.log && git commit -qm "bb web log" && git push -f origin bbweb-log-new:bb-web-log

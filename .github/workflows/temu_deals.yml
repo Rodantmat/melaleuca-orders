@@ -1,0 +1,106 @@
+name: Temu deals -> Amazon profit (read-only on Amazon)
+# Temu items (live paced search, or the last saved Temu pull) -> Amazon match, live offers, fees, profit/ROI, abandoned listings.
+# Results go ONLY to the private Postgres (schema deals). This repo is public: the log shows counts, never products, prices or ASINs.
+# Nothing is listed or changed on Amazon.
+on:
+  workflow_dispatch:
+    inputs:
+      search:   { description: "auto = next chunk in rotation, chunk:N/M = part N of M of temu/keywords.txt (~110 generic keywords), or keywords separated by |, or saved = last saved Temu pull", default: "auto" }
+      roi_min:  { description: "min ROI to flag (0.30 = 30%)", default: "0.30" }
+      max_temu: { description: "max Temu price to consider", default: "25" }
+      wholesale_factor: { description: "est. Alibaba unit price = Temu price x this", default: "0.60" }
+      freight: { description: "est. Alibaba freight + duties per unit", default: "1.00" }
+      source: { description: "ali = AliExpress via Apify (no cooldowns, ~$0.8/1000), temu = paced free Temu bridge, both", default: "ali" }
+      per_kw: { description: "source products per keyword", default: "50" }
+permissions:
+  contents: write
+  actions: write
+# Self-chaining: GitHub's own cron skipped runs, so each run ends by starting the next one after a 2 h pause (about 5 chunks a day, one at a time).
+# If the chain ever breaks, the Claude health-check task restarts it.
+concurrency: { group: temu-bridge, cancel-in-progress: false }
+jobs:
+  deals:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    steps:
+      - name: Preflight - private Postgres must be reachable before any work
+        env: { DATABASE_URL: "${{ secrets.DATABASE_URL }}" }
+        run: |
+          if [ -z "$DATABASE_URL" ]; then echo "::error::secret DATABASE_URL missing in melaleuca-cart - add the AlphaDog Postgres URL"; exit 1; fi
+          psql "$DATABASE_URL" -Atqc "select count(*) from deals.runs" >/dev/null && echo "Postgres OK"
+      - uses: actions/checkout@v4
+        with: { ref: main }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -q "curl_cffi>=0.7" imagehash pillow "psycopg[binary]"
+      - name: Pick chunk (auto = next one after the last stored run)
+        id: pick
+        env: { DATABASE_URL: "${{ secrets.DATABASE_URL }}", IN_SEARCH: "${{ github.event.inputs.search }}" }
+        run: |
+          Q="$IN_SEARCH"
+          if [ -z "$Q" ] || [ "$Q" = auto ]; then
+            N=$(grep -c '|' temu/keywords.txt); M=$(( (N + 34) / 35 ))
+            LAST=$(psql "$DATABASE_URL" -Atqc "select chunk from deals.runs where source='ali' and chunk like 'chunk:%' order by run_at desc limit 1")
+            I=1
+            if [ -n "$LAST" ]; then LI=${LAST#chunk:}; LI=${LI%%/*}; LM=${LAST##*/}; if [ "$LM" = "$M" ]; then I=$(( LI % M + 1 )); fi; fi
+            Q="chunk:$I/$M"
+          fi
+          echo "chunk for this run: $Q"; echo "q=$Q" >> "$GITHUB_OUTPUT"
+      - name: Last saved Temu pull
+        run: git fetch -q origin temu-data && git show origin/temu-data:temu/latest.json > /tmp/temu_last.json || echo '{}' > /tmp/temu_last.json
+      - name: Find deals
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          CRED_ENV: ${{ secrets.CREDENTIALS_ENV }}
+          AMZ_CLIENT: ${{ secrets.AMZ_CLIENT }}
+          AMZ_SECRET: ${{ secrets.AMZ_SECRET }}
+          AMZ_REFRESH: ${{ secrets.AMZ_REFRESH }}
+          PROXY_URL: ${{ secrets.PROXY_URL }}
+          AMZ_PROXY_ALWAYS: "1"
+          NO_IMAGES: "1"
+          ALIEXPRESS_APP_KEY: ${{ secrets.ALIEXPRESS_APP_KEY }}
+          ALIEXPRESS_APP_SECRET: ${{ secrets.ALIEXPRESS_APP_SECRET }}
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN || secrets.APIFY_API_TOKEN || secrets.APIFY_KEY || secrets.APIFY }}
+          DEAL_SOURCE: ${{ github.event.inputs.source || 'ali' }}
+          PER_KW: ${{ github.event.inputs.per_kw || '50' }}
+          Q: ${{ steps.pick.outputs.q }}
+          ROI_MIN: ${{ github.event.inputs.roi_min || '0.30' }}
+          MAX_TEMU_PRICE: ${{ github.event.inputs.max_temu || '25' }}
+          WHOLESALE_FACTOR: ${{ github.event.inputs.wholesale_factor || '0.60' }}
+          FREIGHT_PER_UNIT: ${{ github.event.inputs.freight || '1.00' }}
+        run: |
+          mkdir -p /tmp/deals; printf '%s\n' "$CRED_ENV" > reprice/credentials.env
+          if [ -n "$AMZ_SECRET" ] && [ -n "$AMZ_REFRESH" ]; then
+            grep -v -i -E '^[[:space:]]*(CLIENT_ID|CLIENT_SECRET|REFRESH_TOKEN)[[:space:]]*=' reprice/credentials.env > reprice/credentials.env.tmp; mv reprice/credentials.env.tmp reprice/credentials.env
+            printf 'CLIENT_ID=%s\nCLIENT_SECRET=%s\nREFRESH_TOKEN=%s\n' "$AMZ_CLIENT" "$AMZ_SECRET" "$AMZ_REFRESH" >> reprice/credentials.env
+          elif [ -n "$AMZ_SECRET" ]; then printf 'CLIENT_ID=%s\nCLIENT_SECRET=%s\n' "$AMZ_CLIENT" "$AMZ_SECRET" >> reprice/credentials.env; fi
+          if [ -n "$Q" ] && [ "$Q" != "saved" ]; then ARGS=(--search "$Q"); else ARGS=(--from-json /tmp/temu_last.json); fi
+          # full output stays private: only count lines reach the public log
+          python temu/deal_finder.py "${ARGS[@]}" --out /tmp/deals > /tmp/deals/run.log 2>&1 || true
+          rm -f reprice/credentials.env
+          grep -E "^(Temu items to check|AliExpress keywords|Amazon listings found|Temu items with a real|RESULT:)|apify .*status|official affiliate API|reviews:|review cache|apify amazon|amazon actor|apify .*amazon|ali_api|validation:|verdicts:|fees: |fees ERR|chunk for this run|product pages read|offers read: [0-9]+00/|Traceback|Error" /tmp/deals/run.log | sed -E 's/\$[0-9][0-9.,]*/$x/g' || true
+      - name: Store in private Postgres
+        if: always()
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          RUN_ID: ${{ github.run_id }}
+          CHUNK: ${{ steps.pick.outputs.q }}
+          SOURCE: ${{ github.event.inputs.source || 'ali' }}
+          ROI_MIN: ${{ github.event.inputs.roi_min || '0.30' }}
+          MAX_TEMU_PRICE: ${{ github.event.inputs.max_temu || '25' }}
+          WHOLESALE_FACTOR: ${{ github.event.inputs.wholesale_factor || '0.60' }}
+          FREIGHT_PER_UNIT: ${{ github.event.inputs.freight || '1.00' }}
+          PER_KW: ${{ github.event.inputs.per_kw || '50' }}
+        run: python temu/deals_to_pg.py /tmp/deals
+      - name: Wipe local copies
+        if: always()
+        run: rm -rf /tmp/deals
+      - name: Chain - pause, then start the next chunk
+        if: success() || failure()
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: |
+          # dossiers for new strong candidates (private, Postgres only) - runs in parallel, own concurrency group
+          gh workflow run deal_sheet.yml --repo "${{ github.repository }}" --ref main -f top=10 || true
+          gh workflow run temu_check.yml --repo "${{ github.repository }}" --ref main -f wait=1500 || true
+          sleep 600
+          for t in 1 2 3 4 5 6; do gh workflow run temu_deals.yml --repo "${{ github.repository }}" --ref main -f search=auto && break; echo "next-chunk dispatch failed ($t), retrying"; sleep 45; done

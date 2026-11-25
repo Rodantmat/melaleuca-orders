@@ -1,0 +1,33 @@
+name: FBA v0 labels probe (read only)
+on: { workflow_dispatch: {} }
+permissions: { contents: write }
+concurrency: { group: fbaprobe3, cancel-in-progress: false }
+jobs:
+  go:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: main }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: Probe
+        env: { CRED_ENV: "${{ secrets.CREDENTIALS_ENV }}", AMZ_CLIENT: "${{ secrets.AMZ_CLIENT }}", AMZ_SECRET: "${{ secrets.AMZ_SECRET }}", AMZ_REFRESH: "${{ secrets.AMZ_REFRESH }}" }
+        run: |
+          mkdir -p /tmp/so
+          cd feedwork
+          printf '%s\n' "$CRED_ENV" > credentials.txt
+          if [ -n "$AMZ_SECRET" ] && [ -n "$AMZ_REFRESH" ]; then
+            grep -v -i -E '^[[:space:]]*(CLIENT_ID|CLIENT_SECRET|REFRESH_TOKEN)[[:space:]]*=' credentials.txt > credentials.txt.tmp; mv credentials.txt.tmp credentials.txt
+            printf 'CLIENT_ID=%s\nCLIENT_SECRET=%s\nREFRESH_TOKEN=%s\n' "$AMZ_CLIENT" "$AMZ_SECRET" "$AMZ_REFRESH" >> credentials.txt
+          elif [ -n "$AMZ_SECRET" ]; then printf 'CLIENT_ID=%s\nCLIENT_SECRET=%s\n' "$AMZ_CLIENT" "$AMZ_SECRET" >> credentials.txt; fi
+          python fba_probe3.py 2>&1 | tee /tmp/so/run.log
+          rm -f credentials.txt
+      - name: Publish
+        if: always()
+        run: |
+          git config user.name "feed-bot"; git config user.email "feed-bot@users.noreply.github.com"
+          git checkout --orphan p3-new
+          git rm -rf . >/dev/null 2>&1 || true
+          cp -a /tmp/so/. .
+          find . -name 'credentials.*' -not -path './.git/*' -delete; git add -A && git commit -qm "probe3" && git push -f origin p3-new:fba-probe3

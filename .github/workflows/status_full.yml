@@ -1,0 +1,93 @@
+name: Status page - FULL refresh (orders + tracking + carrier status)
+on:
+  workflow_dispatch:
+    inputs:
+      dry: { description: "test run: print a summary, publish nothing", default: "false" }
+permissions: { contents: write }
+concurrency: { group: status, cancel-in-progress: false }
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix: { acct: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17] }
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: main }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install playwright && playwright install --with-deps chromium && sudo apt-get install -y xvfb
+      - name: Read the order history of one account (text only, through the proxy)
+        env:
+          PROXY_URL: ${{ secrets.PROXY_URL }}
+          CRED_ENV: ${{ secrets.CREDENTIALS_ENV }}
+          AMZ_CLIENT: ${{ secrets.AMZ_CLIENT }}
+          AMZ_SECRET: ${{ secrets.AMZ_SECRET }}
+          AMZ_REFRESH: ${{ secrets.AMZ_REFRESH }}
+          PYTHONUTF8: "0"
+          PYTHONCOERCECLOCALE: "0"
+          LC_ALL: "C"
+          PYTHONIOENCODING: "ascii:replace"
+        run: |
+          cd local
+          printf '%s\n' "$CRED_ENV" > credentials.env
+          if [ -n "$AMZ_SECRET" ] && [ -n "$AMZ_REFRESH" ]; then
+            grep -v -i -E '^[[:space:]]*(CLIENT_ID|CLIENT_SECRET|REFRESH_TOKEN)[[:space:]]*=' credentials.env > credentials.env.tmp; mv credentials.env.tmp credentials.env
+            printf 'CLIENT_ID=%s\nCLIENT_SECRET=%s\nREFRESH_TOKEN=%s\n' "$AMZ_CLIENT" "$AMZ_SECRET" "$AMZ_REFRESH" >> credentials.env
+          elif [ -n "$AMZ_SECRET" ]; then printf 'CLIENT_ID=%s\nCLIENT_SECRET=%s\n' "$AMZ_CLIENT" "$AMZ_SECRET" >> credentials.env; fi
+          grep -q '^PROXY_URL=' credentials.env || printf 'PROXY_URL=%s\n' "$PROXY_URL" >> credentials.env
+          grep -q '^STICKY_BASE=' credentials.env || printf 'STICKY_BASE=10000\n' >> credentials.env
+          cd ../status
+          xvfb-run -a python scrape.py ${{ matrix.acct }} --out ../out
+          rm -f ../local/credentials.env
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: "acct-${{ matrix.acct }}"
+          path: out/acct_${{ matrix.acct }}.json
+          retention-days: 1
+          if-no-files-found: ignore
+  publish:
+    needs: scrape
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: main }
+      - uses: actions/checkout@v4
+        with: { ref: status-site, path: site }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: "acct-*"
+          path: out
+          merge-multiple: true
+      - run: pip install cryptography
+      - name: Build the pages
+        env:
+          STATUS_SALT: ${{ secrets.STATUS_SALT }}
+          PAGE_PAT: ${{ secrets.PAGE_PAT }}
+          SHIPPO_LIVE_TOKEN: ${{ secrets.SHIPPO_LIVE_TOKEN }}
+        run: |
+          if [ "${{ github.event.inputs.dry }}" = "true" ]; then python status/build.py full --in out --site site --dry 2>&1 | tee /tmp/dry.txt; ls out >> /tmp/dry.txt; python3 -c "import json,glob;[print(a['tab'][:1]+'*', a['ok'], len(a['orders']), a['error'][:100]) for a in map(lambda f:json.load(open(f)),sorted(glob.glob('out/acct_*.json')))]" >> /tmp/dry.txt; else python status/build.py full --in out --site site; fi
+      - name: Publish
+        if: github.event.inputs.dry != 'true'
+        run: |
+          cd site
+          git config user.name "status-bot"; git config user.email "status-bot@users.noreply.github.com"
+          find . -name 'credentials.*' -not -path './.git/*' -delete; git add -A
+          git diff --cached --quiet || git commit -qm "status $(date -u +%F_%H%M)"
+          git push origin HEAD:status-site
+      - name: Publish the test summary (no names, no tracking numbers)
+        if: github.event.inputs.dry == 'true'
+        run: |
+          git config user.name "status-bot"; git config user.email "status-bot@users.noreply.github.com"
+          find . -name credentials.env -not -path "./.git/*" -delete  # SCRUB secrets before anything is committed
+          git checkout --orphan dry-new
+          git rm -rf . >/dev/null 2>&1 || true
+          cp /tmp/dry.txt dry.txt
+          find . -name 'credentials.*' -not -path './.git/*' -delete; git add dry.txt && git commit -qm "dry run" && git push -f origin dry-new:status-dry

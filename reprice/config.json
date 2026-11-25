@@ -1,0 +1,26 @@
+{
+  "live_enabled": true,
+  "allowlist": [
+    "ME0287",
+    "ME1131",
+    "ME1429",
+    "DE-QFMC-M0RB",
+    "ME1302"
+  ],
+  "max_changes_per_run": 20,
+  "max_changes_per_day": 40,
+  "new_listing_no_drop_days": 60,
+  "overrides": {},
+  "cfg": {},
+  "auto_raise": {
+    "enabled": true,
+    "max_per_run": 12
+  },
+  "auto_drop": {
+    "enabled": true,
+    "max_per_run": 6,
+    "min_days_no_sale": 30,
+    "min_days_cover": 45
+  },
+  "auto_protect": true
+}
