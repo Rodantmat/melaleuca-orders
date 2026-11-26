@@ -1,0 +1,292 @@
+plan 'TEST-DELETE-ME-SD-2026-10' | ship from Toronto | 85 SKUs, 594 units, 11 boxes
+expiration date added to 42 products that need it
+1/5 plan created: wf24398da9-d043-4388-815a-c25320da116e
+1/5 inventory accepted by Amazon
+2/5 packing option chosen (1 group(s))
+3/5 packing option confirmed
+4/5 box contents and sizes saved (11 boxes)
+5/5 shipment options generated
+placement options: 3
+ option pl0e1ce09f-2e91-4244-b405-dd18375990d6 OFFERED shipments: 1 fees: [{"description": "Placement service fee represents service to inbound with minimal shipment splits and destinations of skus", "type": "FEE", "value": {"amount": 208.77, "code": "USD"}, "target": "Placement Services"}] discounts: [] expires: 2026-11-29T21:42:51.514Z
+ option pl9337d390-e086-4d35-bbe0-7e11adfa2014 OFFERED shipments: 1 fees: [{"description": "Placement service fee represents service to inbound with minimal shipment splits and destinations of skus", "type": "FEE", "value": {"amount": 156.94, "code": "USD"}, "target": "Placement Services"}] discounts: [] expires: 2026-11-29T21:42:51.514Z
+ option plc3b7bfda-1e4a-483a-a312-cb50415028b5 OFFERED shipments: 1 fees: [{"description": "Placement service fee represents service to inbound with minimal shipment splits and destinations of skus", "type": "FEE", "value": {"amount": 250.38, "code": "USD"}, "target": "Placement Services"}] discounts: [] expires: 2026-11-29T21:42:51.514Z
+
+## plan (trimmed)
+{
+ "status": "ACTIVE",
+ "sourceAddress": {
+  "phoneNumber": "9544590398",
+  "city": "North York",
+  "countryCode": "CA",
+  "postalCode": "M3J 2Z3",
+  "name": "Flipping Magic",
+  "addressLine1": "500 Murray Ross Parkway",
+  "addressLine2": "#207",
+  "stateOrProvinceCode": "ON"
+ },
+ "shipments": [],
+ "placementOptions": [
+  {
+   "placementOptionId": "pl0e1ce09f-2e91-4244-b405-dd18375990d6",
+   "status": "OFFERED"
+  },
+  {
+   "placementOptionId": "pl9337d390-e086-4d35-bbe0-7e11adfa2014",
+   "status": "OFFERED"
+  },
+  {
+   "placementOptionId": "plc3b7bfda-1e4a-483a-a312-cb50415028b5",
+   "status": "OFFERED"
+  }
+ ],
+ "packingOptions": [
+  {
+   "packingOptionId": "po16e3a42f-a9b5-4468-a534-fb0e8ae87453",
+   "status": "ACCEPTED"
+  }
+ ]
+}
+
+## shipment shb9870fc3-6351-4e14-ad4e-29df9cb40fa0 (option pl0e1ce09f-2e91-4244-b405-dd18375990d6)
+{
+ "shipmentId": "shb9870fc3-6351-4e14-ad4e-29df9cb40fa0",
+ "destination": {
+  "address": {
+   "city": "LOS LUNAS",
+   "countryCode": "US",
+   "postalCode": "87031",
+   "name": "Amazon.com Services LLC",
+   "addressLine1": "6251 Pioneer Trail NW",
+   "stateOrProvinceCode": "NM"
+  },
+  "warehouseId": "ABQ2",
+  "destinationType": "AMAZON_WAREHOUSE"
+ },
+ "dates": {},
+ "source": {
+  "address": {
+   "phoneNumber": "9544590398",
+   "city": "North York",
+   "countryCode": "CA",
+   "postalCode": "M3J 2Z3",
+   "name": "Flipping Magic",
+   "addressLine1": "500 Murray Ross Parkway",
+   "addressLine2": "#207",
+   "stateOrProvinceCode": "ON"
+  },
+  "sourceType": "SELLER_FACILITY"
+ },
+ "placementOptionId": "pl0e1ce09f-2e91-4244-b405-dd18375990d6",
+ "status": "UNCONFIRMED"
+}
+
+## shipment sh5cda63a8-6f7d-459b-b23e-1d15a28a2126 (option pl9337d390-e086-4d35-bbe0-7e11adfa2014)
+{
+ "shipmentId": "sh5cda63a8-6f7d-459b-b23e-1d15a28a2126",
+ "destination": {
+  "address": {
+   "city": "BREINIGSVILLE",
+   "countryCode": "US",
+   "postalCode": "18031-1536",
+   "name": "HEA2",
+   "addressLine1": "650 BOULDER DR",
+   "addressLine2": "Suite A",
+   "stateOrProvinceCode": "PA"
+  },
+  "warehouseId": "HEA2",
+  "destinationType": "AMAZON_WAREHOUSE"
+ },
+ "dates": {},
+ "source": {
+  "address": {
+   "phoneNumber": "9544590398",
+   "city": "North York",
+   "countryCode": "CA",
+   "postalCode": "M3J 2Z3",
+   "name": "Flipping Magic",
+   "addressLine1": "500 Murray Ross Parkway",
+   "addressLine2": "#207",
+   "stateOrProvinceCode": "ON"
+  },
+  "sourceType": "SELLER_FACILITY"
+ },
+ "placementOptionId": "pl9337d390-e086-4d35-bbe0-7e11adfa2014",
+ "status": "UNCONFIRMED"
+}
+
+## shipment shaa75f5e1-93ae-4fc1-b251-006458562ba1 (option plc3b7bfda-1e4a-483a-a312-cb50415028b5)
+{
+ "shipmentId": "shaa75f5e1-93ae-4fc1-b251-006458562ba1",
+ "destination": {
+  "address": {
+   "city": "BUCKEYE",
+   "countryCode": "US",
+   "postalCode": "85396",
+   "name": "Amazon.com Services LLC",
+   "addressLine1": "18900 W McDowell Road",
+   "stateOrProvinceCode": "AZ"
+  },
+  "warehouseId": "GEU3",
+  "destinationType": "AMAZON_WAREHOUSE"
+ },
+ "dates": {},
+ "source": {
+  "address": {
+   "phoneNumber": "9544590398",
+   "city": "North York",
+   "countryCode": "CA",
+   "postalCode": "M3J 2Z3",
+   "name": "Flipping Magic",
+   "addressLine1": "500 Murray Ross Parkway",
+   "addressLine2": "#207",
+   "stateOrProvinceCode": "ON"
+  },
+  "sourceType": "SELLER_FACILITY"
+ },
+ "placementOptionId": "plc3b7bfda-1e4a-483a-a312-cb50415028b5",
+ "status": "UNCONFIRMED"
+}
+PRECONFIRM boxes sh5cda63a8-6f7d-459b-b23e-1d15a28a2126 -> 11 [{"quantity": 1, "externalContainerIdentifierType": "AMAZON", "templateName": "P1 - B10", "packageId": "pk29118f78-9dda-4724-b2c3-0383c76e77c9", "weight": {"unit": "LB", "value": 26.1}, "items": [{"labelOwner": "SELLER", "msku": "ME0285", "quantity": 13, "fnsku": "X0049K7D99", "asin": "B017JIL4GY", "expiration": "2028-10-31", "prepInstructions": [{"prepType": "ITEM_LABELING", "fee": {"amount": 0, "code": "USD"}, "prepOwner": "SELLER"}, {"prepType": "ITEM_POLYBAGGING", "fee": {"amount": 0, "code": "USD"}, "prepOwner": "SELLER"}]}, {"labelOwner": "SELLER", "msku": "ME1158", "quantity": 3, "fnsku": "X004J6AN4Z", "asin": "B0DS9JN9D7", "expiration": "2028-10-31", "prepInstructions": [{"prepType":
+PRECONFIRM items sh5cda63a8-6f7d-459b-b23e-1d15a28a2126 -> 85 [{"labelOwner": "SELLER", "msku": "ME1833", "quantity": 10, "fnsku": "X004W5FKXR", "asin": "B0FXYC4WFN", "expiration": "2028-10-31", "prepInstructions": [{"prepType": "ITEM_LABELING", "fee": {"amount": 0, "code": "USD"}, "prepOwner": "SELLER"}, {"prepType": "ITEM_NO_PREP", "fee": {"amount": 0, "code": "USD"}, "prepOwner": "SELLER"}]}, {"labelOwner": "SELLER", "msku": "ME1652", "quantity": 2, "fnsku": "X004SBQ5VB", "asin": "B0FKZKR138", "prepInstructions": [{"prepType": "ITEM_LABELING", "fee": {"amount": 0, "code": "USD"}, "prepOwner": "SELLER"}, {"prepType": "ITEM_NO_PREP", "fee": {"amount": 0, "code": "USD"}, "prepOwner": "SELLER"}]}]
+PRECONFIRM boxes shaa75f5e1-93ae-4fc1-b251-006458562ba1 -> 11 [{"quantity": 1, "externalContainerIdentifierType": "AMAZON", "templateName": "P1 - B10", "packageId": "pk29118f78-9dda-4724-b2c3-0383c76e77c9", "weight": {"unit": "LB", "value": 26.1}, "items": [{"labelOwner": "SELLER", "msku": "ME0285", "quantity": 13, "fnsku": "X0049K7D99", "asin": "B017JIL4GY", "expiration": "2028-10-31", "prepInstructions": [{"prepType": "ITEM_LABELING", "fee": {"amount": 0, "code": "USD"}, "prepOwner": "SELLER"}, {"prepType": "ITEM_POLYBAGGING", "fee": {"amount": 0, "code": "USD"}, "prepOwner": "SELLER"}]}, {"labelOwner": "SELLER", "msku": "ME1158", "quantity": 3, "fnsku": "X004J6AN4Z", "asin": "B0DS9JN9D7", "expiration": "2028-10-31", "prepInstructions": [{"prepType":
+PRECONFIRM items shaa75f5e1-93ae-4fc1-b251-006458562ba1 -> 85 [{"labelOwner": "SELLER", "msku": "ME1833", "quantity": 10, "fnsku": "X004W5FKXR", "asin": "B0FXYC4WFN", "expiration": "2028-10-31", "prepInstructions": [{"prepType": "ITEM_LABELING", "fee": {"amount": 0, "code": "USD"}, "prepOwner": "SELLER"}, {"prepType": "ITEM_NO_PREP", "fee": {"amount": 0, "code": "USD"}, "prepOwner": "SELLER"}]}, {"labelOwner": "SELLER", "msku": "ME1652", "quantity": 2, "fnsku": "X004SBQ5VB", "asin": "B0FKZKR138", "prepInstructions": [{"prepType": "ITEM_LABELING", "fee": {"amount": 0, "code": "USD"}, "prepOwner": "SELLER"}, {"prepType": "ITEM_NO_PREP", "fee": {"amount": 0, "code": "USD"}, "prepOwner": "SELLER"}]}]
+
+## transportation options for shb9870fc3-6351-4e14-ad4e-29df9cb40fa0
+[
+ {
+  "carrier": {
+   "name": "ESTES EXPRESS LINES",
+   "alphaCode": "EXLA"
+  },
+  "preconditions": [
+   "CONFIRMED_DELIVERY_WINDOW"
+  ],
+  "shipmentId": "shb9870fc3-6351-4e14-ad4e-29df9cb40fa0",
+  "shippingMode": "FREIGHT_LTL",
+  "transportationOptionId": "to04c8f536-541d-41ab-b09d-c30a42dfee7d",
+  "shippingSolution": "USE_YOUR_OWN_CARRIER"
+ },
+ {
+  "carrier": {
+   "name": "Other"
+  },
+  "preconditions": [
+   "CONFIRMED_DELIVERY_WINDOW"
+  ],
+  "shipmentId": "shb9870fc3-6351-4e14-ad4e-29df9cb40fa0",
+  "shippingMode": "FREIGHT_LTL",
+  "transportationOptionId": "to07e14dd0-ee23-4054-a464-17b05d8ef151",
+  "shippingSolution": "USE_YOUR_OWN_CARRIER"
+ },
+ {
+  "carrier": {
+   "name": "OLD DOMINION FREIGHT LINE INC",
+   "alphaCode": "ODFL"
+  },
+  "preconditions": [
+   "CONFIRMED_DELIVERY_WINDOW"
+  ],
+  "shipmentId": "shb9870fc3-6351-4e14-ad4e-29df9cb40fa0",
+  "shippingMode": "FREIGHT_LTL",
+  "transportationOptionId": "to0dcf2831-160f-4e70-aff6-67cf1efb7dd9",
+  "shippingSolution": "USE_YOUR_OWN_CARRIER"
+ },
+ {
+  "carrier": {
+   "name": "DHL AIRWAYS INC",
+   "alphaCode": "DHLC"
+  },
+  "preconditions": [
+   "CONFIRMED_DELIVERY_WINDOW"
+  ],
+  "shipmentId": "shb9870fc3-6351-4e14-ad4e-29df9cb40fa0",
+  "shippingMode": "GROUND_SMALL_PARCEL",
+  "transportationOptionId": "to1f8e8bcf-e164-4026-a416-101c5150fb67",
+  "shippingSolution": "USE_YOUR_OWN_CARRIER"
+ },
+ {
+  "carrier": {
+   "name": "Amazon Freight",
+   "alphaCode": "ATSB"
+  },
+  "preconditions": [
+   "CONFIRMED_DELIVERY_WINDOW"
+  ],
+  "shipmentId": "shb9870fc3-6351-4e14-ad4e-29df9cb40fa0",
+  "shippingMode": "FREIGHT_LTL",
+  "transportationOptionId": "to3e8ac394-0071-4096-b524-9e0d15a6813a",
+  "shippingSolution": "USE_YOUR_OWN_CARRIER"
+ },
+ {
+  "carrier": {
+   "name": "FEDEX GROUND (CORPORATE)",
+   "alphaCode": "FDEG"
+  },
+  "preconditions": [
+   "CONFIRMED_DELIVERY_WINDOW"
+  ],
+  "shipmentId": "shb9870fc3-6351-4e14-ad4e-29df9cb40fa0",
+  "shippingMode": "GROUND_SMALL_PARCEL",
+  "transportationOptionId": "to40d2f8e1-3ac3-4d64-8c64-99408b14e668",
+  "shippingSolution": "USE_YOUR_OWN_CARRIER"
+ },
+ {
+  "carrier": {
+   "name": "Other"
+  },
+  "preconditions": [
+   "CONFIRMED_DELIVERY_WINDOW"
+  ],
+  "shipmentId": "shb9870fc3-6351-4e14-ad4e-29df9cb40fa0",
+  "shippingMode": "GROUND_SMALL_PARCEL",
+  "transportationOptionId": "to4d194eb5-6455-4ebf-a6d1-0ebe26f62d03",
+  "shippingSolution": "USE_YOUR_OWN_CARRIER"
+ },
+ {
+  "carrier": {
+   "name": "Tforce Freight",
+   "alphaCode": "TFIN"
+  },
+  "preconditions": [
+   "CONFIRMED_DELIVERY_WINDOW"
+  ],
+  "shipmentId": "shb9870fc3-6351-4e14-ad4e-29df9cb40fa0",
+  "shippingMode": "FREIGHT_LTL",
+  "transportationOptionId": "to589f9e65-9898-4c44-ae3e-8aedefd646d2",
+  "shippingSolution": "USE_YOUR_OWN_CARRIER"
+ },
+ {
+  "carrier": {
+   "name": "FLOCK FREIGHT",
+   "alphaCode": "FLOK"
+  },
+  "preconditions": [
+   "CONFIRMED_DELIVERY_WINDOW"
+  ],
+  "shipmentId": "shb9870fc3-6351-4e14-ad4e-29df9cb40fa0",
+  "shippingMode": "FREIGHT_LTL",
+  "transportationOptionId": "to6eee1213-f90c-44b2-9eaa-99a6cd0b2925",
+  "shippingSolution": "USE_YOUR_OWN_CARRIER"
+ },
+ {
+  "carrier": {
+   "name": "UPS FREIGHT",
+   "alphaCode": "UPGF"
+  },
+  "preconditions": [
+   "CONFIRMED_DELIVERY_WINDOW"
+  ],
+  "shipmentId": "shb9870fc3-6351-4e14-ad4e-29df9cb40fa0",
+  "shippingMode": "FREIGHT_LTL",
+  "transportationOptionId": "to76aa5b20-48ed-42df-a4b3-b15d2ace08ec",
+  "shippingSolution": "USE_YOUR_OWN_CARRIER"
+ },
+ {
+  "carrier": {
+   "name": "DHL Express",
+   "alphaCode": "DHL"
+  },
+  "preconditions": [
+ 
+
+test plan cancelled: wf24398da9-d043-4388-815a-c25320da116e
