@@ -1,0 +1,44 @@
+full: month 2026-11 | 35 rows | 35 looked up | failed accounts: none
+status counts: {'DELIVERED': 26, 'TRANSIT': 9}
+carriers: {'ontrac': 17, 'ups': 18}
+carrier/status: {'ontrac/DELIVERED': 17, 'ups/DELIVERED': 9, 'ups/TRANSIT': 9}
+unknown reasons: []
+rows per region: {'US': 20, 'Toronto': 6, 'Vancouver': 9}
+accounts with rows: 17 | rows without tracking: 0
+  sample: ontrac D100...823 | DELIVERED | Delivered | Delivered | loc: Chula Vista, CA | eta: 2026-11-24T02:00:00Z | delivered: 2026-11-24T04:26:27Z | last: 2026-11-24T04:26:27Z
+  sample: ups 1ZY5...328 | TRANSIT | In transit | Departed from Facility | loc: Calgary, AB | eta: 2026-11-27T00:00:00Z | delivered:  | last: 2026-11-26T12:03:00Z
+cities: [('Chula Vista', 'CA'), ('Jamul', 'CA'), ('National City', 'CA'), ('North York', 'ON'), ('San Diego', 'CA'), ('Thornhill', 'ON'), ('Vancouver', 'BC')]
+acct_1.json
+acct_10.json
+acct_11.json
+acct_12.json
+acct_13.json
+acct_14.json
+acct_15.json
+acct_16.json
+acct_17.json
+acct_2.json
+acct_3.json
+acct_4.json
+acct_5.json
+acct_6.json
+acct_7.json
+acct_8.json
+acct_9.json
+D* True 2 
+L* True 2 
+K* True 2 
+J* True 2 
+J* True 2 
+J* True 2 
+A* True 2 
+D* True 2 
+A* True 2 
+L* True 2 
+L* True 2 
+M* True 2 
+A* True 2 
+R* True 2 
+A* True 2 
+W* True 2 
+A* True 2 
