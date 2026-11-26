@@ -1,0 +1,48 @@
+name: Temu watch (cooldown probe - logs the exact reopen time)
+on:
+  workflow_dispatch:
+    inputs:
+      loop: { description: "1 = re-check every 10 min until Temu reopens", default: "1" }
+permissions:
+  contents: write
+concurrency: { group: temu-watch, cancel-in-progress: false }
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 355
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -q "curl_cffi>=0.7"
+      - name: Watch
+        env: { LOOP: "${{ github.event.inputs.loop }}" }
+        run: |
+          git config user.name "temu-bot"; git config user.email "temu-bot@users.noreply.github.com"
+          (git fetch -q origin temu-data:temu-data && git checkout -q temu-data) || { git checkout -q --orphan temu-data; git rm -rf . >/dev/null 2>&1 || true; }
+          mkdir -p temu
+          cat > /tmp/w.py <<'PY'
+          import os, re, subprocess, time, urllib.parse
+          from datetime import datetime, timezone
+          from curl_cffi import requests as cr
+          UA = {"User-Agent": "Pinterestbot/1.0 (+http://www.pinterest.com/bot.html)", "Accept-Language": "en-US,en;q=0.9"}
+          LOG = "temu/watch.log"; T0 = time.time()
+          def goods():
+              try:
+                  r = cr.get("https://www.temu.com/search_result.html?search_key=" + urllib.parse.quote("dog shirt"), impersonate="chrome", headers=UA, timeout=45)
+                  return len(set(re.findall(r'"goodsId":"?(\d{12,})', r.text)))
+              except Exception:
+                  return -1
+          def log(s):
+              line = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC ") + s
+              print(line, flush=True); open(LOG, "a").write(line + chr(10))
+              subprocess.run("git add " + LOG + " && git commit -qm watch && (git push -q origin temu-data || (git pull -q --rebase origin temu-data && git push -q origin temu-data))", shell=True)
+          while True:
+              g = goods(); mins = round((time.time() - T0) / 60, 1)
+              if g > 0:
+                  log("REOPENED: %d products after %s min of watching" % (g, mins)); break
+              log("still blocked (%d products) after %s min" % (g, mins))
+              if os.environ.get("LOOP") != "1" or time.time() - T0 > 5.4 * 3600: break
+              time.sleep(600)
+          PY
+          python /tmp/w.py
