@@ -1,0 +1,28 @@
+SUMMARY [
+ {
+  "marketplaceId": "ATVPDKIKX0DER",
+  "asin": "B018C5698G",
+  "productType": "SUNSCREEN",
+  "conditionType": "new_new",
+  "status": [
+   "DISCOVERABLE"
+  ],
+  "fnSku": "X004IIUUSD",
+  "itemName": "Melaleuca Sun Shades Lip Balm (Mountain Mist)",
+  "createdDate": "2024-12-26T21:14:19.014Z",
+  "lastUpdatedDate": "2025-01-13T22:28:27.487Z",
+  "mainImage": {
+   "link": "https://m.media-amazon.com/images/I/31emkeTg40L.jpg",
+   "height": 172,
+   "width": 500
+  }
+ }
+]
+ISSUES []
+OFFERS [{"marketplaceId": "ATVPDKIKX0DER", "offerType": "B2C", "price": {"currency": "USD", "currencyCode": "USD", "amount": "10.03"}, "audience": {"value": "ALL", "displayName": "Sell on Amazon"}}]
+RESTRICTIONS {
+ "restrictions": []
+}
+ATTRIBUTE NAMES ['condition_type', 'fulfillment_availability', 'merchant_shipping_group', 'merchant_suggested_asin', 'purchasable_offer']
+ALL_ATTRIBUTES {"merchant_suggested_asin": [{"value": "B018C5698G", "marketplace_id": "ATVPDKIKX0DER"}], "condition_type": [{"value": "new_new", "marketplace_id": "ATVPDKIKX0DER"}], "merchant_shipping_group": [{"value": "legacy-template-id", "marketplace_id": "ATVPDKIKX0DER"}], "fulfillment_availability": [{"fulfillment_channel_code": "AMAZON_NA"}], "purchasable_offer": [{"currency": "USD", "audience": "ALL", "our_price": [{"schedule": [{"value_with_tax": 10.03}]}], "marketplace_id": "ATVPDKIKX0DER"}]}
+GENERIC_KEYWORD null
