@@ -1,0 +1,8 @@
+[
+ {
+  "for": "pack_34911_bottle",
+  "method": "POST",
+  "url": "https://www.melaleuca.com/api/cart?sc_itemid=%7B74943C1F-D515-46E0-ACD3-A7BEF4EEFF84%7D&sc_lang=en-US&sc_site=productsto",
+  "body": "{\"Sku\":\"1219\",\"Quantity\":1,\"Configurations\":[],\"PromotionId\":null,\"LineType\":\"Normal\",\"LineId\":null,\"Position\":null}"
+ }
+]
