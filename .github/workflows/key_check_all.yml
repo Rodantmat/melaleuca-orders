@@ -1,0 +1,59 @@
+name: key-check-all
+on: workflow_dispatch
+permissions: { contents: read }
+jobs:
+  t:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Build creds file from separate secrets and test every key
+        env:
+          CRED_ENV: ${{ format('PROXY_URL={1}{0}STICKY_BASE=10000{0}HEADLESS=1{0}MAIL_MODE=send{0}GMAIL_USER={2}{0}GMAIL_APP_PASSWORD={3}{0}SHIPPO_LIVE_TOKEN={4}{0}MELA_USER_1={5}{0}MELA_PASS_1={6}{0}MELA_USER_2={7}{0}MELA_PASS_2={8}{0}MELA_USER_3={9}{0}MELA_PASS_3={10}{0}MELA_USER_4={11}{0}MELA_PASS_4={12}{0}MELA_USER_5={13}{0}MELA_PASS_5={14}{0}MELA_USER_6={15}{0}MELA_PASS_6={16}{0}MELA_USER_7={17}{0}MELA_PASS_7={18}{0}MELA_USER_8={19}{0}MELA_PASS_8={20}{0}MELA_USER_9={21}{0}MELA_PASS_9={22}{0}MELA_USER_10={23}{0}MELA_PASS_10={24}{0}MELA_USER_11={25}{0}MELA_PASS_11={26}{0}MELA_USER_12={27}{0}MELA_PASS_12={28}{0}MELA_USER_13={29}{0}MELA_PASS_13={30}{0}MELA_USER_14={31}{0}MELA_PASS_14={32}{0}MELA_USER_15={33}{0}MELA_PASS_15={34}{0}MELA_USER_16={35}{0}MELA_PASS_16={36}{0}MELA_USER_17={37}{0}MELA_PASS_17={38}{0}APIFY_TOKEN={39}{0}DATABASE_URL={40}{0}R2_ACCOUNT_ID={41}{0}R2_BUCKET={42}{0}R2_ACCESS_KEY_ID={43}{0}R2_SECRET_ACCESS_KEY={44}{0}', fromJSON('"\n"'), secrets.PROXY_URL, secrets.GMAIL_USER, secrets.GMAIL_APP_PASSWORD, secrets.SHIPPO_LIVE_TOKEN, secrets.MELA_USER_1, secrets.MELA_PASS_1, secrets.MELA_USER_2, secrets.MELA_PASS_2, secrets.MELA_USER_3, secrets.MELA_PASS_3, secrets.MELA_USER_4, secrets.MELA_PASS_4, secrets.MELA_USER_5, secrets.MELA_PASS_5, secrets.MELA_USER_6, secrets.MELA_PASS_6, secrets.MELA_USER_7, secrets.MELA_PASS_7, secrets.MELA_USER_8, secrets.MELA_PASS_8, secrets.MELA_USER_9, secrets.MELA_PASS_9, secrets.MELA_USER_10, secrets.MELA_PASS_10, secrets.MELA_USER_11, secrets.MELA_PASS_11, secrets.MELA_USER_12, secrets.MELA_PASS_12, secrets.MELA_USER_13, secrets.MELA_PASS_13, secrets.MELA_USER_14, secrets.MELA_PASS_14, secrets.MELA_USER_15, secrets.MELA_PASS_15, secrets.MELA_USER_16, secrets.MELA_PASS_16, secrets.MELA_USER_17, secrets.MELA_PASS_17, secrets.APIFY_TOKEN, secrets.DATABASE_URL, secrets.R2_ACCOUNT_ID, secrets.R2_BUCKET, secrets.R2_ACCESS_KEY_ID, secrets.R2_SECRET_ACCESS_KEY) }}
+          AMZ_CLIENT: ${{ secrets.AMZ_CLIENT }}
+          AMZ_SECRET: ${{ secrets.AMZ_SECRET }}
+          AMZ_REFRESH: ${{ secrets.AMZ_REFRESH }}
+          PAGE_PAT: ${{ secrets.PAGE_PAT }}
+          GH_ADMIN_TOKEN: ${{ secrets.GH_ADMIN_TOKEN }}
+          STATUS_SALT: ${{ secrets.STATUS_SALT }}
+        run: |
+          python3 - <<'EOF'
+          import os,json,re,urllib.request,urllib.parse,imaplib,subprocess
+          cred={}
+          for l in os.environ["CRED_ENV"].split("\n"):
+              if "=" in l:
+                  k,v=l.split("=",1); cred[k]=v
+          print("creds file keys:",len(cred))
+          empty=[k for k,v in cred.items() if not v]
+          print("EMPTY keys:",empty or "none")
+          def http(url,hdr=None,data=None,method=None):
+              r=urllib.request.Request(url,data=data,headers=hdr or {},method=method)
+              try:
+                  x=urllib.request.urlopen(r,timeout=40); return x.status,x.read().decode()
+              except urllib.error.HTTPError as e: return e.code,e.read().decode()
+              except Exception as e: return 0,str(e)
+          # Amazon LWA + SP-API read
+          c,b=http("https://api.amazon.com/auth/o2/token",{"Content-Type":"application/x-www-form-urlencoded"},urllib.parse.urlencode({"grant_type":"refresh_token","refresh_token":os.environ["AMZ_REFRESH"],"client_id":os.environ["AMZ_CLIENT"],"client_secret":os.environ["AMZ_SECRET"]}).encode())
+          tok=json.loads(b).get("access_token") if c==200 else None
+          print("AMAZON LWA token:",c,"ok" if tok else "FAIL")
+          if tok:
+              c,b=http("https://sellingpartnerapi-na.amazon.com/sellers/v1/marketplaceParticipations",{"x-amz-access-token":tok})
+              print("AMAZON SP-API sellers:",c,"ok" if c==200 else b[:150])
+          # Shippo
+          c,b=http("https://api.goshippo.com/carrier_accounts/",{"Authorization":"ShippoToken "+cred.get("SHIPPO_LIVE_TOKEN","")})
+          print("SHIPPO live:",c,"ok" if c==200 else b[:120])
+          # Gmail IMAP
+          try:
+              m=imaplib.IMAP4_SSL("imap.gmail.com"); m.login(cred["GMAIL_USER"],cred["GMAIL_APP_PASSWORD"]); m.logout(); print("GMAIL login: ok")
+          except Exception as e: print("GMAIL login FAIL",str(e)[:100])
+          # Proxy
+          p=subprocess.run(["curl","-s","-o","/dev/null","-w","%{http_code}","-x",cred["PROXY_URL"],"--max-time","40","https://api.ipify.org"],capture_output=True,text=True)
+          print("PROXY via ipify:",p.stdout)
+          # Melaleuca accounts present
+          miss=[i for i in range(1,18) if not cred.get("MELA_USER_%d"%i) or not cred.get("MELA_PASS_%d"%i)]
+          print("MELA accounts 1-17 present:", "all" if not miss else "missing %s"%miss)
+          # GitHub tokens
+          for n in ("PAGE_PAT","GH_ADMIN_TOKEN"):
+              c,b=http("https://api.github.com/repos/Rodantmat/melaleuca-orders/contents/README.md",{"Authorization":"Bearer "+os.environ[n],"User-Agent":"k"})
+              print(n,"repo read:",c)
+          print("STATUS_SALT present:",bool(os.environ["STATUS_SALT"]))
+          EOF
