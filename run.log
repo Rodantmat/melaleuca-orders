@@ -1,0 +1,30 @@
+plan 'TEST-DELETE-ME-SD-2026-10' | ship from Toronto | 85 SKUs, 594 units, 11 boxes
+expiration date added to 42 products that need it
+1/5 plan created: wf055f808b-4e9e-459e-aed8-84dd1c8bf604
+1/5 inventory accepted by Amazon
+2/5 packing option chosen (1 group(s))
+3/5 packing option confirmed
+4/5 box contents and sizes saved (11 boxes)
+verify: Amazon lists 11 boxes
+test plan cancelled
+DONE plan wf055f808b-4e9e-459e-aed8-84dd1c8bf604
+plan 'TEST-DELETE-ME-SD-2026-10' | ship from Vancouver | 85 SKUs, 594 units, 11 boxes
+expiration date added to 42 products that need it
+1/5 plan created: wfff914f9c-a78e-43b1-86a9-54e137f20e8d
+1/5 inventory accepted by Amazon
+2/5 packing option chosen (1 group(s))
+3/5 packing option confirmed
+4/5 box contents and sizes saved (11 boxes)
+verify: Amazon lists 11 boxes
+test plan cancelled
+DONE plan wfff914f9c-a78e-43b1-86a9-54e137f20e8d
+plan 'TEST-DELETE-ME-SD-2026-10' | ship from San Diego | 85 SKUs, 594 units, 11 boxes
+expiration date added to 42 products that need it
+1/5 plan created: wfb844d483-2f92-4997-ac1b-a8f1fd977b00
+1/5 inventory accepted by Amazon
+2/5 packing option chosen (1 group(s))
+3/5 packing option confirmed
+4/5 box contents and sizes saved (11 boxes)
+verify: Amazon lists 11 boxes
+test plan cancelled
+DONE plan wfb844d483-2f92-4997-ac1b-a8f1fd977b00
