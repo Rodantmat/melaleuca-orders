@@ -1,0 +1,46 @@
+scanning 1 account(s), 1 at a time
+[tab 7 Antonio M] 21:42:23   proxy port 10007 | location: cr.us;city.losangeles,sandiego,longbeach,anaheim,irvine,santaana,riverside
+[tab 7 Antonio M] 21:43:01   IP: 148.135.118.218
+[tab 7 Antonio M] 21:43:01   signed in; cart at start: (0, 0.0)
+[tab 7 Antonio M] 21:43:32   monthly specials: 7 cards, outlet: 0 cards
+[tab 7 Antonio M] 21:43:58   coupons of this account: 3 | Save $2.50 on Sei Bella Dry Shampoo ; Save $1.60 on Vitamin D3 ; Save $4.50 on Sei Bella Lip Treatment
+[tab 7 Antonio M] 21:44:18   fill candidates: [('64298', 51.0, 'Deal of the Month: Peak Performance Total Health Pack'), ('64297', 20.0, 'Monthly Special: Collagen & Sustain Bundle'), ('29514', 9.0, 'Holiday Sugared Amber Body & Hand Bundle'), ('29519', 9.0, 'Monthly Special: Bath Bundle')]
+[tab 7 Antonio M] 21:44:19    add 64298 x 1 -> (0, 0.0)
+[tab 7 Antonio M] 21:44:19    add 64297 x 3 -> (0, 0.0)
+[tab 7 Antonio M] 21:44:20    add 29514 x 5 -> (5, 45.0)
+[tab 7 Antonio M] 21:44:38   special offers: 24
+[tab 7 Antonio M] 21:44:39   cart at end: (0, 0.0)
+[tab 7 Antonio M] 21:44:39   traffic through the proxy: about 2.6 MB (counted from the page headers, real use is a bit higher)
+     coupon not on your sheet: Save $2.50 on Sei Bella Dry Shampoo
+     coupon not on your sheet: Save $4.50 on Sei Bella Lip Treatment
+Antonio M: 3 coupon(s) on the account, 1 match products of your sheet
+Antonio M: 4 offers on your products, 27 not used
+     not used: 79951 Buy one Vitamin C Repair Treatment or Moisturizer, get one for $3.74! (no product of your sheet matches)
+     not used: 8915 Save $6.00 on Simply Fit Chewy Snack Bars 3-Pack! (no product of your sheet matches)
+     not used: 8165 Save $9.00 - $10.70 on Sun Valley Liquid Soap or Foaming Hand Soap Ref (no product of your sheet matches)
+     not used: 79958 Save $7.00 on your choice of Sei Bella Mascara or Lash Primer! (no product of your sheet matches)
+     not used: 64248 Save $14.50 on two Simply Fit Simple Start Muffin Baking Mixes! (no product of your sheet matches)
+     not used: 1860 Save $10.00 on a 473 mL Sol-U-Mel Cleaner! (no product of your sheet matches)
+     not used: 69462 Save $19.00 on Hair, Skin & Nails 2-Pack! (no product of your sheet matches)
+     not used: 5432 Save $7.00 on three EcoSense Cleaning Products! (no product of your sheet matches)
+     not used: 5254 Save $8.00 on Revive Scented Oil 3-Pack!  (no product of your sheet matches)
+     not used: 6488 Buy one Mountain Cabin Coffee, get one for $7.49! (no product of your sheet matches)
+     not used: 2693 Save $3.00 on Antiperspirant or Deodorant 2-Pack! (no product of your sheet matches)
+     not used: 33036 Save $4.00 on Lemon Brite 3-Pack! (needs 3 units - the order limit is 2 units of a discounted product)
+     not used: 69488 Save $14.50 on Melaleuca Magnesium 2-Pack! (no product of your sheet matches)
+     not used: 79101 Save $14.50 on two Sei Bella Dry Shampoo! (no product of your sheet matches)
+     not used: 9392 Save $6.25 on Affinia Shampoo and Conditioner! (Pumps Sold Separately) (no product of your sheet matches)
+     not used: 2039 Save $12.00 on Vitality Multivitamin & Mineral Supplement 2-Pack! (no product of your sheet matches)
+     not used: 1276 Save $4.50 on 5 Sun Shades Lip Balms! (no product of your sheet matches)
+     not used: 39231 Save $5.00 on Diamond Brite Gel Dishwasher Detergent 2-Pack! (no product of your sheet matches)
+     not used: 4288 Save $16.00 on Family-Size Melaleuca Heritage Shampoo 2-Pack! (Pumps S (no product of your sheet matches)
+     not used: 9971 Buy one K2-D3, get one for $7.49! (no product of your sheet matches)
+     not used: 64298 Deal of the Month: Peak Performance Total Health Pack (no product of your sheet matches)
+     not used: 9208 Simply Fit™ Microwave Popcorn Pantry 2-Pack (no product of your sheet matches)
+     not used: 29515 Holiday Affinia Sugared Amber Body Cleanser and Body Lotion Bundle (no product of your sheet matches)
+     not used: 29514 Holiday Sugared Amber Body & Hand Bundle (no product of your sheet matches)
+     not used: 29519 Monthly Special: Bath Bundle (bundle of several products)
+     not used: 64297 Monthly Special: Collagen & Sustain Bundle (bundle of several products)
+     not used: 73990 Sei Bella® Flawless Liquid Foundation Shade-Matching Sample 3-Pack (no product of your sheet matches)
+[tab 7 Antonio M] -> ok
+[tab 7 Antonio M] accounts read: 1 of 1

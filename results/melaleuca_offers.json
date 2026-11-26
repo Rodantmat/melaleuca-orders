@@ -1,0 +1,517 @@
+{
+ "generated": "2026-11-26T21:44:39",
+ "accounts": [
+  {
+   "tab": "Antonio M",
+   "scanned": "2026-11-26T21:42:23",
+   "ok": true,
+   "port": 10007,
+   "ip": "148.135.118.218",
+   "cart_at_start": [
+    0,
+    0.0
+   ],
+   "loyalty_balance": 13.12,
+   "monthly_commitment_points": 35,
+   "monthly_specials": [
+    {
+     "title": "Deal of the Month: Peak Performance Total Health Pack",
+     "family": "4363",
+     "skus": [
+      "64298"
+     ],
+     "sold_out": [
+      false
+     ],
+     "price": 157.49,
+     "price_max": 157.49,
+     "regular": 240.0,
+     "points": 51.0,
+     "is_pack": false,
+     "size": "60 packets"
+    },
+    {
+     "title": "Simply Fit\u2122 Microwave Popcorn Pantry 2-Pack",
+     "family": "629",
+     "skus": [
+      "9208"
+     ],
+     "sold_out": [
+      false
+     ],
+     "price": 8.21,
+     "price_max": 8.21,
+     "regular": 18.0,
+     "points": 2.0,
+     "is_pack": false,
+     "size": "2 products"
+    },
+    {
+     "title": "Holiday Affinia Sugared Amber Body Cleanser and Body Lotion Bundle",
+     "family": "4370",
+     "skus": [
+      "29515"
+     ],
+     "sold_out": [
+      false
+     ],
+     "price": 19.38,
+     "price_max": 19.38,
+     "regular": 34.0,
+     "points": 6.0,
+     "is_pack": false,
+     "size": "2 products"
+    },
+    {
+     "title": "Holiday Sugared Amber Body & Hand Bundle",
+     "family": "4398",
+     "skus": [
+      "29514"
+     ],
+     "sold_out": [
+      false
+     ],
+     "price": 27.39,
+     "price_max": 27.39,
+     "regular": 49.0,
+     "points": 9.0,
+     "is_pack": false,
+     "size": "3 products"
+    },
+    {
+     "title": "Monthly Special: Bath Bundle",
+     "family": "4369",
+     "skus": [
+      "29519"
+     ],
+     "sold_out": [
+      false
+     ],
+     "price": 34.58,
+     "price_max": 34.58,
+     "regular": 60.0,
+     "points": 9.0,
+     "is_pack": false,
+     "size": "3 products"
+    },
+    {
+     "title": "Monthly Special: Collagen & Sustain Bundle",
+     "family": "4371",
+     "skus": [
+      "64297"
+     ],
+     "sold_out": [
+      false
+     ],
+     "price": 62.99,
+     "price_max": 62.99,
+     "regular": 95.0,
+     "points": 20.0,
+     "is_pack": false,
+     "size": "2 products"
+    },
+    {
+     "title": "Sei Bella\u00ae Flawless Liquid Foundation Shade-Matching Sample 3-Pack",
+     "family": "3308",
+     "skus": [
+      "73990"
+     ],
+     "sold_out": [
+      false
+     ],
+     "price": 11.89,
+     "price_max": 11.89,
+     "regular": 20.0,
+     "points": 0.0,
+     "is_pack": false,
+     "size": "3 products"
+    }
+   ],
+   "outlet": [],
+   "coupon_api_calls": [
+    {
+     "url": "https://ca.melaleuca.com/api/coupons?sc_itemid=%7BF4940FE5-5EDC-4E43-8249-8D0B97C28369%7D&sc_lang=en-CA&sc_site=productstoreCa",
+     "keys": [
+      "Success",
+      "ErrorMessages",
+      "Data"
+     ]
+    }
+   ],
+   "coupons_text": "\nkeyboard_arrow_down\nSave $2.50\n\nSave $2.50 on Sei Bella Dry Shampoo\n\nLimit 2\n\n$24.50\n\n$22.00\n\n8 Points\n\nadd\nshopping_cart\nSave $1.60\n\nSave $1.60 on Vitamin D3\n\nLimit 2\n\n$10.59\n\n$8.99\n\n3 Points\n\nadd\nshopping_cart\nSave $4.50\n\nSave $4.50 on Sei Bella Lip Treatment\n\nLimit 2\n\n$22.00\n\n$17.50\n\n6 Points\n\nadd\nshopping_cart\nHave a coupon code?\nREDEEM\nYour Coupons\nchevron_right\nBuy It Again\nkeyboard_arrow_down\nExtra Savings\nkeyboard_arrow_down\nRewards\nkeyboard_arrow_down\nYOU HAVE A NEW COUPON\nWatch videos to earn valuable coupons on Melaleuca products.\nWATCH VIDEO\nLoyalty Shopping Dollars\nAvailable\u00a0$13.12\n\nYour product points total for this month more\n\n147\n\nSPECIAL OFFERS\n\nAs a Member,you saved $0.00\n\nSAVED FOR LATER\n\nYou have no saved items right now.\n\nBEST SELLERS\nSAVINGS PACK\nMelaPower\u00ae 9x Detergent 96 Loads 2-Pack (9x Pump sold separately)\n$45.43\n18 Points\nSELECT\nplaylist_add\nLemon Brite\u00ae Hand Dishwashing Liquid: Original Scent\n$5.99\n2 Points\nSELECT\nplaylist_add\nSAVINGS PACK\nLuxury Glycerin Bath Bar 3-Pack\n$16.72\n7 Points\nSELECT\nplaylist_add\nRenew\u00ae Intensive Skin Therapy: 237 mL tube\n$13.29\n6 Points\nSELECT\nplaylist_add\nSAVINGS PACK\nTooth Polish 3-pack\n$15.82\n5 Points\nSELECT\nplaylist_add\nVitality for Life\u00ae Berberine Glucose Support\n$31.99\n12 Points\nSELECT\nplaylist_add\nSAVINGS PACK\nSimply Fit\u2122 Chewy Snack Bars 2-Pack\n$14.48\n4 Points\nSELECT\nplaylist_add\nSAVINGS PACK\nPeak Performance Total Health Pack: Longevity 50+\n$167.99\n60 Points\nSELECT\nplaylist_add\nSAVINGS PACK\nSun Valley\u2122 Foaming Hand Soap 3-Pack (Pump sold separately)\n$20.27\n7 Points\nSELECT\nplaylist_add\nSAVINGS PACK\nMelaSoft\u00ae Dryer Sheet 2-Pack\n$15.63\n5 Points\nSELECT\nplaylist_add\nMelaBrite\u00ae Plus Oxi Colour-Safe Whitener\n$10.59\n4 Points\nSELECT\nplaylist_add\nSAVINGS PACK\nMountain Cabin Coffee 2-Pack\n$26.23\n8 Points\nSELECT\nplaylist_add\nSafe & Mighty\u2122 Toilet Bowl Cleaner\n$8.39\n3 Points\nSELECT\nplaylist_add\nSAVINGS PACK\nAntiperspirants & Deodorants 3\u2013Pack\n$17.99\n4 Points\nSELECT\nplaylist_add\nDiamond Brite\u2122 Gel Automatic Dishwasher Detergent\n$10.99\n4 Points\nSELECT\nplaylist_add\nSAVINGS PACK\nMelaSoft\u00ae Fabric Softener 96 Load 2-Pack\n$29.78\n9 Points\nSELECT\nplaylist_add\nVitality Vitamin D3\n$10.59\n4 Points\nSELECT\nplaylist_add\nSAVINGS PACK\nSustain Active Electrolyte Hydration Packet 2-Pack\n$27.78\n9 Points\nSELECT\nplaylist_add\nVitality Multivitamin & Mineral\u2122 50+\n$19.19\n8 Points\nSELECT\nplaylist_add\nSAVINGS PACK\nMelaBoost\u2122 Laundry Fragrance Booster 946 mL 2-Pack (Pump sold separately)\n$27.98\n8 Points\nSELECT\nplaylist_add\nSAVINGS",
+   "coupons": [
+    "Save $2.50 on Sei Bella Dry Shampoo",
+    "Save $1.60 on Vitamin D3",
+    "Save $4.50 on Sei Bella Lip Treatment"
+   ],
+   "points_in_cart": 45.0,
+   "special_offers": [
+    {
+     "sku": "79951",
+     "promo_id": 2013818,
+     "title": "Buy one Vitamin C Repair Treatment or Moisturizer, get one for $3.74!",
+     "price": 47.24,
+     "regular": 87,
+     "points": 13,
+     "max_qty": 2,
+     "qty_available": 2,
+     "points_required": 35,
+     "stamp": "SPECIAL OFFER",
+     "description": "Defend and Repair with Vitamin C Defense and Repair Treatment or help restore your complexion with Vitamin C Cream-to-Oil Overnight Repair.",
+     "coupon_price_field": 0,
+     "can_redeem": false
+    },
+    {
+     "sku": "8915",
+     "promo_id": 2013826,
+     "title": "Save $6.00 on Simply Fit Chewy Snack Bars 3-Pack!",
+     "price": 19.47,
+     "regular": 25.47,
+     "points": 3,
+     "max_qty": 2,
+     "qty_available": 2,
+     "points_required": 35,
+     "stamp": "SPECIAL OFFER",
+     "description": "This isn\u2019t just a great-tasting snack bar. It\u2019s a whole grain pick-me-up. A fiber fill-up. A protein recharge. An Omega-3 boost.",
+     "coupon_price_field": 0,
+     "can_redeem": false
+    },
+    {
+     "sku": "8165",
+     "promo_id": 2013821,
+     "title": "Save $9.00 - $10.70 on Sun Valley Liquid Soap or Foaming Hand Soap Refill!",
+     "price": 14.89,
+     "regular": 23.89,
+     "points": 5,
+     "max_qty": 2,
+     "qty_available": 2,
+     "points_required": 35,
+     "stamp": "SPECIAL OFFER",
+     "description": "Delight in hand soap that leaves your skin soft, clean and delectably fragrant.",
+     "coupon_price_field": 0,
+     "can_redeem": false
+    },
+    {
+     "sku": "2046",
+     "promo_id": 2013825,
+     "title": "Save $17.00 on Florify Probiotic 2-Pack!",
+     "price": 46.38,
+     "regular": 63.38,
+     "points": 16,
+     "max_qty": 2,
+     "qty_available": 2,
+     "points_required": 35,
+     "stamp": "SPECIAL OFFER",
+     "description": "Maintain and support good health with Florify Daily Probiotic! Each capsule contains nine diverse probiotic strains and 11 billion active cultures to promote favorable gut flora, support proper immune",
+     "coupon_price_field": 0,
+     "can_redeem": false
+    },
+    {
+     "sku": "5960",
+     "promo_id": 2013819,
+     "title": "Buy one Sei Bella Shampoo, get one Sei Bella Conditioner for $2.49!",
+     "price": 28.49,
+     "regular": 52,
+     "points": 8,
+     "max_qty": 2,
+     "qty_available": 2,
+     "points_required": 35,
+     "stamp": "SPECIAL OFFER",
+     "description": "Choose from Argan Oil & Coconut Moisture Smooth formula, Rice & Amaranth Full Volume formula, Olive Fruit & Almond Protein Strength formula!",
+     "coupon_price_field": 0,
+     "can_redeem": false
+    },
+    {
+     "sku": "79958",
+     "promo_id": 2013815,
+     "title": "Save $7.00 on your choice of Sei Bella Mascara or Lash Primer!",
+     "price": 13,
+     "regular": 20,
+     "points": 3,
+     "max_qty": 2,
+     "qty_available": 2,
+     "points_required": 35,
+     "stamp": "SPECIAL OFFER",
+     "description": "Define your eyes with your favorite Sei Bella Mascara!",
+     "coupon_price_field": 0,
+     "can_redeem": false
+    },
+    {
+     "sku": "64248",
+     "promo_id": 2013812,
+     "title": "Save $14.50 on two Simply Fit Simple Start Muffin Baking Mixes!",
+     "price": 34.29,
+     "regular": 48.79,
+     "points": 5,
+     "max_qty": 2,
+     "qty_available": 2,
+     "points_required": 35,
+     "stamp": "SPECIAL OFFER",
+     "description": "Each serving of banana muffins contains 7 g of protein, 150 calories, 4 g of fiber, 6 g of net carbs and 0 g of added sugar. Each serving of lemon blueberry muffins contains 6 g of protein, 150 calori",
+     "coupon_price_field": 0,
+     "can_redeem": false
+    },
+    {
+     "sku": "1860",
+     "promo_id": 2013824,
+     "title": "Save $10.00 on a 473 mL Sol-U-Mel Cleaner!",
+     "price": 17.99,
+     "regular": 27.99,
+     "points": 6,
+     "max_qty": 2,
+     "qty_available": 2,
+     "points_required": 35,
+     "stamp": "SPECIAL OFFER",
+     "description": "Powered by Melaleuca Oil, this beloved cleaner and deodorizer removes dozens of stains you thought would never come out.",
+     "coupon_price_field": 0,
+     "can_redeem": false
+    },
+    {
+     "sku": "69462",
+     "promo_id": 2013822,
+     "title": "Save $19.00 on Hair, Skin & Nails 2-Pack!",
+     "price": 43.68,
+     "regular": 62.68,
+     "points": 14,
+     "max_qty": 2,
+     "qty_available": 2,
+     "points_required": 35,
+     "stamp": "SPECIAL OFFER",
+     "description": "Our exclusive formula combines biotin, vitamin A and 13 botanical extracts.",
+     "coupon_price_field": 0,
+     "can_redeem": false
+    },
+    {
+     "sku": "5432",
+     "promo_id": 2013829,
+     "title": "Save $7.00 on three EcoSense Cleaning Products!",
+     "price": 17.47,
+     "regular": 24.47,
+     "points": 4,
+     "max_qty": 2,
+     "qty_available": 2,
+     "points_required": 35,
+     "stamp": "SPECIAL OFFER",
+     "description": "Choose three of your favorite\u00a0safer, eco-friendly, effective household cleaning products from EcoSense.\n",
+     "coupon_price_field": 0,
+     "can_redeem": false
+    },
+    {
+     "sku": "5254",
+     "promo_id": 2013813,
+     "title": "Save $8.00 on Revive Scented Oil 3-Pack! ",
+     "price": 18.67,
+     "regular": 26.67,
+     "points": 4,
+     "max_qty": 2,
+     "qty_available": 2,
+     "points_required": 35,
+     "stamp": "SPECIAL OFFER",
+     "description": "Enjoy continuous fragrance to any room. Use with the Revive Scented Oil Warmer, and Revive Scented Oil Covers.",
+     "coupon_price_field": 0,
+     "can_redeem": false
+    },
+    {
+     "sku": "6488",
+     "promo_id": 2013816,
+     "title": "Buy one Mountain Cabin Coffee, get one for $7.49!",
+     "price": 21.98,
+     "regular": 28.98,
+     "points": 3,
+     "max_qty": 2,
+     "qty_available": 2,
+     "points_required": 35,
+     "stamp": "SPECIAL OFFER",
+     "description": "In every cup of Mountain Cabin Premium Coffee you brew, you'll experience fine, flavorful, masterfully roasted coffee blends sourced from the finest coffee regions of the world.",
+     "coupon_price_field": 0,
+     "can_redeem": false
+    },
+    {
+     "sku": "2693",
+     "promo_id": 2013830,
+     "title": "Save $3.00 on Antiperspirant or Deodorant 2-Pack!",
+     "price": 10.98,
+     "regular": 13.98,
+     "points": 2,
+     "max_qty": 2,
+     "qty_available": 2,
+     "points_required": 35,
+     "stamp": "SPECIAL OFFER",
+     "description": "Choosing from the Herbal, Affinia, and Alloy products, you\u2019ll be sure to get the protection that you need to stay confident day and night.\n",
+     "coupon_price_field": 0,
+     "can_redeem": false
+    },
+    {
+     "sku": "33036",
+     "promo_id": 2013808,
+     "title": "Save $4.00 on Lemon Brite 3-Pack!",
+     "price": 12.97,
+     "regular": 16.97,
+     "points": 2,
+     "max_qty": 2,
+     "qty_available": 2,
+     "points_required": 35,
+     "stamp": "SPECIAL OFFER",
+     "description": "Powered by naturally derived grease-cutting agents, this ultra-concentrated dish detergent quickly breaks down food to save you scrubbing time at the sink.",
+     "coupon_price_field": 0,
+     "can_redeem": false
+    },
+    {
+     "sku": "8300",
+     "promo_id": 2013817,
+     "title": "Buy one Replenex Extra Strength, get one for $4.99!",
+     "price": 33.98,
+     "regular": 57.98,
+     "points": 9,
+     "max_qty": 2,
+     "qty_available": 2,
+     "points_required": 35,
+     "stamp": "SPECIAL OFFER",
+     "description": "Each dose of Replenex Extra Strength includes a blend of glucosamine HCL, chondroitin, MSM, manganese, vitamin C, and an A.I. blend.",
+     "coupon_price_field": 0,
+     "can_redeem": false
+    },
+    {
+     "sku": "69488",
+     "promo_id": 2013915,
+     "title": "Save $14.50 on Melaleuca Magnesium 2-Pack!",
+     "price": 44.38,
+     "regular": 58.88,
+     "points": 10,
+     "max_qty": 2,
+     "qty_available": 2,
+     "points_required": 35,
+     "stamp": "SPECIAL OFFER",
+     "description": "Melaleuca Magnesium helps maintain general health and proper muscle function including the heart.",
+     "coupon_price_field": 0,
+     "can_redeem": false
+    },
+    {
+     "sku": "5519",
+     "promo_id": 2013809,
+     "title": "Save $9.00 on Koala Pals Multivitamin 2-Pack!",
+     "price": 26.99,
+     "regular": 35.99,
+     "points": 5,
+     "max_qty": 2,
+     "qty_available": 2,
+     "points_required": 35,
+     "stamp": "SPECIAL OFFER",
+     "description": "No artificial colours, flavours, or sweeteners and the only kids' chewable multivitamin with Oligofructose Complex.\u00a0",
+     "coupon_price_field": 0,
+     "can_redeem": false
+    },
+    {
+     "sku": "79101",
+     "promo_id": 2013810,
+     "title": "Save $14.50 on two Sei Bella Dry Shampoo!",
+     "price": 34.5,
+     "regular": 49,
+     "points": 11,
+     "max_qty": 2,
+     "qty_available": 2,
+     "points_required": 35,
+     "stamp": "SPECIAL OFFER",
+     "description": "Give dull hair an instant makeover\u2014no water required.",
+     "coupon_price_field": 0,
+     "can_redeem": false
+    },
+    {
+     "sku": "9392",
+     "promo_id": 2013827,
+     "title": "Save $6.25 on Affinia Shampoo and Conditioner! (Pumps Sold Separately)",
+     "price": 13.48,
+     "regular": 19.73,
+     "points": 3,
+     "max_qty": 2,
+     "qty_available": 2,
+     "points_required": 35,
+     "stamp": "SPECIAL OFFER",
+     "description": "They just go together! Save on your choice of Affinia Shampoo & Conditioner. Our moisturizing formula features notes of orange, jasmine, and vanilla, while our volumizing formula features notes of ber",
+     "coupon_price_field": 0,
+     "can_redeem": false
+    },
+    {
+     "sku": "2039",
+     "promo_id": 2013814,
+     "title": "Save $12.00 on Vitality Multivitamin & Mineral Supplement 2-Pack!",
+     "price": 26.38,
+     "regular": 38.38,
+     "points": 7,
+     "max_qty": 2,
+     "qty_available": 2,
+     "points_required": 35,
+     "stamp": "SPECIAL OFFER",
+     "description": "Vitality Multivitamin & Mineral Contains 23+ essential vitamins and minerals needed every day for support of good health. Optimized in Men\u2019s, Women\u2019s, and 50+ formulas.",
+     "coupon_price_field": 0,
+     "can_redeem": false
+    },
+    {
+     "sku": "1276",
+     "promo_id": 2013807,
+     "title": "Save $4.50 on 5 Sun Shades Lip Balms!",
+     "price": 13.45,
+     "regular": 17.95,
+     "points": 4,
+     "max_qty": 2,
+     "qty_available": 2,
+     "points_required": 35,
+     "stamp": "SPECIAL OFFER",
+     "description": "Apply liberally 15 minutes before sun exposure and reapply at least every 2 hours. *Not for resale in Canada*\n",
+     "coupon_price_field": 0,
+     "can_redeem": false
+    },
+    {
+     "sku": "39231",
+     "promo_id": 2013806,
+     "title": "Save $5.00 on Diamond Brite Gel Dishwasher Detergent 2-Pack!",
+     "price": 15.48,
+     "regular": 20.48,
+     "points": 3,
+     "max_qty": 2,
+     "qty_available": 2,
+     "points_required": 35,
+     "stamp": "SPECIAL OFFER",
+     "description": "Powered by natural enzymes, this automatic dishwasher detergent leaves dishes, glasses, and silverware spotlessly clean without harsh fumes or residues.\n",
+     "coupon_price_field": 0,
+     "can_redeem": false
+    },
+    {
+     "sku": "4288",
+     "promo_id": 2013811,
+     "title": "Save $16.00 on Family-Size Melaleuca Heritage Shampoo 2-Pack! (Pumps Sold Separately)",
+     "price": 28.58,
+     "regular": 44.58,
+     "points": 8,
+     "max_qty": 1,
+     "qty_available": 1,
+     "points_required": 35,
+     "stamp": "SPECIAL OFFER",
+     "description": "Shampoo with grapefruit, blueberry, and sage extracts and 14 conditioners that add luster and volume to your hair with an invigorating herbal scent.",
+     "coupon_price_field": 0,
+     "can_redeem": false
+    },
+    {
+     "sku": "9971",
+     "promo_id": 2013820,
+     "title": "Buy one K2-D3, get one for $7.49!",
+     "price": 40.98,
+     "regular": 66.98,
+     "points": 15,
+     "max_qty": 2,
+     "qty_available": 2,
+     "points_required": 35,
+     "stamp": "SPECIAL OFFER",
+     "description": "K2-D3 contains a proprietary blend of proven bone health vitamins including K2 (MK-7) and D3 (Cholecalciferol).",
+     "coupon_price_field": 0,
+     "can_redeem": false
+    }
+   ],
+   "cart_at_end": [
+    0,
+    0.0
+   ],
+   "mb": 2.6
+  }
+ ]
+}
