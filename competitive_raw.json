@@ -1,0 +1,1902 @@
+{
+ "responses": [
+  {
+   "body": {
+    "asin": "B01JKSBEKC",
+    "featuredBuyingOptions": [
+     {
+      "buyingOptionType": "New",
+      "segmentedFeaturedOffers": [
+       {
+        "condition": "New",
+        "featuredOfferSegments": [
+         {
+          "customerMembership": "PRIME",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 1.45,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "48823"
+            }
+           }
+          }
+         },
+         {
+          "customerMembership": "PRIME",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 5.8,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "20720"
+            }
+           }
+          }
+         },
+         {
+          "customerMembership": "PRIME",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 11.59,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "29530"
+            }
+           }
+          }
+         },
+         {
+          "customerMembership": "NON_PRIME",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 1.45,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "95205"
+            }
+           }
+          }
+         },
+         {
+          "customerMembership": "NON_PRIME",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 2.9,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "22202"
+            }
+           }
+          }
+         },
+         {
+          "customerMembership": "NON_PRIME",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 10.14,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "07424"
+            }
+           }
+          }
+         },
+         {
+          "customerMembership": "DEFAULT",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 1.45,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "60602"
+            }
+           }
+          }
+         },
+         {
+          "customerMembership": "DEFAULT",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 1.45,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "75034"
+            }
+           }
+          }
+         },
+         {
+          "customerMembership": "DEFAULT",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 1.45,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "99564"
+            }
+           }
+          }
+         },
+         {
+          "customerMembership": "DEFAULT",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 15.94,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "07004"
+            }
+           }
+          }
+         },
+         {
+          "customerMembership": "DEFAULT",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 46.38,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "20237"
+            }
+           }
+          }
+         }
+        ],
+        "fulfillmentType": "AFN",
+        "listingPrice": {
+         "amount": 24.95,
+         "currencyCode": "USD"
+        },
+        "sellerId": "A2PN9CVQ6DIJZW",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "lowestPricedOffers": [
+     {
+      "lowestPricedOffersInput": {
+       "itemCondition": "New",
+       "offerType": "Consumer"
+      },
+      "offers": [
+       {
+        "condition": "New",
+        "fulfillmentType": "MFN",
+        "listingPrice": {
+         "amount": 22.0,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NONE"
+        },
+        "sellerId": "A3LDKS5CUEYHBY",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       },
+       {
+        "condition": "New",
+        "fulfillmentType": "MFN",
+        "listingPrice": {
+         "amount": 22.0,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NONE"
+        },
+        "sellerId": "A2SK870QUCZDTW",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       },
+       {
+        "condition": "New",
+        "fulfillmentType": "AFN",
+        "listingPrice": {
+         "amount": 24.88,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NATIONAL"
+        },
+        "sellerId": "A3431QI59MY9RE",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       },
+       {
+        "condition": "New",
+        "fulfillmentType": "AFN",
+        "listingPrice": {
+         "amount": 24.95,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NATIONAL"
+        },
+        "sellerId": "A2PN9CVQ6DIJZW",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       },
+       {
+        "condition": "New",
+        "fulfillmentType": "AFN",
+        "listingPrice": {
+         "amount": 24.95,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NATIONAL"
+        },
+        "sellerId": "A34XPYM21HEXRE",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       },
+       {
+        "condition": "New",
+        "fulfillmentType": "AFN",
+        "listingPrice": {
+         "amount": 24.99,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NATIONAL"
+        },
+        "sellerId": "A1RPIWLVJ7SQRO",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       },
+       {
+        "condition": "New",
+        "fulfillmentType": "MFN",
+        "listingPrice": {
+         "amount": 25.0,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NONE"
+        },
+        "sellerId": "A1JHMSQDE1XDER",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       },
+       {
+        "condition": "New",
+        "fulfillmentType": "MFN",
+        "listingPrice": {
+         "amount": 25.99,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NONE"
+        },
+        "sellerId": "A10HEHLCN2INB9",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       },
+       {
+        "condition": "New",
+        "fulfillmentType": "MFN",
+        "listingPrice": {
+         "amount": 39.95,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NONE"
+        },
+        "sellerId": "A3JPYLDATQAFP6",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 4.95,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       }
+      ]
+     }
+    ],
+    "marketplaceId": "ATVPDKIKX0DER",
+    "referencePrices": [
+     {
+      "name": "WasPrice",
+      "price": {
+       "amount": 24.95,
+       "currencyCode": "USD"
+      }
+     }
+    ]
+   },
+   "status": {
+    "reasonPhrase": "Success",
+    "statusCode": 200
+   }
+  },
+  {
+   "body": {
+    "asin": "B001TNTWC4",
+    "featuredBuyingOptions": [
+     {
+      "buyingOptionType": "New",
+      "segmentedFeaturedOffers": [
+       {
+        "condition": "New",
+        "featuredOfferSegments": [
+         {
+          "customerMembership": "NON_PRIME",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 9.64,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "10118"
+            }
+           }
+          }
+         },
+         {
+          "customerMembership": "PRIME",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 44.58,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "33165"
+            }
+           }
+          }
+         },
+         {
+          "customerMembership": "DEFAULT",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 1.2,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "02360"
+            }
+           }
+          }
+         },
+         {
+          "customerMembership": "DEFAULT",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 44.58,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "07004"
+            }
+           }
+          }
+         }
+        ],
+        "fulfillmentType": "AFN",
+        "listingPrice": {
+         "amount": 19.96,
+         "currencyCode": "USD"
+        },
+        "sellerId": "A3431QI59MY9RE",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "lowestPricedOffers": [
+     {
+      "lowestPricedOffersInput": {
+       "itemCondition": "New",
+       "offerType": "Consumer"
+      },
+      "offers": [
+       {
+        "condition": "New",
+        "fulfillmentType": "MFN",
+        "listingPrice": {
+         "amount": 18.99,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NONE"
+        },
+        "sellerId": "A3LDKS5CUEYHBY",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       },
+       {
+        "condition": "New",
+        "fulfillmentType": "AFN",
+        "listingPrice": {
+         "amount": 19.96,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NATIONAL"
+        },
+        "sellerId": "A3431QI59MY9RE",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       },
+       {
+        "condition": "New",
+        "fulfillmentType": "MFN",
+        "listingPrice": {
+         "amount": 19.99,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NONE"
+        },
+        "sellerId": "A2SK870QUCZDTW",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       },
+       {
+        "condition": "New",
+        "fulfillmentType": "MFN",
+        "listingPrice": {
+         "amount": 16.9,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NONE"
+        },
+        "sellerId": "A20N1EZ80QSPZR",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 9.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       }
+      ]
+     }
+    ],
+    "marketplaceId": "ATVPDKIKX0DER",
+    "referencePrices": [
+     {
+      "name": "WasPrice",
+      "price": {
+       "amount": 18.84,
+       "currencyCode": "USD"
+      }
+     }
+    ]
+   },
+   "status": {
+    "reasonPhrase": "Success",
+    "statusCode": 200
+   }
+  },
+  {
+   "body": {
+    "asin": "B0030JJNBK",
+    "featuredBuyingOptions": [
+     {
+      "buyingOptionType": "New",
+      "segmentedFeaturedOffers": [
+       {
+        "condition": "New",
+        "featuredOfferSegments": [
+         {
+          "customerMembership": "NON_PRIME",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 0.92,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "10118"
+            }
+           }
+          }
+         },
+         {
+          "customerMembership": "NON_PRIME",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 33.03,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "77477"
+            }
+           }
+          }
+         },
+         {
+          "customerMembership": "DEFAULT",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 11.01,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "07004"
+            }
+           }
+          }
+         },
+         {
+          "customerMembership": "DEFAULT",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 28.44,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "20237"
+            }
+           }
+          }
+         },
+         {
+          "customerMembership": "PRIME",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 1.83,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "06825"
+            }
+           }
+          }
+         },
+         {
+          "customerMembership": "PRIME",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 24.77,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "33165"
+            }
+           }
+          }
+         }
+        ],
+        "fulfillmentType": "MFN",
+        "listingPrice": {
+         "amount": 22.95,
+         "currencyCode": "USD"
+        },
+        "sellerId": "A2ZOCI5BGBLJOM",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "lowestPricedOffers": [
+     {
+      "lowestPricedOffersInput": {
+       "itemCondition": "New",
+       "offerType": "Consumer"
+      },
+      "offers": [
+       {
+        "condition": "New",
+        "fulfillmentType": "AFN",
+        "listingPrice": {
+         "amount": 21.88,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NATIONAL"
+        },
+        "sellerId": "A36AT3FG6J3O3G",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       },
+       {
+        "condition": "New",
+        "fulfillmentType": "MFN",
+        "listingPrice": {
+         "amount": 22.95,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NONE"
+        },
+        "sellerId": "A2ZOCI5BGBLJOM",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       },
+       {
+        "condition": "New",
+        "fulfillmentType": "MFN",
+        "listingPrice": {
+         "amount": 22.99,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NONE"
+        },
+        "sellerId": "A18U6U3EIITJW0",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       },
+       {
+        "condition": "New",
+        "fulfillmentType": "AFN",
+        "listingPrice": {
+         "amount": 23.0,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NATIONAL"
+        },
+        "sellerId": "A25JDJBT1IC4Z9",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       },
+       {
+        "condition": "New",
+        "fulfillmentType": "MFN",
+        "listingPrice": {
+         "amount": 24.99,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NONE"
+        },
+        "sellerId": "A1Y5P7PMGQW2SO",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       },
+       {
+        "condition": "New",
+        "fulfillmentType": "MFN",
+        "listingPrice": {
+         "amount": 24.99,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NONE"
+        },
+        "sellerId": "A2SK870QUCZDTW",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       },
+       {
+        "condition": "New",
+        "fulfillmentType": "MFN",
+        "listingPrice": {
+         "amount": 26.0,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NONE"
+        },
+        "sellerId": "A1FF1T6RFJ87S6",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       },
+       {
+        "condition": "New",
+        "fulfillmentType": "AFN",
+        "listingPrice": {
+         "amount": 26.99,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NATIONAL"
+        },
+        "sellerId": "A2CQAQVRFBMFXD",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       },
+       {
+        "condition": "New",
+        "fulfillmentType": "MFN",
+        "listingPrice": {
+         "amount": 26.99,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NONE"
+        },
+        "sellerId": "A10HEHLCN2INB9",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       },
+       {
+        "condition": "New",
+        "fulfillmentType": "AFN",
+        "listingPrice": {
+         "amount": 27.37,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NATIONAL"
+        },
+        "sellerId": "A3431QI59MY9RE",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       },
+       {
+        "condition": "New",
+        "fulfillmentType": "AFN",
+        "listingPrice": {
+         "amount": 29.75,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NATIONAL"
+        },
+        "sellerId": "A1RPIWLVJ7SQRO",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       },
+       {
+        "condition": "New",
+        "fulfillmentType": "AFN",
+        "listingPrice": {
+         "amount": 29.75,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NATIONAL"
+        },
+        "sellerId": "A34GH88RDKF8DU",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       },
+       {
+        "condition": "New",
+        "fulfillmentType": "MFN",
+        "listingPrice": {
+         "amount": 29.75,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NONE"
+        },
+        "sellerId": "A34GH88RDKF8DU",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       },
+       {
+        "condition": "New",
+        "fulfillmentType": "MFN",
+        "listingPrice": {
+         "amount": 23.9,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NONE"
+        },
+        "sellerId": "A20N1EZ80QSPZR",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 5.99,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       }
+      ]
+     }
+    ],
+    "marketplaceId": "ATVPDKIKX0DER",
+    "referencePrices": [
+     {
+      "name": "WasPrice",
+      "price": {
+       "amount": 25.95,
+       "currencyCode": "USD"
+      }
+     }
+    ]
+   },
+   "status": {
+    "reasonPhrase": "Success",
+    "statusCode": 200
+   }
+  },
+  {
+   "body": {
+    "asin": "B00AOW2M3M",
+    "featuredBuyingOptions": [
+     {
+      "buyingOptionType": "New",
+      "segmentedFeaturedOffers": [
+       {
+        "condition": "New",
+        "featuredOfferSegments": [
+         {
+          "customerMembership": "NON_PRIME",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 8.0,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "10118"
+            }
+           }
+          }
+         },
+         {
+          "customerMembership": "PRIME",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 26.0,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "33165"
+            }
+           }
+          }
+         },
+         {
+          "customerMembership": "DEFAULT",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 66.0,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "10001"
+            }
+           }
+          }
+         }
+        ],
+        "fulfillmentType": "MFN",
+        "listingPrice": {
+         "amount": 44.95,
+         "currencyCode": "USD"
+        },
+        "sellerId": "A3LDKS5CUEYHBY",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "lowestPricedOffers": [
+     {
+      "lowestPricedOffersInput": {
+       "itemCondition": "New",
+       "offerType": "Consumer"
+      },
+      "offers": [
+       {
+        "condition": "New",
+        "fulfillmentType": "MFN",
+        "listingPrice": {
+         "amount": 44.95,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NONE"
+        },
+        "sellerId": "A3LDKS5CUEYHBY",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       },
+       {
+        "condition": "New",
+        "fulfillmentType": "MFN",
+        "listingPrice": {
+         "amount": 44.99,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NONE"
+        },
+        "sellerId": "A2SK870QUCZDTW",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       }
+      ]
+     }
+    ],
+    "marketplaceId": "ATVPDKIKX0DER",
+    "referencePrices": [
+     {
+      "name": "WasPrice",
+      "price": {
+       "amount": 44.88,
+       "currencyCode": "USD"
+      }
+     }
+    ]
+   },
+   "status": {
+    "reasonPhrase": "Success",
+    "statusCode": 200
+   }
+  },
+  {
+   "body": {
+    "asin": "B07MWDCFRZ",
+    "featuredBuyingOptions": [
+     {
+      "buyingOptionType": "New",
+      "segmentedFeaturedOffers": [
+       {
+        "condition": "New",
+        "featuredOfferSegments": [
+         {
+          "customerMembership": "NON_PRIME",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 11.84,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "07424"
+            }
+           }
+          }
+         },
+         {
+          "customerMembership": "PRIME",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 7.89,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "32046"
+            }
+           }
+          }
+         },
+         {
+          "customerMembership": "PRIME",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 13.16,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "33771"
+            }
+           }
+          }
+         },
+         {
+          "customerMembership": "PRIME",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 18.42,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "70535"
+            }
+           }
+          }
+         },
+         {
+          "customerMembership": "DEFAULT",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 2.63,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "02143"
+            }
+           }
+          }
+         },
+         {
+          "customerMembership": "DEFAULT",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 7.89,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "07004"
+            }
+           }
+          }
+         },
+         {
+          "customerMembership": "DEFAULT",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 9.21,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "17401"
+            }
+           }
+          }
+         },
+         {
+          "customerMembership": "DEFAULT",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 28.95,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "37217"
+            }
+           }
+          }
+         }
+        ],
+        "fulfillmentType": "AFN",
+        "listingPrice": {
+         "amount": 28.49,
+         "currencyCode": "USD"
+        },
+        "sellerId": "A1EJJKAII2MBVN",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "lowestPricedOffers": [
+     {
+      "lowestPricedOffersInput": {
+       "itemCondition": "New",
+       "offerType": "Consumer"
+      },
+      "offers": [
+       {
+        "condition": "New",
+        "fulfillmentType": "MFN",
+        "listingPrice": {
+         "amount": 25.0,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NONE"
+        },
+        "sellerId": "A1OYQCBLT3HVHY",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       },
+       {
+        "condition": "New",
+        "fulfillmentType": "MFN",
+        "listingPrice": {
+         "amount": 26.79,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NONE"
+        },
+        "sellerId": "A2SK870QUCZDTW",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       },
+       {
+        "condition": "New",
+        "fulfillmentType": "AFN",
+        "listingPrice": {
+         "amount": 27.95,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NATIONAL"
+        },
+        "sellerId": "A2ZOCI5BGBLJOM",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       },
+       {
+        "condition": "New",
+        "fulfillmentType": "MFN",
+        "listingPrice": {
+         "amount": 27.99,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NONE"
+        },
+        "sellerId": "A10HEHLCN2INB9",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       },
+       {
+        "condition": "New",
+        "fulfillmentType": "MFN",
+        "listingPrice": {
+         "amount": 28.0,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NONE"
+        },
+        "sellerId": "A1FF1T6RFJ87S6",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       },
+       {
+        "condition": "New",
+        "fulfillmentType": "AFN",
+        "listingPrice": {
+         "amount": 28.39,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NATIONAL"
+        },
+        "sellerId": "A3431QI59MY9RE",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       },
+       {
+        "condition": "New",
+        "fulfillmentType": "AFN",
+        "listingPrice": {
+         "amount": 28.49,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NATIONAL"
+        },
+        "sellerId": "A1EJJKAII2MBVN",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       },
+       {
+        "condition": "New",
+        "fulfillmentType": "AFN",
+        "listingPrice": {
+         "amount": 28.5,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NATIONAL"
+        },
+        "sellerId": "A3LM21FNT09E6H",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       },
+       {
+        "condition": "New",
+        "fulfillmentType": "MFN",
+        "listingPrice": {
+         "amount": 28.5,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NONE"
+        },
+        "sellerId": "A30JHXS87738TZ",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       }
+      ]
+     }
+    ],
+    "marketplaceId": "ATVPDKIKX0DER",
+    "referencePrices": [
+     {
+      "name": "WasPrice",
+      "price": {
+       "amount": 28.49,
+       "currencyCode": "USD"
+      }
+     }
+    ]
+   },
+   "status": {
+    "reasonPhrase": "Success",
+    "statusCode": 200
+   }
+  },
+  {
+   "body": {
+    "asin": "B017RW4LTE",
+    "featuredBuyingOptions": [
+     {
+      "buyingOptionType": "New",
+      "segmentedFeaturedOffers": [
+       {
+        "condition": "New",
+        "featuredOfferSegments": [
+         {
+          "customerMembership": "DEFAULT",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 3.06,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "60601"
+            }
+           }
+          }
+         },
+         {
+          "customerMembership": "DEFAULT",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 3.06,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "92084"
+            }
+           }
+          }
+         },
+         {
+          "customerMembership": "DEFAULT",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 5.1,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "66952"
+            }
+           }
+          }
+         },
+         {
+          "customerMembership": "DEFAULT",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 42.86,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "07004"
+            }
+           }
+          }
+         },
+         {
+          "customerMembership": "NON_PRIME",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 1.02,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "60178"
+            }
+           }
+          }
+         },
+         {
+          "customerMembership": "NON_PRIME",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 4.08,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "34243"
+            }
+           }
+          }
+         },
+         {
+          "customerMembership": "NON_PRIME",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 10.2,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "33180"
+            }
+           }
+          }
+         },
+         {
+          "customerMembership": "PRIME",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 1.02,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "92054"
+            }
+           }
+          }
+         },
+         {
+          "customerMembership": "PRIME",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 2.04,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "85020"
+            }
+           }
+          }
+         },
+         {
+          "customerMembership": "PRIME",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 8.16,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "47933"
+            }
+           }
+          }
+         },
+         {
+          "customerMembership": "PRIME",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 8.16,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "98512"
+            }
+           }
+          }
+         },
+         {
+          "customerMembership": "PRIME",
+          "segmentDetails": {
+           "glanceViewWeightPercentage": 11.22,
+           "sampleLocation": {
+            "postalCode": {
+             "countryCode": "US",
+             "value": "33165"
+            }
+           }
+          }
+         }
+        ],
+        "fulfillmentType": "AFN",
+        "listingPrice": {
+         "amount": 39.99,
+         "currencyCode": "USD"
+        },
+        "sellerId": "A34GH88RDKF8DU",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "lowestPricedOffers": [
+     {
+      "lowestPricedOffersInput": {
+       "itemCondition": "New",
+       "offerType": "Consumer"
+      },
+      "offers": [
+       {
+        "condition": "New",
+        "fulfillmentType": "MFN",
+        "listingPrice": {
+         "amount": 35.99,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NONE"
+        },
+        "sellerId": "A2CQAQVRFBMFXD",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       },
+       {
+        "condition": "New",
+        "fulfillmentType": "AFN",
+        "listingPrice": {
+         "amount": 39.95,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NATIONAL"
+        },
+        "sellerId": "A2ZOCI5BGBLJOM",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       },
+       {
+        "condition": "New",
+        "fulfillmentType": "AFN",
+        "listingPrice": {
+         "amount": 39.99,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NATIONAL"
+        },
+        "sellerId": "A34GH88RDKF8DU",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       },
+       {
+        "condition": "New",
+        "fulfillmentType": "AFN",
+        "listingPrice": {
+         "amount": 39.99,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NATIONAL"
+        },
+        "sellerId": "A34XPYM21HEXRE",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       },
+       {
+        "condition": "New",
+        "fulfillmentType": "AFN",
+        "listingPrice": {
+         "amount": 40.93,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NATIONAL"
+        },
+        "sellerId": "A3431QI59MY9RE",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       },
+       {
+        "condition": "New",
+        "fulfillmentType": "MFN",
+        "listingPrice": {
+         "amount": 40.99,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NONE"
+        },
+        "sellerId": "A10HEHLCN2INB9",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       },
+       {
+        "condition": "New",
+        "fulfillmentType": "MFN",
+        "listingPrice": {
+         "amount": 41.99,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NONE"
+        },
+        "sellerId": "A2SK870QUCZDTW",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       },
+       {
+        "condition": "New",
+        "fulfillmentType": "AFN",
+        "listingPrice": {
+         "amount": 44.99,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NATIONAL"
+        },
+        "sellerId": "A1RPIWLVJ7SQRO",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 0.0,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       },
+       {
+        "condition": "New",
+        "fulfillmentType": "MFN",
+        "listingPrice": {
+         "amount": 50.79,
+         "currencyCode": "USD"
+        },
+        "primeDetails": {
+         "eligibility": "NONE"
+        },
+        "sellerId": "A27B60NH9K3P7I",
+        "shippingOptions": [
+         {
+          "price": {
+           "amount": 8.97,
+           "currencyCode": "USD"
+          },
+          "shippingOptionType": "DEFAULT"
+         }
+        ],
+        "subCondition": "New"
+       }
+      ]
+     }
+    ],
+    "marketplaceId": "ATVPDKIKX0DER",
+    "referencePrices": [
+     {
+      "name": "WasPrice",
+      "price": {
+       "amount": 39.99,
+       "currencyCode": "USD"
+      }
+     }
+    ]
+   },
+   "status": {
+    "reasonPhrase": "Success",
+    "statusCode": 200
+   }
+  }
+ ]
+}

@@ -1,0 +1,53 @@
+== 1. competitiveSummary raw (featuredBuyingOptions)
+{"body": {"asin": "B01JKSBEKC", "featuredBuyingOptions": [{"buyingOptionType": "New", "segmentedFeaturedOffers": [{"condition": "New", "featuredOfferSegments": [{"customerMembership": "PRIME", "segmentDetails": {"glanceViewWeightPercentage": 1.45, "sampleLocation": {"postalCode": {"countryCode": "US", "value": "48823"}}}}, {"customerMembership": "PRIME", "segmentDetails": {"glanceViewWeightPercentage": 5.8, "sampleLocation": {"postalCode": {"countryCode": "US", "value": "20720"}}}}, {"customerMembership": "PRIME", "segmentDetails": {"glanceViewWeightPercentage": 11.59, "sampleLocation": {"postalCode": {"countryCode": "US", "value": "29530"}}}}, {"customerMembership": "NON_PRIME", "segmentDetails": {"glanceViewWeightPercentage": 1.45, "sampleLocation": {"postalCode": {"countryCode": "US", "value": "95205"}}}}, {"customerMembership": "NON_PRIME", "segmentDetails": {"glanceViewWeightPercentage": 2.9, "sampleLocation": {"postalCode": {"countryCode": "US", "value": "22202"}}}}, {"customerMembership": "NON_PRIME", "segmentDetails": {"glanceViewWeightPercentage": 10.14, "sampleLocation": {"postalCode": {"countryCode": "US", "value": "07424"}}}}, {"customerMembership": "DEFAULT", "segmentDetails": {"glanceViewWeightPercentage": 1.45, "sampleLocation": {"postalCode": {"countryCode": "US", "value": "60602"}}}}, {"customerMembership": "DEFAULT", "segmentDetails": {"glanceViewWeightPercentage": 1.45, "sampleLocation": {"postalCode": {"countryCode": "US", "value": "75034"}}}}, {"customerMembership": "DEFAULT", "segmentDetails": {"glanceViewWeightPercentage": 1.45, "sampleLocation": {"postalCode": {"countryCode": "US", "value": "99564"}}}}, {"customerMembership": "DEFAULT", "segmentDetails": {"glanceViewWeightPercentage": 15.94, "sampleLocation": {"postalCode": {"countryCode": "US", "value": "07004"}}}}, {"customerMembership": "DEFAULT", "segmentDetails": {"glanceViewWeightPercentage": 46.38, "sampleLocation": {"postalCode": {"countryCode": "US", "value": "20237"}}}}], "fulfillmentType": "AFN", "listingPrice": {"amount": 24.95, "currencyCode": "USD"}, "sellerId": "A2PN9CVQ6DIJZW", "shippingOptions": [{"price": {"amount": 0.0, "currencyCode": "USD"}, "shippingOptionType": "DEFAULT"}]}]}], "lowestPricedOffers": [{"lowestPricedOffersInput": {"itemCondition": "New", "offerType": "Consumer"}, "offers": [{"condition": "New", "fulfillmentType": "MFN", "listingPrice": {"amount": 22.0, "currencyCode": "USD"}, "primeDetails": {"eligibility": "NONE"}, "sellerId": "A3LDKS5CUEYHBY",
+== 2. getItemOffers v0 (IsBuyBoxWinner, feedback, shipping time)
+B01JKSBEKC offers 9
+[{"Shipping": {"CurrencyCode": "USD", "Amount": 0.0}, "ListingPrice": {"CurrencyCode": "USD", "Amount": 22.0}, "ShippingTime": {"maximumHours": 0, "minimumHours": 0, "availabilityType": "NOW"}, "SellerFeedbackRating": {"FeedbackCount": 73, "SellerPositiveFeedbackRating": 90.0}, "ShipsFrom": {"State": "NY", "Country": "US"}, "PrimeInformation": {"IsPrime": false, "IsNationalPrime": false}, "SubCondition": "new", "SellerId": "A3LDKS5CUEYHBY", "IsFeaturedMerchant": true, "IsBuyBoxWinner": true, "IsFulfilledByAmazon": false}, {"Shipping": {"CurrencyCode": "USD", "Amount": 0.0}, "ListingPrice": {"CurrencyCode": "USD", "Amount": 22.0}, "ShippingTime": {"maximumHours": 120, "minimumHours": 96, "availabilityType": "NOW"}, "SellerFeedbackRating": {"FeedbackCount": 38, "SellerPositiveFeedbackRating": 87.0}, "ShipsFrom": {"State": "WY", "Country": "US"}, "PrimeInformation": {"IsPrime": false, "IsNationalPrime": false}, "SubCondition": "new", "SellerId": "A2SK870QUCZDTW", "IsFeaturedMerchant": true, "IsBuyBoxWinner": false, "IsFulfilledByAmazon": false}, {"Shipping": {"CurrencyCode": "USD", "Amount": 0.0}, "ListingPrice": {"CurrencyCode": "USD", "Amount": 24.88}, "ShippingTime": {"maximumHours": 0, "minimumHours": 0, "availableDate": "2026-12-13T00:00:00Z", "availabilityType": "FUTURE_WITH_DATE"}, "SellerFeedbackRating": {"FeedbackCount": 191, "SellerPositiveFeedbackRating": 100.0}, "PrimeInformation": {"IsPrime": true, "IsNationalPrime": true}, "SubCondition": "new", "SellerId": "A3431Q
+B001TNTWC4 offers 4
+[{"Shipping": {"CurrencyCode": "USD", "Amount": 0.0}, "ListingPrice": {"CurrencyCode": "USD", "Amount": 18.99}, "ShippingTime": {"maximumHours": 0, "minimumHours": 0, "availabilityType": "NOW"}, "SellerFeedbackRating": {"FeedbackCount": 73, "SellerPositiveFeedbackRating": 90.0}, "ShipsFrom": {"State": "NY", "Country": "US"}, "PrimeInformation": {"IsPrime": false, "IsNationalPrime": false}, "SubCondition": "new", "SellerId": "A3LDKS5CUEYHBY", "IsFeaturedMerchant": true, "IsBuyBoxWinner": true, "IsFulfilledByAmazon": false}, {"Shipping": {"CurrencyCode": "USD", "Amount": 0.0}, "ListingPrice": {"CurrencyCode": "USD", "Amount": 19.96}, "ShippingTime": {"maximumHours": 0, "minimumHours": 0, "availableDate": "2026-12-02T20:30:00Z", "availabilityType": "FUTURE_WITH_DATE"}, "SellerFeedbackRating": {"FeedbackCount": 191, "SellerPositiveFeedbackRating": 100.0}, "PrimeInformation": {"IsPrime": true, "IsNationalPrime": true}, "SubCondition": "new", "SellerId": "A3431QI59MY9RE", "IsFeaturedMerchant": true, "IsBuyBoxWinner": true, "IsFulfilledByAmazon": true}, {"Shipping": {"CurrencyCode": "USD", "Amount": 0.0}, "ListingPrice": {"CurrencyCode": "USD", "Amount": 19.99}, "ShippingTime": {"maximumHours": 120, "minimumHours": 96, "availabilityType": "NOW"}, "SellerFeedbackRating": {"FeedbackCount": 38, "SellerPositiveFeedbackRating": 87.0}, "ShipsFrom": {"State": "WY", "Country": "US"}, "PrimeInformation": {"IsPrime": false, "IsNationalPrime": false}, "SubCondition": "new", "SellerId": "A2SK87
+B0030JJNBK offers 14
+[{"Shipping": {"CurrencyCode": "USD", "Amount": 0.0}, "ListingPrice": {"CurrencyCode": "USD", "Amount": 21.88}, "ShippingTime": {"maximumHours": 0, "minimumHours": 0, "availableDate": "2026-12-03T19:33:00Z", "availabilityType": "FUTURE_WITH_DATE"}, "SellerFeedbackRating": {"FeedbackCount": 0, "SellerPositiveFeedbackRating": 0.0}, "PrimeInformation": {"IsPrime": true, "IsNationalPrime": true}, "SubCondition": "new", "SellerId": "A36AT3FG6J3O3G", "IsFeaturedMerchant": true, "IsBuyBoxWinner": true, "IsFulfilledByAmazon": true}, {"Shipping": {"CurrencyCode": "USD", "Amount": 0.0}, "ListingPrice": {"CurrencyCode": "USD", "Amount": 22.95}, "ShippingTime": {"maximumHours": 24, "minimumHours": 24, "availabilityType": "NOW"}, "SellerFeedbackRating": {"FeedbackCount": 1566, "SellerPositiveFeedbackRating": 100.0}, "ShipsFrom": {"State": "NJ", "Country": "US"}, "PrimeInformation": {"IsPrime": false, "IsNationalPrime": false}, "SubCondition": "new", "SellerId": "A2ZOCI5BGBLJOM", "IsFeaturedMerchant": true, "IsBuyBoxWinner": true, "IsFulfilledByAmazon": false}, {"Shipping": {"CurrencyCode": "USD", "Amount": 0.0}, "ListingPrice": {"CurrencyCode": "USD", "Amount": 22.99}, "ShippingTime": {"maximumHours": 24, "minimumHours": 24, "availabilityType": "NOW"}, "SellerFeedbackRating": {"FeedbackCount": 55, "SellerPositiveFeedbackRating": 87.0}, "ShipsFrom": {"State": "CA", "Country": "US"}, "PrimeInformation": {"IsPrime": false, "IsNationalPrime": false}, "SubCondition": "new", "SellerId": "A18U6U
+== 3. Sales and Traffic report (Buy Box %, sessions, conversion) per child ASIN per day
+Traceback (most recent call last):
+  File "/home/runner/work/melaleuca-orders/melaleuca-orders/reprice/spapi.py", line 62, in call
+    with urllib.request.urlopen(req, timeout=90) as r:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 403: 
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/work/melaleuca-orders/melaleuca-orders/reprice/bb_probe.py", line 35, in <module>
+    st, txt = spapi.report(c, rt, start.isoformat() + "T00:00:00Z", end.isoformat() + "T23:59:59Z", opts, wait_minutes=20)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/melaleuca-orders/melaleuca-orders/reprice/spapi.py", line 94, in report
+    rid = call(c, "POST", "/reports/2021-06-30/reports", body=body, tries=2, quiet=True)["reportId"]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/melaleuca-orders/melaleuca-orders/reprice/spapi.py", line 76, in call
+    raise SpError("HTTP %s %s %s: %s" % (e.code, method, path[:60], msg[:400]), e.code)
+spapi.SpError: HTTP 403 POST /reports/2021-06-30/reports: {
+  "errors": [
+    {
+      "code": "Unauthorized",
+      "message": "Access to the resource is forbidden",
+      "details": ""
+    }
+  ]
+}

@@ -1,0 +1,232 @@
+{
+ "payload": {
+  "ASIN": "B001TNTWC4",
+  "status": "Success",
+  "ItemCondition": "New",
+  "Identifier": {
+   "MarketplaceId": "ATVPDKIKX0DER",
+   "ItemCondition": "New",
+   "ASIN": "B001TNTWC4"
+  },
+  "Summary": {
+   "LowestPrices": [
+    {
+     "condition": "new",
+     "fulfillmentChannel": "Amazon",
+     "LandedPrice": {
+      "CurrencyCode": "USD",
+      "Amount": 19.96
+     },
+     "ListingPrice": {
+      "CurrencyCode": "USD",
+      "Amount": 19.96
+     },
+     "Shipping": {
+      "CurrencyCode": "USD",
+      "Amount": 0.0
+     }
+    },
+    {
+     "condition": "new",
+     "fulfillmentChannel": "Merchant",
+     "LandedPrice": {
+      "CurrencyCode": "USD",
+      "Amount": 18.99
+     },
+     "ListingPrice": {
+      "CurrencyCode": "USD",
+      "Amount": 18.99
+     },
+     "Shipping": {
+      "CurrencyCode": "USD",
+      "Amount": 0.0
+     }
+    }
+   ],
+   "BuyBoxPrices": [
+    {
+     "condition": "New",
+     "LandedPrice": {
+      "CurrencyCode": "USD",
+      "Amount": 18.99
+     },
+     "ListingPrice": {
+      "CurrencyCode": "USD",
+      "Amount": 18.99
+     },
+     "Shipping": {
+      "CurrencyCode": "USD",
+      "Amount": 0.0
+     }
+    }
+   ],
+   "NumberOfOffers": [
+    {
+     "condition": "new",
+     "fulfillmentChannel": "Amazon",
+     "OfferCount": 1
+    },
+    {
+     "condition": "new",
+     "fulfillmentChannel": "Merchant",
+     "OfferCount": 3
+    }
+   ],
+   "BuyBoxEligibleOffers": [
+    {
+     "condition": "new",
+     "fulfillmentChannel": "Amazon",
+     "OfferCount": 1
+    },
+    {
+     "condition": "new",
+     "fulfillmentChannel": "Merchant",
+     "OfferCount": 3
+    }
+   ],
+   "SalesRankings": [
+    {
+     "ProductCategoryId": "health_and_beauty_display_on_website",
+     "Rank": 148910
+    },
+    {
+     "ProductCategoryId": "15342851",
+     "Rank": 252
+    }
+   ],
+   "ListPrice": {
+    "CurrencyCode": "USD",
+    "Amount": 0.0
+   },
+   "TotalOfferCount": 4
+  },
+  "Offers": [
+   {
+    "Shipping": {
+     "CurrencyCode": "USD",
+     "Amount": 0.0
+    },
+    "ListingPrice": {
+     "CurrencyCode": "USD",
+     "Amount": 18.99
+    },
+    "ShippingTime": {
+     "maximumHours": 0,
+     "minimumHours": 0,
+     "availabilityType": "NOW"
+    },
+    "SellerFeedbackRating": {
+     "FeedbackCount": 73,
+     "SellerPositiveFeedbackRating": 90.0
+    },
+    "ShipsFrom": {
+     "State": "NY",
+     "Country": "US"
+    },
+    "PrimeInformation": {
+     "IsPrime": false,
+     "IsNationalPrime": false
+    },
+    "SubCondition": "new",
+    "SellerId": "A3LDKS5CUEYHBY",
+    "IsFeaturedMerchant": true,
+    "IsBuyBoxWinner": true,
+    "IsFulfilledByAmazon": false
+   },
+   {
+    "Shipping": {
+     "CurrencyCode": "USD",
+     "Amount": 0.0
+    },
+    "ListingPrice": {
+     "CurrencyCode": "USD",
+     "Amount": 19.96
+    },
+    "ShippingTime": {
+     "maximumHours": 0,
+     "minimumHours": 0,
+     "availableDate": "2026-12-02T20:30:00Z",
+     "availabilityType": "FUTURE_WITH_DATE"
+    },
+    "SellerFeedbackRating": {
+     "FeedbackCount": 191,
+     "SellerPositiveFeedbackRating": 100.0
+    },
+    "PrimeInformation": {
+     "IsPrime": true,
+     "IsNationalPrime": true
+    },
+    "SubCondition": "new",
+    "SellerId": "A3431QI59MY9RE",
+    "IsFeaturedMerchant": true,
+    "IsBuyBoxWinner": true,
+    "IsFulfilledByAmazon": true
+   },
+   {
+    "Shipping": {
+     "CurrencyCode": "USD",
+     "Amount": 0.0
+    },
+    "ListingPrice": {
+     "CurrencyCode": "USD",
+     "Amount": 19.99
+    },
+    "ShippingTime": {
+     "maximumHours": 120,
+     "minimumHours": 96,
+     "availabilityType": "NOW"
+    },
+    "SellerFeedbackRating": {
+     "FeedbackCount": 38,
+     "SellerPositiveFeedbackRating": 87.0
+    },
+    "ShipsFrom": {
+     "State": "WY",
+     "Country": "US"
+    },
+    "PrimeInformation": {
+     "IsPrime": false,
+     "IsNationalPrime": false
+    },
+    "SubCondition": "new",
+    "SellerId": "A2SK870QUCZDTW",
+    "IsFeaturedMerchant": true,
+    "IsBuyBoxWinner": false,
+    "IsFulfilledByAmazon": false
+   },
+   {
+    "Shipping": {
+     "CurrencyCode": "USD",
+     "Amount": 9.0
+    },
+    "ListingPrice": {
+     "CurrencyCode": "USD",
+     "Amount": 16.9
+    },
+    "ShippingTime": {
+     "maximumHours": 0,
+     "minimumHours": 0,
+     "availabilityType": "NOW"
+    },
+    "SellerFeedbackRating": {
+     "FeedbackCount": 369,
+     "SellerPositiveFeedbackRating": 96.0
+    },
+    "ShipsFrom": {
+     "State": "CA",
+     "Country": "US"
+    },
+    "PrimeInformation": {
+     "IsPrime": false,
+     "IsNationalPrime": false
+    },
+    "SubCondition": "new",
+    "SellerId": "A20N1EZ80QSPZR",
+    "IsFeaturedMerchant": true,
+    "IsBuyBoxWinner": false,
+    "IsFulfilledByAmazon": false
+   }
+  ],
+  "marketplaceId": "ATVPDKIKX0DER"
+ }
+}
