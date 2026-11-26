@@ -1,0 +1,20 @@
+proxy=False B001TNTWC4 aod status=503 len=316 captcha=False offers=0 soldBy=[]
+proxy=False B001TNTWC4 dp status=200 len=3781 captcha=True offers=0 soldBy=[]
+proxy=False B0030JJNBK aod status=503 len=316 captcha=False offers=0 soldBy=[]
+proxy=False B0030JJNBK dp status=200 len=3781 captcha=True offers=0 soldBy=[]
+proxy=False B01JKSBEKC aod status=503 len=316 captcha=False offers=0 soldBy=[]
+proxy=False B01JKSBEKC dp status=200 len=3781 captcha=True offers=0 soldBy=[]
+proxy=False B08PSS11NS aod status=503 len=316 captcha=False offers=0 soldBy=[]
+proxy=False B08PSS11NS dp status=200 len=3781 captcha=True offers=0 soldBy=[]
+proxy=True B001TNTWC4 aod status=503 len=316 captcha=False offers=0 soldBy=[]
+proxy=True B001TNTWC4 dp status=200 len=644705 captcha=False offers=0 soldBy=[]
+proxy=True B0030JJNBK aod status=503 len=316 captcha=False offers=0 soldBy=[]
+proxy=True B0030JJNBK dp status=200 len=3781 captcha=True offers=0 soldBy=[]
+proxy=True B01JKSBEKC aod status=503 len=316 captcha=False offers=0 soldBy=[]
+proxy=True B01JKSBEKC dp status=200 len=3781 captcha=True offers=0 soldBy=[]
+proxy=True B08PSS11NS aod status=503 len=316 captcha=False offers=0 soldBy=[]
+proxy=True B08PSS11NS dp status=200 len=3781 captcha=True offers=0 soldBy=[]
+== real browser (Playwright, headed under xvfb) through the proxy
+B001TNTWC4 captcha=False title='Amazon.com: Melaleuca EcoSense Lemon Brite Dishwashing Liquid 16oz - L' price=['19.96', '1.25', '19.96'] sold=['  ', '  ', '  ', '  '] aod_link=True len=1890252
+B0030JJNBK captcha=False title='Amazon.com: Melaleuca PreSpot with Scrub Brush Tip – 8 fl. oz. | Enzym' price=['22.95', '2.87', '22.95'] sold=[] aod_link=True len=1658574
+B01JKSBEKC captcha=False title='Amazon.com : Melaleuca MelaGel Topical Balm .4oz Disk by selltop15 : H' price=['24.95', '62.38', '24.95'] sold=['Amazon ', 'Oasis Enterprises LLC ', '  ', '  '] aod_link=True len=1989767
