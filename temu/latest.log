@@ -1,0 +1,7 @@
+  !! no product data on search 'dog shirt' - Temu is blocking; stopping this run
+
+SEARCH 'dog shirt' -> 0 products
+
+SEARCH 'yoga mat' -> 0 products
+
+STATS {"requests": 1, "bytes": 268120, "failed": 0, "closed": "search 'dog shirt' at 21:33 UTC", "mb": 0.26, "secs": 0.4}
