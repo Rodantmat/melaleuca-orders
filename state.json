@@ -3,11 +3,11 @@
  "accounts": {
   "1": {
    "tab": "David H",
-   "mode": "tracking",
-   "armed": "2026-11-25T03:42:14Z",
-   "next_scrape": "",
+   "mode": "waiting",
+   "armed": "2026-11-26T21:25:43Z",
+   "next_scrape": "2026-11-27T14:00:00Z",
    "tries": 0,
-   "note": "tracking numbers found 2026-11-25T03:49:05Z",
+   "note": "",
    "last_error": ""
   },
   "2": {
@@ -155,5 +155,5 @@
    "last_error": ""
   }
  },
- "updated": "2026-11-26T20:47:06Z"
+ "updated": "2026-11-26T21:32:11Z"
 }
