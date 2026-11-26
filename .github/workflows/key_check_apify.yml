@@ -1,0 +1,21 @@
+name: key_check_apify
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  t:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Apify token under all 4 names
+        env:
+          A1: ${{ secrets.APIFY_TOKEN }}
+          A2: ${{ secrets.APIFY_KEY }}
+          A3: ${{ secrets.APIFY_API_TOKEN }}
+          A4: ${{ secrets.APIFY }}
+        run: |
+          for n in A1 A2 A3 A4; do
+            v="${!n}"
+            code=$(curl -s -o /tmp/o.json -w '%{http_code}' -H "Authorization: Bearer $v" https://api.apify.com/v2/users/me)
+            u=$(python3 -c "import json;d=json.load(open('/tmp/o.json')).get('data',{});print(d.get('username'),d.get('plan',{}).get('id') if isinstance(d.get('plan'),dict) else '')" 2>/dev/null)
+            echo "$n len=${#v} http=$code user=$u"
+          done
