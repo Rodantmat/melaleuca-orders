@@ -1,0 +1,1 @@
+{"url": "https://ca.melaleuca.com/api/cart/upsells/?sc_itemid=%7BF4940FE5-5EDC-4E43-8249-8D0B97C28369%7D&sc_lang=en-CA&sc_site=productstoreCa", "status": 200, "method": "GET", "page": "https://ca.melaleuca.com/cart?sc_lang=en-ca", "body": "{\"Success\":true,\"ErrorMessages\":[],\"Data\":{\"Upsells\":[]}}"}

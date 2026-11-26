@@ -1,0 +1,26 @@
+using proxy gw.dataimpulse.com:10001 (account 1)
+exit IP at start: 178.83.60.220
+home status=200
+[01_home] url=https://www.melaleuca.com/ title='Welcome to Melaleuca, The Wellness Company'
+OK   home
+[02_signin_page] url=https://www.melaleuca.com/account/signin?ReturnUrl=%2fconnect%2fauthorize%2fcallback%3fclient_id%3dmelaleuca-sitecore%26culture%3den-US%26nonce%3d39cdf81b-e097-4d3c-a799-29386044b1d5%26redirect_uri%3dhttps%253A%252F%252Fwww.melaleuca.com%252Fdepaccount%252FLoadProfile%26response_mode%3dform_post%26response_type%3dcode%2520id_token%26scope%3dopenid%2520offline_access%2520DEPInterface.API.Full%2520CustomerAccount.API.Full%2520Order.API.Full%2520Product.API.Full%2520Communication.API.Full%2520Address.API.Full%2520Organization.API.Full%2520SubscribedServices.API.Full%2520PayMethod.API.Full%2520Document.API.Full%2520BackupOrder.API.Full%2520Promotion.API.Full%2520LSD.API.Full%2520PaymentNotification.API.Full%26state%3dhttps%253A%252F%252Fwww.melaleuca.com%252Fcart title=''
+username inputs: 1, visible: 1
+[03_after_login] url=https://ca.melaleuca.com/cart?sc_lang=en-ca title='Shopping Cart'
+still on sign-in form: False
+OK   login
+04_outlet status=404
+[04_outlet] url=https://ca.melaleuca.com/productstore/extra-savings/outlet-store?sc_lang=en-ca title='404'
+OK   04_outlet
+05_monthly status=200
+[05_monthly] url=https://ca.melaleuca.com/productstore/extra-savings/monthly-specials?sc_lang=en-ca title='Monthly Specials'
+OK   05_monthly
+06_cart status=200
+[06_cart] url=https://ca.melaleuca.com/cart?sc_lang=en-ca title='Shopping Cart'
+OK   06_cart
+07_search status=200
+[07_search] url=https://ca.melaleuca.com/search?q=lip+balm&sc_lang=en-ca title='Search'
+OK   07_search
+08_account status=200
+[08_account] url=https://ca.melaleuca.com/account?sc_lang=en-ca title='My Account'
+OK   08_account
+exit IP at end: 178.83.60.220
