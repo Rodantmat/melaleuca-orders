@@ -1,0 +1,49 @@
+{
+ "origin": "Toronto",
+ "name": "TEST-DELETE-ME-SD-2026-10",
+ "planId": "wfc40ff7ad-bc78-4907-9efb-0bbf1ec7e169",
+ "placementOptionId": "pl69ad085f-3527-4406-8d41-dfb547c2ece2",
+ "why": "only the target region is available",
+ "feeUSD": 156.94,
+ "legs": [
+  {
+   "shipmentId": "sh9fe8086c-90c5-4b0a-ab66-1d6f201e76c8",
+   "warehouse": "HEA2",
+   "address": {
+    "city": "BREINIGSVILLE",
+    "countryCode": "US",
+    "postalCode": "18031-1536",
+    "name": "HEA2",
+    "addressLine1": "650 BOULDER DR",
+    "addressLine2": "Suite A",
+    "stateOrProvinceCode": "PA"
+   },
+   "boxes": 11,
+   "lb": 377.8,
+   "units": 594,
+   "counts": {
+    "Cleaner": 161,
+    "Bar": 234,
+    "Lotion": 199
+   },
+   "service": "Standard\u00ae",
+   "rate_id": "f81db841c0604f7394e217e27743617a",
+   "shippo_shipment": "91b54f88d42042c8a2c101bdedf0ca7b",
+   "shippo_account": "291d65038fa24611b6e4848076c080e9",
+   "amount": 407.64,
+   "currency": "CAD",
+   "usd": 286.2,
+   "estimated_days": 3
+  }
+ ],
+ "upsUSD": 286.2,
+ "fx": {
+  "usd_per_cad": 0.7021,
+  "source": "Bank of Canada 2026-11-26"
+ },
+ "warning": "",
+ "expires": "2026-11-29T21:25:45.095Z",
+ "created": "2026-11-26T21:26:04",
+ "sendFile": "/home/runner/work/melaleuca-orders/melaleuca-orders/feedwork/inbound_test.tsv",
+ "test": true
+}

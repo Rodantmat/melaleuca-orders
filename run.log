@@ -1,0 +1,42 @@
+plan 'TEST-DELETE-ME-SD-2026-10' | ship from Toronto | 85 SKUs, 594 units, 11 boxes
+expiration date added to 42 products that need it
+1/5 plan created: wfc40ff7ad-bc78-4907-9efb-0bbf1ec7e169
+1/5 inventory accepted by Amazon
+2/5 packing option chosen (1 group(s))
+3/5 packing option confirmed
+4/5 box contents and sizes saved (11 boxes)
+5/5 shipment options generated
+   option pl2be822 fee 250.38  GEU3(WEST)  -> outside region
+   option pl69ad08 fee 156.94  HEA2(EAST)  -> all EAST
+   option plf8dd0a fee 208.77  ABQ2(WEST)  -> outside region
+   decision: only the target region is available
+
+Amazon FBA Placement Fees: $156.94
+UPS Shipment Cost: $286.20  (approx. USD; Shippo quotes 407.64 CAD)
+Ships to: HEA2 (BREINIGSVILLE, PA)
+Why: only the target region is available
+
+Complete Shipment?
+(state saved: inbound_test_stage1.json; FX Bank of Canada 2026-11-26 0.7021)
+plan cancelled: wfc40ff7ad-bc78-4907-9efb-0bbf1ec7e169
+plan 'TEST-DELETE-ME-SD-2026-10' | ship from Vancouver | 85 SKUs, 594 units, 11 boxes
+expiration date added to 42 products that need it
+1/5 plan created: wf1c889343-27cd-419f-8295-74350a8ed429
+1/5 inventory accepted by Amazon
+2/5 packing option chosen (1 group(s))
+3/5 packing option confirmed
+4/5 box contents and sizes saved (11 boxes)
+5/5 shipment options generated
+   option pl04568c fee 208.77  BNA6(CENTRAL)  -> all CENTRAL
+   option pl6b4260 fee 250.38  GEU3(WEST)  -> all WEST
+   option plc53519 fee 156.94  HEA2(EAST)  -> outside region
+   decision: Central is not closer (3311 km vs 1911 km) but cheaper ($604.92 vs $628.21)
+
+Amazon FBA Placement Fees: $208.77
+UPS Shipment Cost: $396.15  (approx. USD; Shippo quotes 564.24 CAD)
+Ships to: BNA6 (CLARKSVILLE, TN)
+Why: Central is not closer (3311 km vs 1911 km) but cheaper ($604.92 vs $628.21)
+
+Complete Shipment?
+(state saved: inbound_test_Vancouver_stage1.json; FX Bank of Canada 2026-11-26 0.7021)
+plan cancelled: wf1c889343-27cd-419f-8295-74350a8ed429

@@ -1,0 +1,48 @@
+{
+ "origin": "Vancouver",
+ "name": "TEST-DELETE-ME-SD-2026-10",
+ "planId": "wf1c889343-27cd-419f-8295-74350a8ed429",
+ "placementOptionId": "pl04568c9b-acaa-4af9-9bb0-a71499a49071",
+ "why": "Central is not closer (3311 km vs 1911 km) but cheaper ($604.92 vs $628.21)",
+ "feeUSD": 208.77,
+ "legs": [
+  {
+   "shipmentId": "sha4a75f35-76d0-4e0f-a381-e3272f83dc3d",
+   "warehouse": "BNA6",
+   "address": {
+    "city": "CLARKSVILLE",
+    "countryCode": "US",
+    "postalCode": "37040-5502",
+    "name": "BNA6",
+    "addressLine1": "3875 GUTHRIE HWY",
+    "stateOrProvinceCode": "TN"
+   },
+   "boxes": 11,
+   "lb": 377.8,
+   "units": 594,
+   "counts": {
+    "Lotion": 199,
+    "Cleaner": 161,
+    "Bar": 234
+   },
+   "service": "Standard\u00ae",
+   "rate_id": "f04ba0da2136495999f29a79baee015c",
+   "shippo_shipment": "08bfb050bc3845579454ef2b4e366d3d",
+   "shippo_account": "291d65038fa24611b6e4848076c080e9",
+   "amount": 564.24,
+   "currency": "CAD",
+   "usd": 396.15,
+   "estimated_days": 6
+  }
+ ],
+ "upsUSD": 396.15,
+ "fx": {
+  "usd_per_cad": 0.7021,
+  "source": "Bank of Canada 2026-11-26"
+ },
+ "warning": "",
+ "expires": "2026-11-29T21:27:01.909Z",
+ "created": "2026-11-26T21:27:24",
+ "sendFile": "/home/runner/work/melaleuca-orders/melaleuca-orders/feedwork/inbound_test_Vancouver.tsv",
+ "test": true
+}
