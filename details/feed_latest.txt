@@ -1,4 +1,4 @@
-# 2026-11-25T20:52:26Z  feed  success  run 45696767574
+# 2026-11-26T20:38:04Z  feed  success  run 45891207299
 Requesting reports ...
 Waiting for Amazon to build them (usually 1-10 minutes) ...
   planning                     DONE
@@ -34,9 +34,9 @@ Summary
 
 Files are in: /home/runner/work/melaleuca-orders/melaleuca-orders/feedwork/raw
 Send Claude the file raw\headers_summary.txt (it contains no sales data).
-Asking Amazon for fee estimates on 163 products ...
+Asking Amazon for fee estimates on 164 products ...
   (Amazon busy / rate limit, HTTP 429 - waiting 5s)
-demand history: 130 products with orders, 171 with a stock ledger (folder /home/runner/work/melaleuca-orders/melaleuca-orders/feedwork/state)
+demand history: 130 products with orders, 182 with a stock ledger (folder /home/runner/work/melaleuca-orders/melaleuca-orders/feedwork/state)
 
 Built feed files in: /home/runner/work/melaleuca-orders/melaleuca-orders/feedwork/feed
   Inventory rows: 174 | FBA rows: 172 | fees known: 174
@@ -47,4 +47,4 @@ Built feed files in: /home/runner/work/melaleuca-orders/melaleuca-orders/feedwor
   note: no fee for ME1128: {'Type': 'Sender', 'Code': 'InvalidParameterValue', 'Message': 'No ASIN found fo
   note: incomplete fee (no FBA fee) for P9-9LY1-OBH4 - not used
   note: 2 fee(s) came from the Fee Preview report (at your price, not the Buy Box price)
-  note: 9 fee(s) are the last known complete fee (Amazon gave none/incomplete today): GF-Y56X-CX1Z, HN-7OON-4N0S, ME1505, ME1657, ME1806, ME1824, ME1826, ME1827, ME1828
+  note: 8 fee(s) are the last known complete fee (Amazon gave none/incomplete today): GF-Y56X-CX1Z, HN-7OON-4N0S, ME1657, ME1806, ME1824, ME1826, ME1827, ME1828
