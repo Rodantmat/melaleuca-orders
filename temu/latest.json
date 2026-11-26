@@ -1,17 +1,16 @@
 {
- "run_at": "2026-11-26T21:33:36+00:00",
+ "run_at": "2026-11-26T21:35:27+00:00",
  "searches": {
-  "dog shirt": [],
-  "yoga mat": []
+  "dog shirt": []
  },
  "products": [],
  "best_sellers": [],
  "stats": {
   "requests": 1,
-  "bytes": 268120,
+  "bytes": 268010,
   "failed": 0,
-  "closed": "search 'dog shirt' at 21:33 UTC",
+  "closed": "search 'dog shirt' at 21:35 UTC",
   "mb": 0.26,
-  "secs": 0.4
+  "secs": 0.3
  }
 }
