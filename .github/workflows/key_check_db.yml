@@ -1,0 +1,24 @@
+name: key_check_db
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  t:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Read-only Postgres check
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          pip -q install "psycopg[binary]"
+          python3 - <<'PY'
+          import os,psycopg
+          cx=psycopg.connect(os.environ["DATABASE_URL"],connect_timeout=15)
+          cx.read_only=True
+          c=cx.cursor()
+          c.execute("select 1"); print("select1",c.fetchone())
+          c.execute("select current_database(),current_user,split_part(version(),' ',2)"); print("db",c.fetchone())
+          c.execute("select count(*) from information_schema.tables where table_schema not in ('pg_catalog','information_schema')"); print("user tables",c.fetchone())
+          c.execute("select table_schema,table_name from information_schema.tables where table_schema not in ('pg_catalog','information_schema') order by 1,2 limit 40")
+          for r in c.fetchall(): print(" ",r)
+          PY
