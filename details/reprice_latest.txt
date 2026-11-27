@@ -1,4 +1,4 @@
-# 2026-11-27T07:27:50Z  reprice  success  run 45957473429
+# 2026-11-27T13:27:11Z  reprice  success  run 46005784706
 /home/runner/work/melaleuca-orders/melaleuca-orders/reprice/run.py:14: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
   now = dt.datetime.utcnow()
 mode=live live_writes_allowed=True killed=False skus=179
@@ -15,11 +15,11 @@ Amazon target prices (FOEP) read for 66 products
 seller id found
 decided 159 products: {'hold': 157, 'down': 2} ; applied this run: 1
   ME0066 down 40.93 -> 39.7  drought/surplus: 15 days without sale (limit 30), 150 days of supply; market price 37.86 | SHADOW (not applied
-  ME0287 down 11.04 -> 10.49  rival Buy Box owner is cheaper and has a big stock (owner has plenty, we have 171 days of cover and are 23% ab
-units to sell 1107 | cost paid 7965 | at your listed prices 29847 | net payout base 20400 | net payout conservative 18747
+  ME0125 down 54.99 -> 52.24  rival Buy Box owner is cheaper and has a big stock (owner has plenty, we have 1260 days of cover and are 6% ab
+units to sell 1107 | cost paid 7965 | at your listed prices 29847 | net payout base 20322 | net payout conservative 18665
 Counter({'OK': 76, 'BUY MORE': 47, 'BUY': 19, 'BUY LESS': 15, 'STOP buying': 10, 'STOP buying - no sales 90d': 5})
-market depth for 147 products: {'LOW': 89, 'MEDIUM': 57, 'HIGH': 1}
-bb intel: 142 ASINs, we own the box in 38% of web scans; API vs web: {('same seller', 'same price'): 111, ('different seller', 'different price'): 25, ('different seller', 'same price'): 6}
+market depth for 147 products: {'LOW': 90, 'MEDIUM': 55, 'HIGH': 2}
+bb intel: 142 ASINs, we own the box in 38% of web scans; API vs web: {('same seller', 'same price'): 120, ('different seller', 'different price'): 19, ('different seller', 'same price'): 3}
 /home/runner/work/melaleuca-orders/melaleuca-orders/reprice/reports.py:54: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
   now = dt.datetime.utcnow()
-reports: rival stock hints {'WAIT': 1, 'DROP-CANDIDATE': 3, 'WATCH': 5, 'HOLD': 81} | restock alerts 36 (profit at risk $2286/month) | rival alerts 72 | outcomes 25
+reports: rival stock hints {'DROP-CANDIDATE': 2, 'WATCH': 5, 'HOLD': 76} | restock alerts 36 (profit at risk $2273/month) | rival alerts 63 | outcomes 25
