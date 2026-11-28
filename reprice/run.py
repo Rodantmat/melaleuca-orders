@@ -197,7 +197,7 @@ def is_allowed(d, sku, conf, raised_run, dropped_run):
     if act == "up":
         return bool(ar.get("enabled") is True and raised_run < ar.get("max_per_run", 4) and flags_ok(d)), False
     if act == "down":
-        return bool(ad.get("enabled") is True and dropped_run < ad.get("max_per_run", 3) and (d.get("severe") or d.get("no_box") or d.get("rival_flood") or (
+        return bool(ad.get("enabled") is True and dropped_run < ad.get("max_per_run", 3) and (d.get("severe") or d.get("no_box") or d.get("rival_flood") or d.get("market_set") or (
             (d.get("dss") or 0) >= ad.get("min_days_no_sale", 30) and (d.get("dos") or 0) >= ad.get("min_days_cover", 90)))), False
     return False, False
 
@@ -378,6 +378,12 @@ def main():
         w_ = web.get(asin)                         # what a shopper really sees on amazon.com: if another seller owns a LOWER Buy Box, never raise towards it
         if w_ and seller and w_["seller_id"] != seller and price and w_["bb_price"] < price - 0.005:
             snap["we_hold_bb"] = False
+        if w_ and seller and w_.get("seller_id") and w_["seller_id"] != seller and w_.get("bb_price"):
+            snap["web_bb_rival"] = w_["bb_price"]          # OWNER 2026-11-27: out of stock, the price is set for what shoppers really see
+        if lv and seller and snap["on_hand"] <= 0:           # nobody else sells it (Amazon's offer list AND the web page agree, or the page could not be read)
+            api_riv = sum(1 for x in (lv.get("ladder") or []) if x and x[0] != seller)
+            web_riv = sum(1 for o in ((w_ or {}).get("aod") or []) if o.get("seller_id") and o["seller_id"] != seller)
+            snap["nobody_sells"] = bool(api_riv == 0 and web_riv == 0 and lv.get("bb") is None and not (w_ and w_.get("bb_price") and w_.get("seller_id") != seller))
         # overrides: min/max price
         try:
             d = engine.decide(snap, cfg, now)
