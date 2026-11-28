@@ -87,12 +87,14 @@ def main():
             pl = [v["price"] for v in rr["rivals"] if v.get("match") and v.get("price") and v["price"] < own and (v.get("left") is None or v["left"] >= 10)]
             if pl: plenty_px = min(pl)
         # hints (proposal, not wired to the repricer)
-        if on_hand <= 5: hint, why = "HOLD", "we have %d units: keep the margin" % on_hand
-        elif plenty_px is None and left is not None and (left <= 3 or (eta is not None and eta <= 10)):
+        # OWNER 2026-11-27: follow the rival's stock - a rival with plenty makes our units sit (step toward him), a rival nearly sold out means a stronger price soon (raise ahead of him)
+        if plenty_px is None and left is not None and (left <= 3 or (eta is not None and eta <= 10)):
             hint, why = "WAIT", "owner has %s left%s" % (left, (", gone in ~%.0f days" % eta) if eta else "")
-        elif plenty_px is not None and sold_m > 0 and cover and cover >= 30 and (own / plenty_px - 1) * 100 > 5:
+        elif on_hand <= 0: hint, why = "HOLD", "no stock: priced by the zero-stock rules"
+        elif on_hand <= 2 and (cover is None or cover < 7): hint, why = "HOLD", "we have %d units and sell them within a week: keep the margin" % on_hand
+        elif plenty_px is not None and sold_m > 0 and cover and cover >= 7 and (own / plenty_px - 1) * 100 > 5:
             hint, why = "DROP-CANDIDATE", "a cheaper seller (%.2f) has plenty of stock, we have %.0f days of cover" % (plenty_px, cover)
-        elif sold_m > 0 and cover and cover >= 30 and gap is not None and gap > 5 and (left is None or left >= 10 or (eta is not None and eta > 30)):
+        elif sold_m > 0 and cover and cover >= 7 and gap is not None and gap > 5 and (left is None or left >= 10 or (eta is not None and eta > 30)):
             hint, why = "DROP-CANDIDATE", "owner has %s, we have %.0f days of cover and are %.0f%% above the box" % ("plenty" if left is None else left, cover, gap)
         else: hint, why = "WATCH", ""
         nxt = [o["price"] for o in (lr.get("aod") or []) if o.get("price") and o.get("seller_id") not in (me, lr["seller_id"]) and lr.get("bb_price") and o["price"] > lr["bb_price"] + 0.005]
