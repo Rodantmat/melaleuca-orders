@@ -1,22 +1,22 @@
-# 2026-11-28T14:54:08Z  bb_web  success  run 46154964956
+# 2026-11-28T18:56:15Z  bb_web  success  run 46176282069
 rival stock reads: off (budget 80)
-browser session 1 on proxy port 10093  (0 of 179 products read so far, wire 0.0 MB)
+browser session 1 on proxy port 10096  (0 of 179 products read so far, wire 0.0 MB)
   1/30  price=52.95 seller=MEGA SAVINGS  (0.1 MB so far)
-  21/30  price=None seller=None  (9.3 MB so far)
-browser session 2 on proxy port 10106  (30 of 179 products read so far, wire 3.9 MB)
+  21/30  price=None seller=None  (11.8 MB so far)
+browser session 2 on proxy port 10104  (30 of 179 products read so far, wire 3.8 MB)
   1/30  price=22.95 seller=MEGA SAVINGS  (1.7 MB so far)
-  21/30  price=23.99 seller=Oasis Enterprises LLC  (11.3 MB so far)
-browser session 3 on proxy port 10118  (60 of 179 products read so far, wire 7.1 MB)
+  21/30  price=23.99 seller=Oasis Enterprises LLC  (11.2 MB so far)
+browser session 3 on proxy port 10113  (60 of 179 products read so far, wire 7.0 MB)
   1/30  price=None seller=None  (0.0 MB so far)
-  21/30  price=61.79 seller=Flipping Magic  (10.0 MB so far)
-browser session 4 on proxy port 10128  (90 of 179 products read so far, wire 10.3 MB)
-  1/30  price=53.95 seller=HEALING DREAM  (2.1 MB so far)
-  21/30  price=15.4 seller=aboutcare00  (17.8 MB so far)
+  21/30  price=61.79 seller=Flipping Magic  (12.6 MB so far)
+browser session 4 on proxy port 10125  (90 of 179 products read so far, wire 11.3 MB)
+  1/30  price=53.95 seller=HEALING DREAM  (1.5 MB so far)
+  21/30  price=15.4 seller=HEALTHY AND DREAM  (16.3 MB so far)
 browser session 5 on proxy port 10134  (120 of 179 products read so far, wire 15.1 MB)
   1/30  price=None seller=None  (0.0 MB so far)
-  21/30  price=64.0 seller=Top Quality of Life  (16.3 MB so far)
-browser session 6 on proxy port 10146  (150 of 179 products read so far, wire 18.9 MB)
-  1/29  price=27.95 seller=balabasics  (0.1 MB so far)
-  21/29  price=41.61 seller=Flipping Magic  (10.9 MB so far)
-proxy traffic on the wire: 21.5 MB in 248 requests; by type: {'document': 19.3, 'fetch': 1.9}
-web Buy Box: 179 ASINs read, 131 with a price, we win 52, errors 7
+  21/30  price=64.0 seller=Top Quality of Life  (14.8 MB so far)
+browser session 6 on proxy port 10145  (150 of 179 products read so far, wire 19.2 MB)
+  1/29  price=25.99 seller=ccomstore18  (0.1 MB so far)
+  21/29  price=41.61 seller=Flipping Magic  (12.2 MB so far)
+proxy traffic on the wire: 22.3 MB in 248 requests; by type: {'document': 20.2, 'fetch': 1.8}
+web Buy Box: 179 ASINs read, 131 with a price, we win 45, errors 7
