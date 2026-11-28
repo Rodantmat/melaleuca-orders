@@ -7,8 +7,8 @@
     "DE-QFMC-M0RB",
     "ME1302"
   ],
-  "max_changes_per_run": 20,
-  "max_changes_per_day": 40,
+  "max_changes_per_run": 30,
+  "max_changes_per_day": 60,
   "new_listing_no_drop_days": 60,
   "overrides": {},
   "cfg": {},
@@ -18,7 +18,7 @@
   },
   "auto_drop": {
     "enabled": true,
-    "max_per_run": 6,
+    "max_per_run": 12,
     "min_days_no_sale": 30,
     "min_days_cover": 45
   },
