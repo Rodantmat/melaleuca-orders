@@ -66,6 +66,46 @@ class Drops(unittest.TestCase):
         self.assertNotEqual(d["action"], "down")
 
 
+class ZeroStockMarket(unittest.TestCase):
+    """OWNER 2026-11-27: out of stock -> priced for the market; nobody sells it -> raise properly; never below the floor"""
+    H = {"n": 20, "p_low": 18.0, "p_mid": 24.0, "p_high": 30.0}
+    def test_zero_stock_drops_to_the_market_when_we_are_above(self):
+        s = base(price=30.0, cost=8.0, fba_fee=3.0, on_hand=0, inbound=10, units_90=12, units_30=4, bb=24.0, we_hold_bb=False, days_since_sale=10, hist=self.H)
+        d = engine.decide(s, CFG, NOW)
+        self.assertEqual(d["action"], "down"); self.assertTrue(d.get("zero_stock"))
+        self.assertAlmostEqual(d["price"], 23.97, places=2)
+    def test_zero_stock_never_drops_below_the_floor(self):
+        s = base(price=30.0, cost=14.0, fba_fee=4.0, on_hand=0, inbound=10, units_90=12, bb=15.0, we_hold_bb=False, hist=self.H)
+        d = engine.decide(s, CFG, NOW)
+        fl = engine.floors(s, CFG)[1]
+        if d["action"] == "down": self.assertGreaterEqual(d["price"], fl - 0.011)
+    def test_zero_stock_uses_the_web_rival_price_when_amazon_gives_none(self):
+        s = base(price=26.73, cost=8.0, fba_fee=3.0, on_hand=0, inbound=10, units_90=25, units_30=18, bb=None, we_hold_bb=False, web_bb_rival=18.99, days_since_sale=2, hist=self.H)
+        d = engine.decide(s, CFG, NOW)
+        self.assertEqual(d["action"], "down"); self.assertAlmostEqual(d["price"], 18.96, places=2)
+    def test_zero_stock_waits_while_the_box_owner_is_nearly_sold_out(self):
+        s = base(price=30.0, cost=8.0, fba_fee=3.0, on_hand=0, inbound=10, units_90=12, bb=24.0, we_hold_bb=False, hist=self.H,
+                 rival_wait={"left": "2", "eta": "3", "why": "owner has 2 left", "next_price": "29", "seen_h": 12})
+        self.assertNotEqual(engine.decide(s, CFG, NOW)["action"], "down")
+    def test_zero_stock_nobody_sells_raises_properly(self):
+        s = base(price=20.0, cost=6.0, fba_fee=3.0, on_hand=0, inbound=10, units_90=12, units_30=4, bb=None, we_hold_bb=None, nobody_sells=True, days_since_sale=10,
+                 hist={"n": 20, "p_low": 18.0, "p_mid": 21.0, "p_high": 30.0})
+        d = engine.decide(s, CFG, NOW)
+        self.assertEqual(d["action"], "up"); self.assertTrue(d.get("zero_alone"))
+        self.assertAlmostEqual(d["price"], 21.6, places=2)
+    def test_zero_stock_nobody_sells_stops_at_the_ceiling(self):
+        s = base(price=55.0, cost=6.0, fba_fee=3.0, on_hand=0, inbound=10, units_90=12, bb=None, we_hold_bb=None, nobody_sells=True,
+                 hist={"n": 20, "p_low": 18.0, "p_mid": 21.0, "p_high": 30.0})
+        self.assertNotEqual(engine.decide(s, CFG, NOW)["action"], "up")
+
+
+class BuyBoxHeldCheck(unittest.TestCase):
+    def test_no_raise_when_amazon_gave_no_price_but_the_web_shows_a_cheaper_owner(self):
+        s = base(price=25.46, cost=8.0, fba_fee=3.0, on_hand=3, inbound=0, units_90=31, units_30=18, units_7=5, bb=None, we_hold_bb=False, days_since_sale=1, n_rivals=2,
+                 hist={"n": 30, "p_low": 17.0, "p_mid": 22.0, "p_high": 30.0})
+        self.assertNotEqual(engine.decide(s, CFG, NOW)["action"], "up")
+
+
 class Raises(unittest.TestCase):
     def test_zero_stock_follows_rival_box_a_few_cents_under(self):
         s = base(price=20.0, on_hand=0, inbound=30, units_90=12, units_30=4, bb=27.50, we_hold_bb=False, days_since_sale=10,
@@ -156,7 +196,7 @@ class RivalStockPricing(unittest.TestCase):
     def test_flood_waits_with_scarce_own_stock_and_after_a_recent_change(self):
         rf = {"price": "25.0", "gap": "20", "why": "plenty"}
         d = engine.decide(dict(self._s(), on_hand=3, rival_flood=rf), CFG, NOW)       # 3 units / 0.1 per day = 30 days -> still ok; make it scarce
-        d = engine.decide(dict(self._s(), on_hand=1, units_30=3, rival_flood=rf), CFG, NOW)
+        d = engine.decide(dict(self._s(), on_hand=1, units_30=9, units_90=18, rival_flood=rf), CFG, NOW)     # OWNER 2026-11-27: only days of stock left -> the units sell out anyway: keep the margin
         self.assertEqual(d["action"], "hold")
         lc = {"ts": NOW - timedelta(hours=10), "old": 31.5, "new": 30.0, "dir": "down", "base_v": 0.1}
         d = engine.decide(dict(self._s(), rival_flood=rf, last_change=lc, changes=[lc]), CFG, NOW)
@@ -225,9 +265,11 @@ class Properties(unittest.TestCase):
             if d["action"] == "down":
                 if d["price"] < hard - 0.005:
                     bad.append(("down below hard floor", i))
-                if s["on_hand"] <= 0:
+                if s["on_hand"] <= 0 and not d.get("zero_stock"):
                     bad.append(("down without stock", i))
-                if d["price"] < s["price"] * (1 - 0.04 * 1.5 - 0.2) - 0.02:
+                if s["on_hand"] <= 0 and d.get("zero_stock") and not s["bb"]:
+                    bad.append(("zero-stock drop without market", i))
+                if not d.get("zero_stock") and d["price"] < s["price"] * (1 - 0.04 * 1.5 - 0.2) - 0.02:
                     bad.append(("down too big", i))
             if d["action"] in ("up",):
                 lim = max(CFG["STEP_UP_ALONE"], CFG["STEP_UP_BIG"], CFG["STEP_UP"])
@@ -235,7 +277,7 @@ class Properties(unittest.TestCase):
                     bad.append(("up too big", i))
                 if d["price"] < s["price"]:
                     bad.append(("up goes down", i))
-            if d.get("zero_stock") and s["bb"] and d["price"] > s["bb"] - CFG["UNDER_BB"] + 0.005:
+            if d.get("zero_stock") and d["action"] == "up" and not d.get("zero_alone") and s["bb"] and d["price"] > s["bb"] - CFG["UNDER_BB"] + 0.005:
                 bad.append(("zero stock above rival box", i))
             if d["action"] == "to_floor" and d["price"] < s["price"]:
                 bad.append(("to_floor lowers", i))
