@@ -1,6 +1,6 @@
 name: Heartbeat (keeps the status pages and reprice on time)
 # GitHub's own cron is late and patchy. This job stays alive for ~5h40m, starts the status update every
-# 15 minutes and the reprice at its 3 daily slots, then starts the next heartbeat. The hourly cron below
+# 15 minutes, the web Buy Box scan and the reprice every 4 hours (6 slots a day), then starts the next heartbeat. The hourly cron below
 # only restarts the chain if it ever breaks (concurrency keeps a single heartbeat alive).
 on:
   schedule:
@@ -38,9 +38,9 @@ jobs:
               fi
               last_status=$now
             fi
-            # reprice slots (UTC): the first beat after 07:17 / 13:17 / 19:17, once per slot
+            # reprice slots (UTC): the first beat after 03:17 / 07:17 / 11:17 / 15:17 / 19:17 / 23:17, once per slot (OWNER 2026-11-27: every 4 h, so stock changes and Buy Box moves are answered within hours)
             hm=$(date -u +%H%M); h=$((10#${hm:0:2})); m=$((10#${hm:2:2})); mins=$((h*60+m))
-            for slot in 437 797 1157; do
+            for slot in 197 437 677 917 1157 1397; do
               if [ $mins -ge $slot ] && [ $mins -lt $((slot+20)) ]; then
                 recent=$(gh api "repos/$REPO/actions/workflows/reprice.yml/runs?per_page=3" -q "[.workflow_runs[]|select((.created_at|fromdateiso8601) > $((now-10800)))]|length" 2>/dev/null || echo 0)
                 if [ "${recent:-0}" = "0" ]; then
@@ -48,8 +48,8 @@ jobs:
                 fi
               fi
             done
-            # web Buy Box scan slots (UTC): the first beat after 06:30 / 12:30 / 18:30, ~45 min before each reprice slot, once per slot (cheap: ~10 MB, HTML only)
-            for slot in 390 750 1110; do
+            # web Buy Box scan slots (UTC): the first beat after 02:30 / 06:30 / 10:30 / 14:30 / 18:30 / 22:30, ~45 min before each reprice slot, once per slot (HTML only, ~25 MB per scan)
+            for slot in 150 390 630 870 1110 1350; do
               if [ $mins -ge $slot ] && [ $mins -lt $((slot+20)) ]; then
                 recent=$(gh api "repos/$REPO/actions/workflows/bb_web.yml/runs?per_page=3" -q "[.workflow_runs[]|select((.created_at|fromdateiso8601) > $((now-10800)))]|length" 2>/dev/null || echo 0)
                 if [ "${recent:-0}" = "0" ]; then
