@@ -59,7 +59,7 @@ def main():
     c = spapi.load_creds(HERE)
     os.makedirs(STATE, exist_ok=True)
     wins = month_windows(max(n, 12))                        # always look 12 months back for MISSING ledger months (a failed month used to stay missing for ever)
-    for k, (s, e) in enumerate(wins):
+    for k, (s, e) in reversed(list(enumerate(wins))):          # newest month first: the current month matters most, old ledger backfill is optional
         recent = k >= len(wins) - 2
         for kind, fn in (("orders", pull_orders), ("ledger", pull_ledger)):
             if kind == "ledger" and k < len(wins) - 12:      # the ledger only reaches back about a year
@@ -72,6 +72,8 @@ def main():
             lines, st = fn(c, s, e)
             if lines is None:
                 print("%s %s: %s" % (kind, s.strftime("%Y-%m"), st)); sys.stdout.flush()
+                if st == "QUOTA":                            # Amazon's report quota is spent: every further request just waits ~18 min, so stop and use what is stored
+                    print("report quota spent - stopping history refresh, saved history is used"); return
                 continue
             open(path, "w", encoding="utf-8", newline="\n").write("\n".join(lines) + "\n")
             print("%s %s: %d rows" % (kind, s.strftime("%Y-%m"), len(lines) - 1)); sys.stdout.flush()
