@@ -1,24 +1,2 @@
-# 2026-11-28T02:08:25Z  reprice  success  run 46095717992
-/home/runner/work/melaleuca-orders/melaleuca-orders/reprice/run.py:14: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
-  now = dt.datetime.utcnow()
-mode=live live_writes_allowed=True killed=False skus=179
-  live Buy Box prices: 20 of 179 ASINs read
-  live Buy Box prices: 40 of 179 ASINs read
-  live Buy Box prices: 60 of 179 ASINs read
-  live Buy Box prices: 80 of 179 ASINs read
-  live Buy Box prices: 100 of 179 ASINs read
-  live Buy Box prices: 120 of 179 ASINs read
-  live Buy Box prices: 140 of 179 ASINs read
-  live Buy Box prices: 160 of 179 ASINs read
-  live Buy Box prices: 179 of 179 ASINs read
-Amazon target prices (FOEP) read for 62 products
-seller id found
-decided 159 products: {'hold': 158, 'down': 1} ; applied this run: 0
-  ME0066 down 40.93 -> 39.7  drought/surplus: 16 days without sale (limit 30), 150 days of supply; market price 36.94 | SHADOW (not applied
-units to sell 1103 | cost paid 7918 | at your listed prices 29814 | net payout base 20241 | net payout conservative 18657
-Counter({'OK': 75, 'BUY MORE': 46, 'BUY': 20, 'BUY LESS': 15, 'STOP buying': 11, 'STOP buying - no sales 90d': 5})
-market depth for 147 products: {'LOW': 89, 'MEDIUM': 53, 'HIGH': 5}
-bb intel: 142 ASINs, we own the box in 38% of web scans; API vs web: {('same seller', 'same price'): 113, ('different seller', 'different price'): 26, ('different seller', 'same price'): 3}
-/home/runner/work/melaleuca-orders/melaleuca-orders/reprice/reports.py:54: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
-  now = dt.datetime.utcnow()
-reports: rival stock hints {'WAIT': 1, 'DROP-CANDIDATE': 1, 'WATCH': 4, 'HOLD': 80} | restock alerts 37 (profit at risk $2259/month) | rival alerts 61 | outcomes 32
+# 2026-11-28T02:28:34Z  reprice  failure  run 46098214630
+
