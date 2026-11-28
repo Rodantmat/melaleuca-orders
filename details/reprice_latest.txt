@@ -1,4 +1,4 @@
-# 2026-11-28T04:47:26Z  reprice  success  run 46107898895
+# 2026-11-28T07:47:53Z  reprice  success  run 46121618134
 /home/runner/work/melaleuca-orders/melaleuca-orders/reprice/run.py:14: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
   now = dt.datetime.utcnow()
 mode=live live_writes_allowed=True killed=False skus=179
@@ -13,65 +13,54 @@ mode=live live_writes_allowed=True killed=False skus=179
   live Buy Box prices: 179 of 179 ASINs read
 Amazon target prices (FOEP) read for 61 products
 seller id found
-decided 159 products: {'up': 21, 'hold': 105, 'down': 33} ; applied this run: 24
-  05-SH42-DDII up 64.99 -> 70.19  no stock and nobody else sells it: raise to 70.19 so the price is strong when the units land | SHADOW (not app
+decided 159 products: {'up': 19, 'hold': 116, 'down': 24} ; applied this run: 25
+  05-SH42-DDII up 64.99 -> 70.19  no stock and nobody else sells it: raise to 70.19 so the price is strong when the units land
   2Y-LBJT-OTHD up 21.36 -> 23.07  no stock and nobody else sells it: raise to 23.07 so the price is strong when the units land | SHADOW (not app
   4K-5OF1-YPS3 up 19.99 -> 21.59  no stock and nobody else sells it: raise to 21.59 so the price is strong when the units land | SHADOW (not app
-  9P-4ZS7-QV81 down 38.76 -> 37.21  severe: 60 days without sale (limit 30), 450 days of supply
-  HB-YB7V-EIA1 up 49.99 -> 53.99  no stock and nobody else sells it: raise to 53.99 so the price is strong when the units land | SHADOW (not app
-  ME0008 down 28.74 -> 28.27  no stock, market (Buy Box) at 28.30 and we are at 28.74: priced for the market (28.27, floor 19.65) so the uni
-  ME0011 down 51.99 -> 39.97  no stock, market (Buy Box) at 40.00 and we are at 51.99: priced for the market (39.97, floor 26.02) so the uni
-  ME001502 up 73.7 -> 79.6  no stock and nobody else sells it: raise to 79.60 so the price is strong when the units land
-  ME0018 down 16.15 -> 15.84  no stock, market (Buy Box) at 15.87 and we are at 16.15: priced for the market (15.84, floor 11.02) so the uni
-  ME0022 up 25.39 -> 27.95  no stock, rival Buy Box at 27.98: price follows it (27.95) so the next units sell higher
-  ME0023 down 59.97 -> 49.96  no stock, market (Buy Box) at 49.99 and we are at 59.97: priced for the market (49.96, floor 32.16) so the uni
-  ME0024 down 61.97 -> 54.97  no stock, market (Buy Box) at 55.00 and we are at 61.97: priced for the market (54.97, floor 40.96) so the uni
-  ME0029 down 40.37 -> 35.96  no stock, market (Buy Box) at 35.99 and we are at 40.37: priced for the market (35.96, floor 19.19) so the uni
-  ME0030 down 34.96 -> 32.92  no stock, market (Buy Box) at 32.95 and we are at 34.96: priced for the market (32.92, floor 24.66) so the uni
-  ME0033 down 37.95 -> 26.92  no stock, market (Buy Box) at 26.95 and we are at 37.95: priced for the market (26.92, floor 19.63) so the uni
-  ME0046 down 26.73 -> 18.96  no stock, market (Buy Box) at 18.99 and we are at 26.73: priced for the market (18.96, floor 11.29) so the uni
+  8B-GMC4-4EZ8 up 59.48 -> 61.86  alone on the listing, sells 0.07/day: test 61.86
+  9C-A4T7-C308 up 65.48 -> 70.72  alone on the listing, sells 0.20/day: test 70.72
+  DE-QFMC-M0RB up 38.64 -> 40.19  alone on the listing, sells 0.07/day: test 40.19
+  HB-YB7V-EIA1 up 49.99 -> 53.99  no stock and nobody else sells it: raise to 53.99 so the price is strong when the units land
+  LP-R08I-0PFV up 75.7 -> 78.73  alone on the listing, sells 0.03/day: test 78.73 | SHADOW (not applied)
+  ME0008 down 28.74 -> 24.57  no stock, market (Buy Box) at 24.60 and we are at 28.74: priced for the market (24.57, floor 19.65) so the uni
+  ME0018 down 16.15 -> 15.46  no stock, market (Buy Box) at 15.49 and we are at 16.15: priced for the market (15.46, floor 11.02) so the uni
+  ME0030 down 34.96 -> 33.96  no stock, market (Buy Box) at 33.99 and we are at 34.96: priced for the market (33.96, floor 24.66) so the uni
+  ME0032 down 48.54 -> 44.92  no stock, market (Buy Box) at 44.95 and we are at 48.54: priced for the market (44.92, floor 25.70) so the uni
+  ME0050 down 29.96 -> 29.47  no stock, market (Buy Box) at 29.50 and we are at 29.96: priced for the market (29.47, floor 21.74) so the uni
   ME0062 down 17.95 -> 16.46  no stock, market (Buy Box) at 16.49 and we are at 17.95: priced for the market (16.46, floor 11.58) so the uni
-  ME0066 down 40.93 -> 39.7  drought/surplus: 7 days without sale (limit 30), 150 days of supply; market price 36.94 | SHADOW (not applied)
-  ME0070 down 51.96 -> 45.87  no stock, market (Buy Box) at 45.90 and we are at 51.96: priced for the market (45.87, floor 35.26) so the uni
-  ME0096 down 64.12 -> 63.97  no stock, market (Buy Box) at 64.00 and we are at 64.12: priced for the market (63.97, floor 30.81) so the uni
+  ME0064 down 27.92 -> 25.96  no stock, market (Buy Box) at 25.99 and we are at 27.92: priced for the market (25.96, floor 19.50) so the uni
+  ME0066 down 40.93 -> 39.7  drought/surplus: 16 days without sale (limit 30), 150 days of supply; market price 36.94 | SHADOW (not applied
+  ME0112 down 25.92 -> 22.92  no stock, market (Buy Box) at 22.95 and we are at 25.92: priced for the market (22.92, floor 22.84) so the uni
   ME0114 down 24.89 -> 23.88  no stock, market (Buy Box) at 21.00 and we are at 24.89: priced for the market (23.88, floor 23.88) so the uni
-  ME0153 down 70.95 -> 59.82  no stock, market (Buy Box) at 59.85 and we are at 70.95: priced for the market (59.82, floor 32.43) so the uni
-  ME0285 down 16.53 -> 15.97  no stock, market (Buy Box) at 16.00 and we are at 16.53: priced for the market (15.97, floor 8.21) so the unit
-  ME0289 up 21.34 -> 23.05  no stock and nobody else sells it: raise to 23.05 so the price is strong when the units land
   ME0291 down 39.97 -> 35.92  no stock, market (Buy Box) at 35.95 and we are at 39.97: priced for the market (35.92, floor 25.21) so the uni
-  ME0357 down 18.47 -> 17.92  drought/surplus: 0 days without sale (limit 18), 180 days of supply | SHADOW (not applied)
-  ME0360 down 25.39 -> 24.46  no stock, market (Buy Box) at 24.49 and we are at 25.39: priced for the market (24.46, floor 16.01) so the uni
   ME0361 down 56.96 -> 46.92  no stock, market (Buy Box) at 46.95 and we are at 56.96: priced for the market (46.92, floor 27.48) so the uni
+  ME049 down 29.39 -> 21.92  no stock, market (Buy Box) at 21.95 and we are at 29.39: priced for the market (21.92, floor 16.74) so the uni
   ME1102 down 52.79 -> 44.72  no stock, market (Buy Box) at 44.75 and we are at 52.79: priced for the market (44.72, floor 41.94) so the uni
-  ME1132 down 21.99 -> 19.96  no stock, market (Buy Box) at 19.99 and we are at 21.99: priced for the market (19.96, floor 11.29) so the uni
-  ME1135 down 41.95 -> 38.92  no stock, market (Buy Box) at 38.95 and we are at 41.95: priced for the market (38.92, floor 23.15) so the uni
-  ME1165 up 92.58 -> 99.99  no stock and nobody else sells it: raise to 99.99 so the price is strong when the units land
-  ME1235 up 44.86 -> 48.45  no stock and nobody else sells it: raise to 48.45 so the price is strong when the units land
-  ME1238 up 74.35 -> 78.07  sells well (0.13/day, 8 days of supply, Buy Box held): test 78.07
+  ME1124 down 39.96 -> 36.46  no stock, market (Buy Box) at 36.49 and we are at 39.96: priced for the market (36.46, floor 28.81) so the uni
   ME1305 down 27.43 -> 25.96  no stock, market (Buy Box) at 25.99 and we are at 27.43: priced for the market (25.96, floor 18.35) so the uni
-  ME1414 down 49.54 -> 48.05  drought/surplus: 7 days without sale (limit 30), 100 days of supply | SHADOW (not applied)
-  ME1415 down 65.96 -> 55.77  no stock, market (Buy Box) at 55.80 and we are at 65.96: priced for the market (55.77, floor 40.96) so the uni
-  ME1416 down 43.06 -> 34.96  no stock, market (Buy Box) at 34.99 and we are at 43.06: priced for the market (34.96, floor 18.13) so the uni
-  ME1430 down 42.99 -> 41.7  drought/surplus: 0 days without sale (limit 30), 90 days of supply | SHADOW (not applied)
+  ME1414 down 49.54 -> 48.05  drought/surplus: 7 days without sale (limit 30), 300 days of supply | SHADOW (not applied)
+  ME1430 down 42.99 -> 41.7  drought/surplus: 2 days without sale (limit 30), 90 days of supply | SHADOW (not applied)
   ME1434 down 14.29 -> 11.96  no stock, market (Buy Box) at 11.99 and we are at 14.29: priced for the market (11.96, floor 8.12) so the unit
-  ME1507 up 49.99 -> 53.99  no stock and nobody else sells it: raise to 53.99 so the price is strong when the units land
-  ME1609 up 49.99 -> 53.99  no stock and nobody else sells it: raise to 53.99 so the price is strong when the units land | SHADOW (not app
+  ME1609 up 49.99 -> 53.99  no stock and nobody else sells it: raise to 53.99 so the price is strong when the units land
   ME1621 up 29.99 -> 32.39  no stock and nobody else sells it: raise to 32.39 so the price is strong when the units land | SHADOW (not app
-  ME1622 up 34.99 -> 37.79  no stock and nobody else sells it: raise to 37.79 so the price is strong when the units land
-  ME1623 up 24.99 -> 26.99  no stock and nobody else sells it: raise to 26.99 so the price is strong when the units land
-  ME1629 down 21.61 -> 21.32  no stock, market (Buy Box) at 21.35 and we are at 21.61: priced for the market (21.32, floor 13.65) so the uni
-  ME1641 up 41.99 -> 45.35  no stock and nobody else sells it: raise to 45.35 so the price is strong when the units land
-  ME1651 up 48.6 -> 52.49  no stock and nobody else sells it: raise to 52.49 so the price is strong when the units land
+  ME1629 down 21.61 -> 21.49  no stock, market (Buy Box) at 21.35 and we are at 21.61: priced for the market (21.49, floor 21.49) so the uni
+  ME1648 down 39.97 -> 29.87  no stock, market (Buy Box) at 29.90 and we are at 39.97: priced for the market (29.87, floor 18.54) so the uni
+  ME1649 down 36.96 -> 32.92  no stock, market (Buy Box) at 32.95 and we are at 36.96: priced for the market (32.92, floor 18.54) so the uni
   ME1652 up 21.99 -> 23.75  no stock and nobody else sells it: raise to 23.75 so the price is strong when the units land | SHADOW (not app
+  ME1653 up 18.24 -> 19.7  alone on the listing, sells 0.17/day: test 19.70
   ME1659 up 37.99 -> 41.03  no stock and nobody else sells it: raise to 41.03 so the price is strong when the units land | SHADOW (not app
   ME1673 down 59.96 -> 54.97  no stock, market (Buy Box) at 52.95 and we are at 59.96: priced for the market (54.97, floor 54.97) so the uni
+  ME1802 up 34.98 -> 37.78  alone on the listing, sells 0.30/day: test 37.78
+  ME1810 up 34.98 -> 37.78  alone on the listing, sells 0.20/day: test 37.78
   ME1812 down 36.99 -> 33.92  no stock, market (Buy Box) at 33.95 and we are at 36.99: priced for the market (33.92, floor 18.00) so the uni
-  ME1819 up 84.99 -> 91.79  no stock and nobody else sells it: raise to 91.79 so the price is strong when the units land
-  PQ-6D5S-MTW1 up 69.99 -> 75.59  no stock and nobody else sells it: raise to 75.59 so the price is strong when the units land | SHADOW (not app
-units to sell 1103 | cost paid 7981 | at your listed prices 29896 | net payout base 21058 | net payout conservative 8591
-Counter({'STOP buying - no sales 90d': 135, 'OK': 21, 'BUY MORE': 16})
-market depth for 142 products: {'LOW': 84, 'HIGH': 39, 'MEDIUM': 19}
-no web Buy Box data yet
+  P9-9LY1-OBH4 up 32.75 -> 35.37  alone on the listing, sells 0.20/day: test 35.37
+  PQ-6D5S-MTW1 up 69.99 -> 75.59  no stock and nobody else sells it: raise to 75.59 so the price is strong when the units land
+  VI-4LX8-XEFI up 40.01 -> 41.61  alone on the listing, sells 0.10/day: test 41.61
+  ZG-3DR2-6CUW up 78.73 -> 81.88  alone on the listing, sells 0.07/day: test 81.88
+units to sell 1107 | cost paid 8050 | at your listed prices 30161 | net payout base 21253 | net payout conservative 17968
+Counter({'OK': 77, 'BUY MORE': 30, 'BUY LESS': 20, 'STOP buying - no sales 90d': 17, 'STOP buying': 16, 'BUY': 12})
+market depth for 142 products: {'LOW': 85, 'HIGH': 39, 'MEDIUM': 18}
+bb intel: 133 ASINs, we own the box in 33% of web scans; API vs web: {('same seller', 'same price'): 96, ('different seller', 'different price'): 31, ('different seller', 'same price'): 6}
 /home/runner/work/melaleuca-orders/melaleuca-orders/reprice/reports.py:54: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
   now = dt.datetime.utcnow()
-reports: rival stock hints {} | restock alerts 0 (profit at risk $0/month) | rival alerts 0 | outcomes 0
+reports: rival stock hints {'DROP-CANDIDATE': 13, 'WATCH': 12, 'HOLD': 64} | restock alerts 23 (profit at risk $1467/month) | rival alerts 38 | outcomes 0
