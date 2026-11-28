@@ -1,0 +1,8 @@
+/home/runner/work/melaleuca-orders/melaleuca-orders/reprice/history.py:14: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  today = dt.datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
+orders 2026-11: 734 rows
+ledger 2026-11: 3404 rows
+ledger 2026-10: 4037 rows
+ledger 2026-06: 4129 rows
+ledger 2026-05: 4204 rows
+ledger 2026-04: 3988 rows

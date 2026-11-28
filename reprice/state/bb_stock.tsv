@@ -1,0 +1,87 @@
+asin	sku	box_owner	type	box_price	our_price	our_gap_pct	owner_left	reads	owner_sales_per_day	owner_days_to_zero	our_stock	our_sold_per_month	our_cover_days	hint	why	next_price	cheap_plenty_price
+B00Q3HVF44	ME0276	MEGA SAVINGS	M	27.95	30.33	8.5	1	3			0.0	9.3	3.0	WAIT	owner has 1 left	27.99	
+B00J4F85C2	ME0102	Gigis Discount Store	M	23.7	26.89	13.5	1	2			2.0	8.7	28.0	WAIT	owner has 1 left	24.75	
+B00AO4A1DS	ME0357	Lamoure INC	M	15.95	18.47	15.8	1	1			26.0	8.0	131.0	WAIT	owner has 1 left	16.99	
+B0F37HW9DM	ME1406	ccomstore18	M	21.99	21.89	-0.5	3	3			0.0	2.7	11.0	WAIT	owner has 3 left		
+B01INQN7FW	ME049	Brightlightning LLC	M	25.99	21.92	-15.7	1	1			0.0	2.7	0.0	WAIT	owner has 1 left	29.5	
+B00CBY7COU	ME1628	balabasics	F	23.98	23.89	-0.4	1	1			1.0	2.0	90.0	WAIT	owner has 1 left		
+B004OURVLI	ME0011	Fit for All	M	40.0	39.97	-0.1	1	3			0.0	2.0	0.0	WAIT	owner has 1 left	44.95	
+B005JKIIKU	ME0021	Brightlightning LLC	M	28.99	24.45	-15.7	2	1			0.0	2.0	45.0	WAIT	owner has 2 left		
+B000NZ4ETK	ME1124	MIMI HEALTH	M	36.49	36.46	-0.1	1	3			0.0	1.3	0.0	WAIT	owner has 1 left	39.99	
+B00CBYCYD4	ME0361	A1Y5P7PMGQW2SO	M	51.0	46.92	-8.0	1	1			0.0	0.7	0.0	WAIT	owner has 1 left	51.9	
+B0F3X15FT8	ME1485	A1Y5P7PMGQW2SO	M	49.49	49.49	0.0	1	3			0.0	0.7	45.0	WAIT	owner has 1 left	51.99	
+B0F3B949PC	ME1415	HEALING DREAM	M	55.8	55.77	-0.1	1	3			0.0	0.7	45.0	WAIT	owner has 1 left	64.99	
+B011K7CCN4	ME0024	MEGA SAVINGS	M	54.95	54.97	0.0	2	3			0.0	0.7	45.0	WAIT	owner has 2 left	55.0	
+B00TPACURC	ME1134	MEGA SAVINGS	F	43.95	47.01	7.0	2	1			1.0	0.7	45.0	WAIT	owner has 2 left	47.84	
+B0090PZAE2	ME0114	Lamoure INC	M	21.0	23.88	13.7	1	3			0.0	0.7	0.0	WAIT	owner has 1 left	22.0	
+B007136OHW	ME0022	HEALING DREAM	F	25.39	27.95	10.1	20+/none	0			2.0	18.7	29.0	DROP-CANDIDATE	a cheaper seller (25.30) has plenty of stock, we have 29 days of cover	25.49	25.3
+B0F37XMH8Q	ME1304	MEGA SAVINGS	F	33.95	39.99	17.8	4	1			6.0	12.7	31.0	DROP-CANDIDATE	a cheaper seller (33.95) has plenty of stock, we have 31 days of cover	34.99	33.95
+B00H6B53TE	ME0279	Oasis Enterprises LLC	F	23.95	29.49	23.1	20+/none	0			1.0	4.7	32.0	DROP-CANDIDATE	a cheaper seller (23.95) has plenty of stock, we have 32 days of cover	29.75	23.95
+B0F3BSMXPZ	ME1431	MEGA SAVINGS	M	39.95	44.23	10.7	3	3			9.0	4.0	105.0	DROP-CANDIDATE	a cheaper seller (41.99) has plenty of stock, we have 105 days of cover	41.99	41.99
+B00NYAJ4GE	ME0127	Fit for All	F	25.0	33.24	33.0	4	3			3.0	3.3	54.0	DROP-CANDIDATE	a cheaper seller (28.99) has plenty of stock, we have 54 days of cover	28.99	28.99
+B0F39Z2LY6	ME1411	A1Y5P7PMGQW2SO	M	26.99	28.49	5.6	1	2			4.0	2.0	210.0	DROP-CANDIDATE	a cheaper seller (26.99) has plenty of stock, we have 210 days of cover		26.99
+B00UTYY4QS	ME0282	aboutcare00	F	11.05	10.99	-0.5	20+/none	0			4.0	10.7	59.0	WATCH		11.1	
+B01N4QCNPX	ME0052	Oasis Enterprises LLC	F	22.95	23.71	3.3	20+/none	0			13.0	4.7	109.0	WATCH		24.49	
+B00UU1EBOU	ME0063	MIMI HEALTH	M	18.99	20.69	9.0	4	2			4.0	4.7	84.0	WATCH		23.49	
+B01G971HKO	ME0275	Oasis Enterprises LLC	F	23.99	24.47	2.0	20+/none	0			2.0	4.0	82.0	WATCH		24.0	23.99
+B004P3DRR6	ME0002	Oasis Enterprises LLC	F	23.99	24.17	0.8	20+/none	0			15.0	3.3	207.0	WATCH		24.0	
+B0F3BCWGMC	ME1412	A3N14WJ97NFOCH	F	24.79	24.79	0.0	4	3			3.0	3.3	54.0	WATCH		25.99	
+B004OV2DYW	ME0266	Nutri Healthy	M	41.98	42.92	2.2	20+/none	0			1.0	2.7	146.0	WATCH		41.99	
+B00AV334R2	ME0125	Oasis Enterprises LLC	F	51.99	52.24	0.5	20+/none	1			7.0	2.0	225.0	WATCH		54.99	
+B004P9TVK2	ME0017	aboutcare00	F	16.09	16.09	0.0	20+/none	0			5.0	2.0	120.0	WATCH		16.99	
+B017RW4LTE	ME0066	KHALMA	F	39.99	40.93	2.4	20+/none	0			10.0	1.3	225.0	WATCH		40.99	
+B01LBLKWO0	ME1647	Arabianperfumes	F	31.5	33.79	7.3	20+/none	0			2.0	0.0	999.0	WATCH		31.95	
+B008HVD8IK	ME0023	Top Quality of Life	F	49.7	49.96	0.5	20+/none	0			2.0	0.0	999.0	WATCH		49.99	
+B00AA68KJC	ME0287	aboutcare00	F	8.95	10.49	17.2	20+/none	0			15.0	0.0	999.0	WATCH		9.03	
+B08PSS11NS	ME0096	Top Quality of Life	F	64.0	64.12	0.2	5	3			0.0	19.3	20.0	HOLD	no stock: priced by the zero-stock rules	67.97	59.99
+B005MKA4U4	ME0029	Cronkai	M	35.99	35.96	-0.1	20+/none	0			0.0	15.3	49.0	HOLD	no stock: priced by the zero-stock rules		
+B0030JJNBK	ME0027	MEGA SAVINGS	M	22.95	27.37	19.3	4	3			0.0	14.0	19.0	HOLD	no stock: priced by the zero-stock rules	22.99	21.88
+B0F37YG7GZ	ME1301	balabasics	F	37.99	37.96	-0.1	20+/none	0			0.0	14.0	17.0	HOLD	no stock: priced by the zero-stock rules		33.99
+B001TNTWC4	ME0020	Qmax Brands	M	19.96	19.96	0.0	8	3			0.0	12.7	26.0	HOLD	no stock: priced by the zero-stock rules	19.99	
+B018C56968	ME0286	Cronkai	M	13.99	13.96	-0.2	20+/none	0			0.0	12.0	22.0	HOLD	no stock: priced by the zero-stock rules		
+B00Q5EMLIO	ME1135	MEGA SAVINGS	F	38.95	38.92	-0.1	20+/none	0			0.0	11.3	13.0	HOLD	no stock: priced by the zero-stock rules	40.87	
+B00OI5CAMO	ME0130	HEALING DREAM	M	53.95	59.99	11.2	2	3			0.0	10.7	6.0	HOLD	no stock: priced by the zero-stock rules	54.99	54.99
+B00712RI3M	ME0360	HEALTHY AND DREAM	M	24.49	25.39	3.7	20+/none	0			0.0	10.0	27.0	HOLD	no stock: priced by the zero-stock rules	24.95	
+B0DS9JN9D7	ME1158	MEGA SAVINGS	F	24.75	24.79	0.2	8	1			0.0	8.7	90.0	HOLD	no stock: priced by the zero-stock rules	24.99	
+B017JIL4GY	ME0285	MIMI HEALTH	M	16.0	16.53	3.3	9	2			0.0	8.0	30.0	HOLD	no stock: priced by the zero-stock rules		
+B018C5698G	ME1131	aboutcare00	F	9.99	10.03	0.4	20+/none	0			0.0	8.0	0.0	HOLD	no stock: priced by the zero-stock rules	12.5	
+B008L2GZJO	ME0070	A3U19L9YZ9VVYX	M	45.99	45.87	-0.3	3	2			0.0	6.7	0.0	HOLD	no stock: priced by the zero-stock rules	47.99	44.99
+B07MWDCFRZ	ME0039	Arabianperfumes	F	28.49	28.39	-0.4	20+/none	0			0.0	6.7	9.0	HOLD	no stock: priced by the zero-stock rules	28.5	26.79
+B008K15NBM	ME1132	Qmax Brands	M	19.99	21.99	10.0	5	3			0.0	5.3	22.0	HOLD	no stock: priced by the zero-stock rules		
+B0089XP258	ME0092	Brightlightning LLC	M	44.99	44.96	-0.1	1	3			0.0	4.7	6.0	HOLD	no stock: priced by the zero-stock rules		41.99
+B004P9QKY2	ME1629	balabasics	F	21.64	21.61	-0.1	1	1			0.0	4.7	32.0	HOLD	no stock: priced by the zero-stock rules		21.35
+B00JO0FRBY	ME0277	balabasics	F	18.99	18.96	-0.2	20+/none	0			0.0	4.0	0.0	HOLD	no stock: priced by the zero-stock rules		
+B00OH20CSC	ME0031	Cronkai	M	23.99	23.96	-0.1	20+/none	0			0.0	3.3	27.0	HOLD	no stock: priced by the zero-stock rules		
+B01JKSBEKC	ME0009	Qmax Brands	M	22.0	24.88	13.1	20+/none	0			0.0	3.3	99.0	HOLD	no stock: priced by the zero-stock rules	24.95	22.0
+B0F37RCV12	ME1303	MEGA SAVINGS	M	25.95	28.96	11.6	3	3			0.0	2.7	45.0	HOLD	no stock: priced by the zero-stock rules	25.99	25.99
+B00BY724HU	ME0050	Pure Science USA	F	29.5	29.96	1.6	20+/none	0			0.0	2.7	22.0	HOLD	no stock: priced by the zero-stock rules	29.99	
+B01DN3TZAQ	ME1138	MIMI HEALTH	M	34.9	34.92	0.1	4	3			0.0	2.7	0.0	HOLD	no stock: priced by the zero-stock rules	34.95	
+B0F37FQ5G9	ME1305	Tasheestore LLC	M	25.99	25.96	-0.1	20+/none	0			0.0	2.7	11.0	HOLD	no stock: priced by the zero-stock rules		
+B00266EREQ	ME0088	Arabianperfumes	F	16.09	16.06	-0.2	20+/none	0			0.0	2.7	34.0	HOLD	no stock: priced by the zero-stock rules	16.1	
+B00TP98T0A	ME1128	Cronkai	M	24.99			20+/none	0			0.0	2.0	15.0	HOLD	no stock: priced by the zero-stock rules		
+B095XNBDGX	ME1646	balabasics	F	44.99	44.96	-0.1	1	1			0.0	2.0	45.0	HOLD	no stock: priced by the zero-stock rules		43.99
+B0F39DTVMP	ME1409	Cronkai	M	61.87	61.84	-0.0	20+/none	0			0.0	2.0	0.0	HOLD	no stock: priced by the zero-stock rules		
+B017J428HC	ME0018	Arabianperfumes	F	16.18	15.46	-4.4	20+/none	0			0.0	2.0	45.0	HOLD	no stock: priced by the zero-stock rules	16.19	
+B08HVY8C85	ME1102	balabasics	F	44.75	44.72	-0.1	20+/none	0			0.0	1.3	0.0	HOLD	no stock: priced by the zero-stock rules	53.99	
+B0052H0OFC	ME0030	MEGA SAVINGS	F	32.95	33.96	3.1	20+/none	0			0.0	1.3	112.0	HOLD	no stock: priced by the zero-stock rules	33.99	32.95
+B00P1G0H24	ME0003	Pure Science USA	F	5.95	6.24	4.9	20+/none	0			0.0	1.3	68.0	HOLD	no stock: priced by the zero-stock rules	6.1	5.95
+B0F3B85XMK	ME1434	Cronkai	M	11.99	11.96	-0.3	20+/none	0			0.0	1.3	225.0	HOLD	no stock: priced by the zero-stock rules		
+B07P2F8GL8	ME0008	Bluepan.	M	24.6	24.57	-0.1	1	2			0.0	1.3	68.0	HOLD	no stock: priced by the zero-stock rules	25.97	24.56
+B005MJD1L4	ME0256	aboutcare00	F	15.99	15.89	-0.6	20+/none	0			0.0	1.3	68.0	HOLD	no stock: priced by the zero-stock rules		
+B078XGM6XF	ME0043	balabasics	F	16.49	16.46	-0.2	20+/none	0			0.0	1.3	90.0	HOLD	no stock: priced by the zero-stock rules		
+B008HUT1XC	ME0062	Qmax Brands	M	16.49	16.46	-0.2	20+/none	0			0.0	1.3	68.0	HOLD	no stock: priced by the zero-stock rules		
+B07RRFDLL5	ME1649	MEGA SAVINGS	F	32.95	36.96	12.2	20+/none	0			0.0	0.7	45.0	HOLD	no stock: priced by the zero-stock rules	34.99	30.5
+B071CWBVBR	ME0033	Oasis Enterprises LLC	F	26.95	26.92	-0.1	20+/none	0			0.0	0.7	90.0	HOLD	no stock: priced by the zero-stock rules	35.79	
+B096HWPYWW	ME1673	MEGA SAVINGS	F	52.95	54.97	3.8	20+/none	0			0.0	0.0	0.0	HOLD	no stock: priced by the zero-stock rules	62.95	
+B0F3WZ3K8Y	ME1482	Cronkai	M	65.99	65.96	-0.0	20+/none	0			0.0	0.0	999.0	HOLD	no stock: priced by the zero-stock rules		
+B07WCF5ZNW	ME1812	HEALTHY AND DREAM	M	33.95	36.99	9.0	20+/none	0			0.0	0.0	999.0	HOLD	no stock: priced by the zero-stock rules	33.99	
+B0085EQJE4	ME0291	HEALTHY AND DREAM	M	35.95	35.92	-0.1	20+/none	0			0.0	0.0	999.0	HOLD	no stock: priced by the zero-stock rules	37.9	
+B005YGOJGG	ME0139	Multyshops	M	48.9			20+/none	0			0.0	0.0		HOLD	no stock: priced by the zero-stock rules	52.95	
+B0075BH2C6	ME0103	Multyshops	M	61.99			20+/none	0			0.0	0.0		HOLD	no stock: priced by the zero-stock rules	99.95	
+B0085AT6FC	ME1648	HEALTHY AND DREAM	M	29.9	29.87	-0.1	20+/none	0			0.0	0.0	999.0	HOLD	no stock: priced by the zero-stock rules	34.98	
+B004PZRHHU	ME0153	MIMI HEALTH	M	59.85	59.82	-0.1	20+/none	0			0.0	0.0	999.0	HOLD	no stock: priced by the zero-stock rules	62.9	
+B00WVEW79K	GV-PN7P-3X4C	HEALTHY AND DREAM	M	15.4	15.39	-0.1	20+/none	0			0.0	0.0	999.0	HOLD	no stock: priced by the zero-stock rules	15.45	
+B0DS9JG8YB	ME1201	balabasics	F	54.95	56.88	3.5	20+/none	0			0.0	0.0	0.0	HOLD	no stock: priced by the zero-stock rules	55.99	
+B09WSR8BD3	DW-ZS8U-L678	Cronkai	M	35.99			20+/none	0			0.0	0.0		HOLD	no stock: priced by the zero-stock rules		
+B0088VS4QK	ME0064	ccomstore18	M	25.99	27.92	7.4	20+/none	0			0.0	0.0	999.0	HOLD	no stock: priced by the zero-stock rules	27.95	
+B0DYWSXFD4	ME1236	HEALING DREAM	M	44.77	39.99	-10.7	20+/none	0			0.0	0.0	0.0	HOLD	no stock: priced by the zero-stock rules	44.89	
