@@ -12,7 +12,7 @@ Safety rules that can never be broken by any input (they are checked by tests.py
   S3  cooldown between two changes of the same SKU; a SKU that changed MAX_CHANGES_14D times in 14 days is frozen
   S4  missing / insane data (no price, no cost, competitor below the floor by a mile, Buy Box far from history) -> HOLD, never guess
   S5  a manual change by the owner is respected (SKU frozen for MANUAL_FREEZE_DAYS)
-  S6  no stock -> never lower the price (nothing to sell), and a price below the floor is only ever corrected UPWARDS
+  S6  no stock -> the price may only move to the MARKET (OWNER 2026-11-27: priced right for when the stock lands) and never below the floor; a price below the floor is only ever corrected UPWARDS
 """
 import math
 from datetime import datetime, timedelta
@@ -38,11 +38,13 @@ DEFAULTS = {
     "STEP_UP_ALONE_SLOW": 0.04,  # ... in this smaller step when it sells fewer than UP_MIN_UNITS_30 a month; the next step always waits for a sale at the new price
     "ZERO_STOCK_FOLLOW": True,
     "MAX_RISE_ZERO_STOCK": 0.60,   # nothing to sell now, so a big move costs no sales: follow the rival box up to this far in 30 days
+    "COOLDOWN_ZERO_STOCK_H": 24, # OWNER 2026-11-27: out of stock there is nothing to sell, so the price may be set to the market again after this many hours
+    "MAX_DROP_ZERO_STOCK": 0.45, # ... and may fall this far below the highest price of the last 30 days (never below the profit floor)
     "UNDER_BB": 0.03,            # zero stock: raise to this many dollars under the rival Buy Box price
     "RIVAL_WAIT_MAX_DAYS": 10,   # OWNER: wait for a cheap rival's last units to sell - but never longer than this in a row
     "NO_BOX_STEP": 0.12,         # in stock, nobody else sells it, Amazon shows NO Buy Box and our price is above the history ceiling (price suppression): step down this much per change toward the ceiling
     "RIVAL_FLOOD_STEP": 0.05,    # OWNER 2026-11-09: a cheaper rival with a big stock will not run out soon - step toward his price (never below our floor) instead of waiting for him
-    "RIVAL_FLOOD_MIN_DOS": 25,   # ... but only with more than this many days of our own stock to move (with scarce stock keep the margin)
+    "RIVAL_FLOOD_MIN_DOS": 7,    # ... OWNER 2026-11-27: follow the rival stock: with a rival who has plenty our units sit, so step toward him whenever we have more than a week of stock (with only days left the units sell out anyway: keep the margin)
     "RIVAL_RAISE_STEP": 0.10,    # OWNER 2026-11-09: the Buy Box owner is nearly sold out - raise decently now so the price is already higher when he is gone
     "RIVAL_RAISE_CONFIRM_H": 6,  # ... and only when the low-stock reading held for at least this long (two scans), a single reading can be a glitch or a restock
     "RIVAL_RAISE_MAX_ETA": 14,   # ... when he is gone within this many days (or has 3 units or fewer)
@@ -300,19 +302,48 @@ def decide(snap, cfg=None, now=None):
                             "FBM" if wtype == "M" else "FBA", ref, 100 * (price / ref - 1), 100 * v30 / v90, min(dos, 999)),
                         "flags": flags + ["match"], "floor": floor, "ceil": ceil, "severe": False, "dss": dss, "dos": dos}
 
-    # =============================================================== ZERO STOCK: price follows the rival Buy Box, so the next units sell high
+    # =============================================================== ZERO STOCK: price it for the market now, so the next units sell at the right price
     # OWNER 2026-11-04: "if there's zero available, but the prices on the buy box are higher, raise the price close to the buy box prices, or a little bit under"
-    if cfg.get("ZERO_STOCK_FOLLOW", True) and on_hand <= 0 and u90 >= 1 and bb and not anomalous and bb > price + cfg["MIN_STEP"]:
-        if since_last_h >= cfg["COOLDOWN_UP_H"]:
-            target = bb - cfg["UNDER_BB"]
-            if ceil:
-                target = min(target, ceil * cfg["CEIL_MULT_ALONE"])
+    # OWNER 2026-11-27: "should be priced accordingly to the market and all other rules, so when we have the product it will be priced accordingly. If nobody sells it, raise properly"
+    if cfg.get("ZERO_STOCK_FOLLOW", True) and on_hand <= 0 and u90 >= 1 and not anomalous:
+        href_ = (snap.get("hist") or {}).get("p_mid") or price
+        web_rival = _f(snap.get("web_bb_rival"))             # what a shopper sees on amazon.com when another seller owns the box
+        if web_rival and (web_rival < href_ * cfg["ANOMALY_LOW"] or web_rival > href_ * cfg["ANOMALY_HIGH"]):
+            web_rival = None
+        mkt = web_rival or bb
+        if since_last_h >= cfg["COOLDOWN_ZERO_STOCK_H"]:
             c30 = [c for c in changes if (now - c["ts"]) <= timedelta(days=30)]
             base_ = min([price] + [c["old"] for c in c30])
-            target = _r2(min(target, base_ * (1 + cfg["MAX_RISE_ZERO_STOCK"])))
-            if target >= price + cfg["MIN_STEP"] - 1e-9:
-                return {"action": "up", "price": target, "reason": "no stock, rival Buy Box at %.2f: price follows it (%.2f) so the next units sell higher" % (bb, target),
-                        "flags": flags, "base_v": None, "floor": floor, "ceil": ceil, "zero_stock": True, "impact": round(max(u90 / 3.0, 1.0) * (target - price), 2)}
+            top30 = max([price] + [c["old"] for c in c30] + [c["new"] for c in c30])
+            if mkt and mkt > price + cfg["MIN_STEP"]:
+                target = mkt - cfg["UNDER_BB"]
+                if ceil:
+                    target = min(target, ceil * cfg["CEIL_MULT_ALONE"])
+                target = _r2(min(target, base_ * (1 + cfg["MAX_RISE_ZERO_STOCK"])))
+                if target >= price + cfg["MIN_STEP"] - 1e-9:
+                    return {"action": "up", "price": target, "reason": "no stock, rival Buy Box at %.2f: price follows it (%.2f) so the next units sell higher" % (mkt, target),
+                            "flags": flags, "base_v": None, "floor": floor, "ceil": ceil, "zero_stock": True, "impact": round(max(u90 / 3.0, 1.0) * (target - price), 2)}
+            elif mkt and mkt < price - cfg["MIN_STEP"] and not snap.get("rival_wait"):
+                # the market is below us and nothing is on the shelf: set the price where the units will sell once they land (profit floor and all other limits still hold)
+                target = max(mkt - cfg["UNDER_BB"], floor)
+                target = _r2(max(target, top30 * (1 - cfg["MAX_DROP_ZERO_STOCK"])))
+                if target <= price - cfg["MIN_STEP"] + 1e-9:
+                    return {"action": "down", "price": target, "reason": "no stock, market (Buy Box) at %.2f and we are at %.2f: priced for the market (%.2f, floor %.2f) so the units sell when they land" % (mkt, price, target, floor),
+                            "flags": flags, "floor": floor, "ceil": ceil, "severe": False, "dss": dss, "dos": dos, "zero_stock": True, "market_set": True,
+                            "impact": round(max(u90 / 3.0, 1.0) * (price - target), 2)}
+            elif not mkt and snap.get("nobody_sells") and not (ceil and price >= ceil * cfg["CEIL_MULT_ALONE"] - 0.005):
+                # nobody else sells it: raise properly, the 7-day sales test after the restock undoes a mistake
+                target = price * (1 + cfg["STEP_UP_ALONE"])
+                if ceil:
+                    target = min(target, ceil * cfg["CEIL_MULT_ALONE"])
+                target = _r2(min(target, base_ * (1 + cfg["MAX_RISE_ZERO_STOCK"])))
+                if target >= price + cfg["MIN_STEP"] - 1e-9:
+                    return {"action": "up", "price": target, "reason": "no stock and nobody else sells it: raise to %.2f so the price is strong when the units land" % target,
+                            "flags": flags, "base_v": max(v, v90), "floor": floor, "ceil": ceil, "zero_stock": True, "zero_alone": True, "impact": round(max(u90 / 3.0, 1.0) * (target - price), 2)}
+
+        if mkt or snap.get("nobody_sells"):          # out of stock the price is only ever moved by the rules above - nothing else may push it past the market
+            return hold("no stock: price already set for the market (%s)%s" % (("Buy Box %.2f" % mkt) if mkt else "nobody else sells it",
+                        "" if since_last_h >= cfg["COOLDOWN_ZERO_STOCK_H"] else ", waiting after the last change"), floor=floor, ceil=ceil)
 
     # OWNER 2026-11-09 (no stacked raises): after a raise, the next raise waits until something sold at the new price
     unsold_raise = bool(lc and lc.get("dir") == "up" and since_last_h < 1e8 and dss * 24 >= since_last_h)
@@ -379,7 +410,7 @@ def decide(snap, cfg=None, now=None):
         alone = (n_riv is not None and n_riv == 0)
         if alone:
             comp = None
-        if bb and we_hold is False and not alone:
+        if we_hold is False and not alone:          # OWNER 2026-11-27 fix: also when Amazon gave no price but the web page shows a cheaper owner
             return hold("another seller owns the Buy Box - no raise" + flood_note, floor=floor, ceil=ceil)
         if alone and dos > 0:                           # nobody else sells it: raise hard, the 7-day sales test undoes a mistake
             if since_last_h < cfg["COOLDOWN_UP_ALONE_H"]:
