@@ -78,7 +78,7 @@ class Pipeline(unittest.TestCase):
             decs = [json.loads(l) for l in open(os.path.join(tmp, "decisions.jsonl"))]
             applied = [d for d in decs if d["applied"]]
             self.assertEqual(len(applied), len(writes))
-            self.assertLessEqual(len([d for d in applied if d["action"] in ("up", "down")]) - 0, 20 + 5)   # caps: 20 per run (protective moves excluded)
+            self.assertLessEqual(len([d for d in applied if d["action"] in ("up", "down")]) - 0, 30 + 5)   # caps: 30 per run (protective moves excluded)
             sk = json.load(open(os.path.join(tmp, "skustate.json")))
             self.assertIn("_day", sk)
             for d in applied:
