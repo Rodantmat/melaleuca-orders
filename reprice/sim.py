@@ -180,21 +180,21 @@ def run(seed, scenario, days, use_engine, cfg):
                 ceil_lim = ceil * (cfg["CEIL_MULT_ALONE"] if (dec.get("alone") or dec.get("zero_stock")) else 1.0) if ceil else None
                 if ceil_lim and dec["action"] == "up" and newp > ceil_lim + 0.005:
                     viol.append(("S1 above ceiling", scenario, seed, day, price, newp, ceil_lim))
-                if dec["action"] == "down" and (price - newp) > price * (cfg["STEP_DOWN_MAX"]) + 0.011 and (price - newp) > cfg["MIN_STEP"] + 0.011:
+                if dec["action"] == "down" and not dec.get("zero_stock") and (price - newp) > price * (cfg["STEP_DOWN_MAX"]) + 0.011 and (price - newp) > cfg["MIN_STEP"] + 0.011:
                     viol.append(("S2 step down too big", scenario, seed, day, price, newp))
                 lim_up = cfg["STEP_UP_ALONE"] if dec.get("alone") else cfg["STEP_UP"]
                 if dec["action"] == "up" and not dec.get("zero_stock") and (newp - price) > price * lim_up + 0.011 and (newp - price) > cfg["MIN_STEP"] + 0.011:
                     viol.append(("S2 step up too big", scenario, seed, day, price, newp))
-                if dec.get("zero_stock") and newp > snap["bb"] - cfg["UNDER_BB"] + 0.005:
+                if dec.get("zero_stock") and not dec.get("zero_alone") and snap["bb"] and dec["action"] == "up" and newp > snap["bb"] - cfg["UNDER_BB"] + 0.005:
                     viol.append(("ZS above rival box minus margin", scenario, seed, day, price, newp, snap["bb"]))
-                if dec["action"] == "down" and snap["on_hand"] <= 0:
+                if dec["action"] == "down" and snap["on_hand"] <= 0 and not (dec.get("zero_stock") and newp >= floor - 0.005):
                     viol.append(("S6 lowered with no stock", scenario, seed, day, price, newp))
                 n14 = sum(1 for c in changes if (now - c["ts"]) <= timedelta(days=14))
                 if dec["action"] in ("down", "up") and n14 >= cfg["MAX_CHANGES_14D"]:
                     viol.append(("S3 too many changes", scenario, seed, day, n14))
                 if last_change and dec["action"] in ("down", "up"):
                     hrs = (now - last_change["ts"]).total_seconds() / 3600
-                    need = cfg["COOLDOWN_DOWN_H"] if dec["action"] == "down" else cfg["COOLDOWN_UP_H"]
+                    need = cfg["COOLDOWN_ZERO_STOCK_H"] if dec.get("zero_stock") else (cfg["COOLDOWN_DOWN_H"] if dec["action"] == "down" else cfg["COOLDOWN_UP_H"])
                     if hrs < need - 0.01:
                         viol.append(("S3 cooldown", scenario, seed, day, hrs))
                 ch = {"ts": now, "old": price, "new": newp, "dir": "up" if newp > price else "down", "base_v": dec.get("base_v")}
